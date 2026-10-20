@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bombril × 75 LAB · Da inovação ao giro na loja</title>
+<meta name="description" content="Projeto de trade marketing para a inovação Limpol Perfumes: peças, rastreio por QR e piloto em lojas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;700;800;900&family=Poppins:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#C4151B;--lil:#6B3FA0;--lilw:#EFE7F8;--ink:#1A1420;--paper:#FBF9F6;--lime:#C0EE4E;--mut:#5d5566;--line:#e3dcea}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:Poppins,system-ui,sans-serif;overflow:hidden}
+h1,h2,h3,.k-titulo,.k-mega,.num{font-family:Urbanist,Poppins,sans-serif;letter-spacing:-.02em}
+img{display:block;max-width:100%}
+#stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;overflow:hidden;background:var(--paper)}
+.slide{position:absolute;inset:0;padding:0;opacity:0;pointer-events:none;transform:translateX(60px) scale(1.01);transition:opacity .55s ease,transform .55s ease;overflow:hidden}
+.slide.on{opacity:1;pointer-events:auto;transform:none;z-index:2}
+.slide.prev{transform:translateX(-60px)}
+[data-s]{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.on [data-s]{opacity:1;transform:none;transition-delay:calc(var(--i,0)*110ms + 250ms)}
+.hd{position:absolute;left:56px;right:56px;top:28px;display:flex;align-items:center;justify-content:space-between;z-index:5;height:44px}
+.hd .lg{display:flex;align-items:center;gap:18px}
+.hd img{height:36px;width:auto}
+.hd .sep{width:1px;height:26px;background:currentColor;opacity:.3}
+.hd .cap{font:700 12px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+.fonte{position:absolute;left:56px;right:56px;bottom:22px;font-size:12px;line-height:1.35;color:var(--mut);z-index:5;max-width:1200px}
+.pad{position:absolute;inset:104px 56px 70px 56px}
+h1{font-size:92px;line-height:.96;font-weight:900}
+h2{font-size:54px;line-height:1.02;font-weight:800}
+h3{font-size:28px;line-height:1.1;font-weight:800}
+p,li{font-size:22px;line-height:1.4}
+.eyebrow{font:700 14px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.mut{color:var(--mut)}
+.num{font-weight:900;line-height:.9}
+.k-mega{font-size:230px;font-weight:900;line-height:.85}
+.red{color:var(--red)}.lil{color:var(--lil)}
+.ic{display:block;width:46px;height:46px;flex:none;color:var(--lil)}
+.ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ic svg *{stroke-dasharray:1;stroke-dashoffset:1}
+.on .ic svg *{animation:draw 1.3s ease forwards;animation-delay:calc(var(--i,0)*110ms + 500ms)}
+.ic.pulse svg{animation:pulse 2.6s ease-in-out infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.ln path,.ln line{stroke-dasharray:1;stroke-dashoffset:1;fill:none}
+.on .ln path,.on .ln line{animation:draw 1.6s ease forwards;animation-delay:.7s}
+.bgk{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgk i{position:absolute;border-radius:50%;background:var(--lilw);animation:flt 14s ease-in-out infinite}
+@keyframes flt{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-24px)}}
+.kb{animation:kb 22s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08) translate(-1%,-1%)}}
+.zoomable{cursor:zoom-in}
+/* capa */
+.s-capa .bgimg{position:absolute;inset:0}
+.s-capa .bgimg img{width:100%;height:100%;object-fit:cover}
+.s-capa .card{position:absolute;left:56px;top:120px;bottom:70px;width:650px;background:rgba(251,249,246,.93);padding:48px 52px;display:flex;flex-direction:column;justify-content:center;gap:26px;border-radius:6px}
+.s-capa .logos{position:absolute;left:56px;top:34px;z-index:6;display:flex;gap:22px;align-items:center;background:rgba(251,249,246,.93);padding:10px 20px;border-radius:6px}
+.s-capa .logos img{height:40px}
+/* quem somos */
+.s-quem{background:var(--lime)}
+.s-quem .hd{color:var(--ink)}
+.s-quem .fonte{color:#2b3a0a}
+.lados{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:34px}
+.lado{border-top:4px solid var(--ink);padding-top:16px}
+.lado b{font:800 30px Urbanist}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chip{border:2px solid var(--ink);border-radius:99px;padding:8px 18px;font:600 16px Poppins}
+/* marcas */
+.s-marc{background:#171117;color:#fff}
+.s-marc .hd{color:#fff}.s-marc .fonte{color:#b9aebe}
+.dif{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:40px}
+.dif div{border-top:2px solid var(--lime);padding-top:18px}
+.dif h3{font-size:26px;margin:12px 0 6px}
+.dif p{font-size:18px;color:#d8cfdc}
+.marcas{display:flex;align-items:center;gap:44px;flex-wrap:wrap;margin-top:44px;padding-top:30px;border-top:1px solid #3a2f3e}
+.marcas img{height:44px;width:auto;filter:brightness(0) invert(1);opacity:.9}
+.marcas span{font:800 28px Urbanist;opacity:.9}
+/* leitura */
+.l4{display:grid;grid-template-columns:420px 1fr 520px;gap:44px;height:100%;align-items:center}
+.heroN{display:flex;flex-direction:column;gap:26px}
+.heroN .num{font-size:150px;color:var(--red)}
+.heroN small{display:block;font-size:19px;color:var(--mut);margin-top:6px}
+.apr{display:flex;flex-direction:column;gap:16px}
+.apr .bx{border:2px solid var(--line);border-radius:10px;padding:20px 24px}
+.apr .bx.real{border-color:var(--red);background:#fff4f4}
+.apr .bx b{font:700 13px 'Space Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.apr .bx.real b{color:var(--red)}
+.apr .bx p{font-size:23px;font-weight:600;margin-top:6px}
+.mos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:230px 230px;gap:12px}
+.mos img{width:100%;height:100%;object-fit:cover;border-radius:8px;background:#fff}
+.mos .w{grid-column:1/3}
+/* mercado */
+.s-mer{background:#fff}
+.mer{display:grid;grid-template-columns:1fr 1fr;gap:60px;height:100%;align-items:center}
+.bars{display:flex;align-items:flex-end;gap:46px;height:330px;border-bottom:3px solid var(--ink);padding:0 30px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:10px}
+.bar .b{width:100%;background:var(--lil);transform-origin:bottom;transform:scaleY(0);transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .8s}
+.on .bar .b{transform:scaleY(1)}
+.bar .num{font-size:64px}
+.bar span{font:700 14px 'Space Mono';text-transform:uppercase;letter-spacing:.1em;margin-bottom:-34px;color:var(--mut);position:absolute}
+.qt{font:800 46px/1.05 Urbanist;color:var(--lil)}
+.warn{margin-top:22px;padding:16px 20px;border-left:5px solid var(--red);background:#fff4f4;font-size:18px}
+/* concorrência */
+.cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+.cmp .cl{border:2px solid var(--line);border-radius:12px;padding:26px 26px 22px;background:#fff;min-height:300px}
+.cmp .cl.us{border-color:var(--lil);background:var(--lilw)}
+.cmp .cl b{font:800 34px Urbanist}
+.cmp .cl p{font-size:19px;margin-top:10px}
+.cmp .tag{display:inline-block;margin-top:14px;font:700 12px 'Space Mono';letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 10px;border-radius:4px}
+.gap{margin-top:26px;display:flex;gap:18px;align-items:center;font:800 32px/1.1 Urbanist}
+.gap .arrow{flex:none}
+/* shopper */
+.jor{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:70px;position:relative}
+.jor .st{padding:0 22px 0 0;position:relative}
+.jor .dot{width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font:800 22px Urbanist;margin-bottom:20px;position:relative;z-index:2}
+.jor .st h3{font-size:26px;margin-bottom:10px}
+.jor .st p{font-size:18px}
+.jor .resp{margin-top:16px;display:inline-block;font:700 13px 'Space Mono';text-transform:uppercase;letter-spacing:.1em;color:var(--lil);border:1.5px solid var(--lil);padding:5px 10px;border-radius:4px}
+.jlinha{position:absolute;left:23px;right:60px;top:22px;height:4px;z-index:1}
+.sh-img{position:absolute;right:56px;bottom:90px;width:230px;display:flex;gap:10px;align-items:flex-end}
+.sh-img img{height:250px;width:auto;object-fit:contain}
+/* trade */
+.s-trade{background:var(--lilw)}
+.pil{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.pil .p{background:#fff;border-radius:12px;padding:26px;border-top:6px solid var(--lil);min-height:380px}
+.pil .p .n{font:900 70px Urbanist;color:var(--lil);opacity:.25;line-height:1}
+.pil .p h3{margin:10px 0 12px}
+.pil .p p{font-size:18px}
+/* marketing */
+.s-mkt{background:var(--red);color:#fff}
+.s-mkt .hd{color:#fff}.s-mkt .fonte{color:#ffd9da}
+.s-mkt .hd img.blk{filter:brightness(0) invert(1)}
+.mk{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;height:100%;align-items:center}
+.mk .big{font:900 116px/.92 Urbanist}
+.mk .it{display:flex;gap:20px;align-items:flex-start;padding:22px 0;border-top:2px solid rgba(255,255,255,.45)}
+.mk .it .ic{color:#fff}
+.mk .it h3{font-size:28px;margin-bottom:6px}
+.mk .it p{font-size:18px;color:#ffe9ea}
+/* reveal */
+.s-rev .bgimg{position:absolute;inset:0}
+.s-rev .bgimg img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.s-rev .ov{position:absolute;right:56px;top:120px;bottom:70px;width:560px;background:rgba(26,20,32,.88);color:#fff;padding:46px;display:flex;flex-direction:column;justify-content:center;gap:24px;border-radius:6px}
+.s-rev .hd{color:#fff}
+.s-rev .hd img.blk{filter:brightness(0) invert(1)}
+.rev3{display:flex;gap:14px;flex-wrap:wrap}
+.rev3 span{background:var(--lime);color:var(--ink);font:800 20px Urbanist;padding:8px 18px;border-radius:99px}
+/* divisor */
+.k-divisor{background:var(--ink);color:#fff}
+.k-divisor .hd{color:#fff}
+.k-divisor .bgk i{background:#2a2030}
+.k-divisor .cn{position:absolute;left:56px;top:190px;font:900 360px/0.8 Urbanist;color:var(--lime)}
+.k-divisor .tx{position:absolute;left:56px;right:56px;bottom:160px}
+.k-divisor .tx h2{font-size:84px;max-width:1100px}
+.k-divisor .tx p{font-size:26px;color:#d8cfdc;margin-top:16px;max-width:900px}
+.trail{position:absolute;left:56px;right:56px;bottom:52px;display:flex;gap:10px}
+.trail span{flex:1;border-top:4px solid #4a3d50;padding-top:10px;font:700 13px 'Space Mono';letter-spacing:.12em;text-transform:uppercase;color:#8d8093}
+.trail span.me{border-color:var(--lime);color:var(--lime)}
+/* peça */
+.pc{display:grid;gap:40px;height:100%}
+.pa{grid-template-columns:1fr 760px}
+.pb{grid-template-columns:760px 1fr}
+.pcx{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr}
+.blks{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px;align-content:start}
+.blk{display:flex;gap:14px}
+.blk .ic{width:40px;height:40px;margin-top:2px}
+.blk b{display:block;font:700 13px 'Space Mono';letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+.blk p,.blk li{font-size:18px;line-height:1.38}
+.blk ul{list-style:none}
+.imgs{position:relative}
+.imgs .cena{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.imgs .rec{position:absolute;left:-26px;bottom:-14px;width:240px;height:240px;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(26,20,32,.28);padding:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.imgs .rec img{width:100%;height:100%;object-fit:contain}
+.pb .imgs .rec{left:auto;right:-26px}
+.spec{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.spec span{font:700 12px 'Space Mono';text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:#fff;padding:6px 10px;border-radius:4px}
+.spec span.l{background:var(--lil)}
+.arbox{display:flex;gap:16px;align-items:center;margin-top:14px;font-size:14px;color:var(--mut)}
+.arbox svg.qr{width:92px;height:92px;flex:none;background:#fff;padding:4px;border:1px solid var(--line)}
+.arbox a{color:var(--lil);font-weight:600}
+.arcard{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;font-size:13px;color:var(--mut)}
+.arcard svg{width:84px;height:84px}
+/* rastreio */
+.fl{display:flex;align-items:stretch;gap:6px;margin-top:26px}
+.fl .nd{flex:1;text-align:center;font:700 13px 'Space Mono';letter-spacing:.08em;text-transform:uppercase;padding:14px 4px;border:2px solid var(--ink);border-radius:8px;background:#fff;position:relative}
+.fl .nd .ic{margin:0 auto 6px;width:34px;height:34px}
+.fl .ar{align-self:center;color:var(--red);font:900 26px Urbanist}
+.tw{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:28px}
+.tw .cd{border-radius:12px;padding:24px 28px;background:#fff;border:2px solid var(--line)}
+.tw .cd.os{border-top:8px solid var(--red)}.tw .cd.ot{border-top:8px solid var(--lil)}
+.tw .cd h3{font-size:30px;margin-bottom:10px}
+.tw .cd dl{display:grid;grid-template-columns:130px 1fr;gap:8px 14px;font-size:16px;line-height:1.35}
+.tw .cd dt{font:700 12px 'Space Mono';text-transform:uppercase;letter-spacing:.1em;color:var(--red);padding-top:3px}
+.tw .cd.ot dt{color:var(--lil)}
+/* piloto */
+.gr3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+.gr3 .g{border-radius:12px;padding:26px;background:#fff;border:2px solid var(--line)}
+.gr3 .g.hi{border-color:var(--lil);background:var(--lilw)}
+.gr3 .g .num{font-size:96px;color:var(--lil)}
+.gr3 .g h3{margin:6px 0 6px}
+.gr3 .g p{font-size:17px}
+.lojas{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.lojas i{width:22px;height:22px;border-radius:5px;background:var(--lil);opacity:.25;display:block;transform:scale(0);transition:transform .4s ease}
+.on .lojas i{transform:scale(1);transition-delay:calc(var(--k)*70ms + 700ms)}
+.g:nth-child(1) .lojas i{background:var(--ink)}.g:nth-child(3) .lojas i{background:var(--red)}
+.nt{margin-top:22px;font-size:18px;padding:14px 20px;background:#fff;border-left:5px solid var(--lil)}
+/* cronograma */
+.s-cro{background:#fff}
+.tl{position:relative;margin-top:50px;height:430px}
+.tl .eixo{position:absolute;left:0;right:0;top:92px;height:6px;background:var(--line);border-radius:3px}
+.tl .fill{position:absolute;left:0;top:92px;height:6px;background:var(--red);border-radius:3px;width:0;transition:width 2.4s ease .6s}
+.on .tl .fill{width:100%}
+.ph{position:absolute;top:0}
+.ph .bar2{height:56px;border-radius:8px;color:#fff;font:800 19px Urbanist;display:flex;align-items:center;padding:0 16px;white-space:nowrap}
+.ph .wk{font:700 12px 'Space Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.ph .mk2{position:absolute;top:84px;left:0;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--red)}
+.ph .d{position:absolute;top:130px;left:0;width:240px;font-size:16px}
+.ph .d b{display:block;font:800 21px Urbanist;margin-bottom:4px}
+/* kpis */
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:26px}
+.kp .k{background:#fff;border:2px solid var(--line);border-radius:12px;padding:22px}
+.kp .k h3{font-size:24px;margin:8px 0}
+.kp .k p{font-size:15.5px;line-height:1.35}
+.kp .k em{display:block;margin-top:10px;font:700 11.5px 'Space Mono';text-transform:uppercase;letter-spacing:.06em;color:var(--lil);font-style:normal}
+.nx{display:grid;grid-template-columns:1.3fr 1fr;gap:34px;margin-top:22px;align-items:start}
+.nx ol{padding-left:24px}.nx li{font-size:19px;margin-bottom:8px}
+.pq{font:800 34px/1.1 Urbanist;color:var(--red)}
+/* fim */
+.s-fim{background:var(--lime)}
+.s-fim .hd{color:var(--ink)}
+.fim{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;height:100%;align-items:center}
+.fim h2{font-size:88px;line-height:.95}
+.dados{font-size:17px;line-height:1.5}
+.dados b{font-family:Urbanist;font-size:20px}
+.wa{display:inline-flex;align-items:center;gap:12px;margin-top:26px;background:var(--ink);color:#fff;text-decoration:none;font:700 24px Urbanist;padding:20px 34px;border-radius:99px;min-height:56px}
+.wa:hover{background:var(--red)}
+/* nav */
+#nav{position:fixed;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 14px;pointer-events:none}
+#nav button{pointer-events:auto;width:48px;height:48px;border-radius:50%;border:2px solid var(--ink);background:#fff;font:800 20px Urbanist;cursor:pointer}
+#nav .ct{font:700 13px 'Space Mono';background:#fff;padding:8px 14px;border-radius:99px;border:2px solid var(--ink);pointer-events:auto}
+#prog{position:fixed;left:0;top:0;height:5px;background:var(--red);z-index:60;transition:width .5s}
+#rot{position:fixed;left:0;right:0;bottom:0;max-height:34vh;overflow:auto;background:#171117;color:#fff;padding:20px 40px 74px;z-index:70;display:none;font-size:18px;line-height:1.5}
+body.pres #rot{display:block}
+.roteiro{display:none}
+#cur{position:fixed;left:0;top:0;width:18px;height:18px;border:2px solid var(--red);border-radius:50%;pointer-events:none;z-index:99;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:multiply}
+#cur.big{width:70px;height:70px;background:rgba(227,30,36,.12)}
+#cur b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 10px 'Space Mono';color:var(--red);opacity:0}
+#cur.big b{opacity:1}
+#lb{position:fixed;inset:0;background:rgba(10,6,14,.9);z-index:120;display:none;align-items:center;justify-content:center;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:6px;animation:lbin .3s ease}
+@keyframes lbin{from{opacity:0;transform:scale(.96)}}
+#lb button{position:absolute;top:18px;right:22px;font-size:34px;color:#fff;background:none;border:0;cursor:pointer;min-width:48px;min-height:48px}
+@media(pointer:coarse){#cur{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}[data-s]{opacity:1;transform:none}.ic svg *,.ln path,.ln line{stroke-dashoffset:0}.bar .b{transform:none}.tl .fill{width:100%}.lojas i{transform:scale(1)}}
+/* MOBILE */
+@media(max-width:899px){
+ html,body{overflow:auto;height:auto}
+ body{overflow-x:hidden}
+ #stage{position:static;width:100%;height:auto;transform:none!important;overflow:visible}
+ .slide{position:relative;inset:auto;opacity:1!important;transform:none!important;pointer-events:auto;padding:26px 22px 40px;min-height:0;border-bottom:1px solid var(--line)}
+ [data-s]{opacity:1!important;transform:none!important}
+ .ic svg *,.ln path,.ln line{stroke-dashoffset:0}.bar .b{transform:none}.tl .fill{width:100%}.lojas i{transform:scale(1)}
+ .hd{position:static;height:auto;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+ .hd img{height:30px}
+ .hd .cap{display:none}
+ .fonte{position:static;margin-top:20px;max-width:none;font-size:12px}
+ .pad{position:static;inset:auto}
+ h1{font-size:40px;line-height:1.02}h2{font-size:30px;line-height:1.08}h3{font-size:22px}
+ p,li{font-size:16px}
+ .k-mega{font-size:96px}
+ .s-capa .bgimg,.s-rev .bgimg{position:relative;height:260px;margin:-26px -22px 18px}
+ .s-capa .card,.s-rev .ov{position:static;width:auto;background:none;padding:0;color:inherit;gap:16px}
+ .s-rev .ov{color:var(--ink)}
+ .s-capa .logos{position:static;background:none;padding:0;margin-bottom:14px}
+ .s-capa .logos img{height:32px}
+ .l4,.mer,.mk,.fim,.pc,.pa,.pb,.pcx,.tw,.nx,.gr3,.cmp,.pil,.kp,.dif,.lados,.blks{display:flex!important;flex-direction:column;gap:18px}
+ .heroN .num{font-size:84px}
+ .mos{grid-template-rows:140px 140px}
+ .bars{height:220px;gap:20px}
+ .qt{font-size:30px}
+ .jor{display:flex;flex-direction:column;gap:26px;margin-top:24px}
+ .jlinha,.sh-img{display:none}
+ .pil .p{min-height:0}
+ .k-divisor{min-height:420px}
+ .k-divisor .cn{position:static;font-size:150px}
+ .k-divisor .tx{position:static;margin-top:14px}
+ .k-divisor .tx h2{font-size:32px}
+ .k-divisor .tx p{font-size:17px}
+ .trail{position:static;flex-wrap:wrap;margin-top:18px}
+ .imgs .cena{height:auto}
+ .imgs .rec{position:static;width:100%;height:200px;margin-top:12px;box-shadow:none;border:1px solid var(--line)}
+ .fl{flex-direction:column}.fl .ar{transform:rotate(90deg)}
+ .tl{height:auto;display:flex;flex-direction:column;gap:20px;margin-top:20px}
+ .tl .eixo,.tl .fill{display:none}
+ .ph{position:static;width:auto!important}.ph .bar2{font-size:17px;white-space:normal;height:auto;padding:12px 16px;width:auto!important}
+ .ph .mk2{display:none}.ph .d{position:static;width:auto;margin-top:10px}
+ .tw .cd dl{grid-template-columns:1fr}
+ .mk .big{font-size:56px}
+ .fim h2{font-size:42px}
+ .wa{font-size:20px;padding:16px 24px}
+ .gap{font-size:22px}
+ .dados{font-size:16px}
+ .marcas img{height:34px}.marcas{gap:24px}
+ #nav,#prog,#cur{display:none}
+ .blk p,.blk li{font-size:16px}
+}
+
+@media(min-width:900px){
+.cmp{margin-top:56px;gap:30px}.cmp .cl{min-height:420px;padding:32px}.cmp .cl b{font-size:42px}.cmp .cl p{font-size:23px;margin-top:14px}.cmp .tag{font-size:13px}.gap{margin-top:46px;font-size:38px}
+.jor{margin-top:120px}.jor .st h3{font-size:34px}.jor .st p{font-size:23px}.jor .resp{font-size:15px;margin-top:22px}.jor .dot{width:58px;height:58px;font-size:26px}.jlinha{top:27px;left:29px}
+.pil{margin-top:50px}.pil .p{min-height:540px;padding:32px}.pil .p .n{font-size:96px}.pil .p h3{font-size:34px}.pil .p p{font-size:23px}
+.gr3{margin-top:50px}.gr3 .g{padding:32px}.gr3 .g .num{font-size:140px}.gr3 .g h3{font-size:32px}.gr3 .g p{font-size:22px}.lojas i{width:34px;height:34px}.nt{font-size:23px;margin-top:34px}
+.tl{height:600px;margin-top:70px}.tl .eixo,.tl .fill{top:110px}.ph .bar2{height:68px;font-size:22px}.ph .mk2{top:101px}.ph .d{top:160px;width:100%;font-size:19px}.ph .d b{font-size:25px}.ph .wk{font-size:13px}
+.kp{margin-top:44px}.kp .k{padding:30px}.kp .k h3{font-size:30px}.kp .k p{font-size:20px}.kp .k em{font-size:13px;margin-top:16px}.nx{margin-top:44px}.nx li{font-size:23px;margin-bottom:12px}.pq{font-size:42px}
+.tw .cd dl{font-size:18px}.tw .cd h3{font-size:34px}
+.dif p{font-size:21px}.dif h3{font-size:30px}
+.lados p{font-size:21px!important}
+.q-grid{display:grid;grid-template-columns:600px 1fr;gap:70px;align-items:center}
+}
+@media(max-width:899px){.q-grid{display:flex;flex-direction:column;gap:20px}.s-quem h2{font-size:38px!important}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="cur"><b>VER</b></div>
+<div id="stage">
+
+<!-- 1 CAPA -->
+<section class="slide s-capa" data-cap="Abertura">
+ <div class="bgimg"><img class="kb" data-img="kv" src="assets/01-1792508701284-imagem.png" alt="Ponta de gôndola Limpol Perfumes em supermercado, com shoppers escolhendo o frasco"></div>
+ <div class="logos"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span style="width:1px;height:30px;background:#1a1420;opacity:.3"></span><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div>
+ <div class="card">
+  <div class="eyebrow" data-s style="--i:0">Trade marketing para inovação · 27/10/2026</div>
+  <h1 class="k-titulo" data-s style="--i:1">Da inovação ao <span class="red">giro</span> na loja.</h1>
+  <p data-s style="--i:2">Um piloto para a inovação Limpol Perfumes chegar à gôndola, ser escolhida pelo shopper e ser medida loja a loja.</p>
+ </div>
+ <aside class="roteiro" hidden>Boa tarde. A Bombril disse no relatório de 2025 que lava-roupas e limpadores perfumados ajudaram a crescer. Nós viemos falar do passo seguinte: fazer essa inovação ser vista, entendida e escolhida na loja, e provar isso com dado. Em vinte minutos mostramos uma hipótese concreta, Limpol Perfumes, as peças, o rastreio por QR e um piloto de doze semanas. Queremos sair daqui com uma categoria, uma rede e um interlocutor.</aside>
+</section>
+
+<!-- 2 QUEM SOMOS -->
+<section class="slide s-quem" data-cap="Abertura">
+ <div class="hd"><div class="lg"><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"><span class="sep"></span><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"></div><div class="cap">Quem somos</div></div>
+ <div class="pad q-grid">
+  <div><h2 style="font-size:104px;line-height:.92" data-s style="--i:0">Os dois lados do balcão.</h2></div>
+  <div>
+   <p data-s style="--i:1;font-size:26px">A 75 LAB nasceu da soma de quem opera a loja e de quem pensa a marca na indústria. Mais de 15 anos vivendo a distância entre a intenção comercial e o que acontece no canal.</p>
+   <div class="lados">
+    <div class="lado" data-s style="--i:2"><b>Caique Becker</b><p style="font-size:18px">Cofundador e Head de Trade. Veio do varejo: layout, execução e a régua de aprovação do que a indústria propõe.</p></div>
+    <div class="lado" data-s style="--i:3"><b>Daniel Coimbra</b><p style="font-size:18px">Cofundador e CEO. Veio da indústria: lançamento, gestão de categoria e estratégia comercial que vira venda.</p></div>
+   </div>
+   <div class="chips" data-s style="--i:4"><span class="chip">Estratégia de PDV</span><span class="chip">Displays e produção</span><span class="chip">Rastreio por QR</span><span class="chip">AR e vitrine virtual</span></div>
+  </div>
+ </div>
+ <aside class="roteiro" hidden>A 75 LAB tem dois fundadores com origens opostas. O Caique veio do varejo e sabe o que a loja aprova, instala e cobra. O Daniel veio da indústria e pensa a marca pelo resultado. Por isso a gente desenha peça que a loja aceita e que a indústria consegue medir. Fazemos estratégia, design, produção, instalação e leitura de resultado, tudo na mesma casa.</aside>
+</section>
+
+<!-- 3 DIFERENCIAL -->
+<section class="slide s-marc" data-cap="Abertura">
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"><span class="sep"></span><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril" style="background:#fff;padding:3px 8px;border-radius:4px"></div><div class="cap">Nosso diferencial</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;max-width:1100px">Quem desenha a peça já teve de aprová-la, instalá-la e cobrá-la.</h2>
+  <div class="dif">
+   <div data-s style="--i:1"><span class="ic" data-ic="store"></span><h3>Vivemos o trade</h3><p>Falamos a língua de quem decide: margem, giro e positivação.</p></div>
+   <div data-s style="--i:2"><span class="ic" data-ic="box"></span><h3>Solução que cabe numa frase</h3><p>Entregável físico, escopo fechado e em ondas. Vira ativo da marca, com começo, meio e fim.</p></div>
+   <div data-s style="--i:3"><span class="ic" data-ic="qr"></span><h3>PDV mensurável</h3><p>Plano de rastreamento One Shot e On Timing em cada peça.</p></div>
+   <div data-s style="--i:4"><span class="ic" data-ic="layers"></span><h3>Plataformas próprias</h3><p>Ariuno, Códice, LAB2WIN e BE2WIN para gestão, displays inteligentes e planejamento de trade.</p></div>
+  </div>
+  <div class="marcas" data-s style="--i:5">
+   <span class="mut" style="font:700 13px 'Space Mono';letter-spacing:.14em;text-transform:uppercase;color:#b9aebe">Marcas que confiam na 75 LAB</span>
+   <img src="assets/05-logo-1792194372343.svg" alt="Logo Savencia, Polenghi" loading="lazy"><img src="assets/06-logo-1792194370190.svg" alt="Logo Mars" loading="lazy"><span>Panco</span><img src="assets/07-logo-1792194370325.svg" alt="Logo Scala" loading="lazy"><span>Lactalis</span><span>Nestlé</span><span>Seara</span><span>Grupo Pereira</span><span>Alltak</span>
+  </div>
+ </div>
+ <aside class="roteiro" hidden>O nosso diferencial é simples: a gente já esteve dos dois lados. Cada peça que desenhamos passa pelo teste de quem aprova, instala e repõe. E sempre com escopo fechado, em ondas, com rastreio. Aqui estão algumas das marcas que já trabalham com a gente em supermercado e atacarejo. Plataformas próprias, como o Códice, ajudam a medir o que acontece na loja.</aside>
+</section>
+
+<!-- DIVISOR 1 -->
+<section class="slide k-divisor" data-cap="Leitura">
+ <div class="bgk"><i style="width:520px;height:520px;right:-120px;top:-100px"></i></div>
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap">Capítulo 1</div></div>
+ <div class="cn" data-s>01</div>
+ <div class="tx"><h2 data-s style="--i:1">Leitura: a inovação já tem prioridade.</h2><p data-s style="--i:2">Antes de propor, o que os números públicos dizem e o que ainda ninguém mediu.</p></div>
+ <div class="trail"><span class="me">01 Leitura</span><span>02 Estratégia</span><span>03 Solução</span><span>04 Execução e medição</span></div>
+ <aside class="roteiro" hidden>Primeiro capítulo: a leitura. Vamos olhar o que a própria Bombril declarou, o que o mercado mostra e onde existe espaço para a loja ajudar a inovação a girar. Tudo o que vem a seguir parte de dado público, e o que for hipótese vai dito como hipótese.</aside>
+</section>
+
+<!-- 4 LEITURA -->
+<section class="slide" data-cap="Leitura">
+ <div class="bgk"><i style="width:380px;height:380px;left:420px;bottom:-140px"></i></div>
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Leitura do desafio</div></div>
+ <div class="pad"><div class="l4">
+  <div class="heroN">
+   <div data-s style="--i:0"><div class="num" data-conta="8.2" data-dec="1" data-pre="+" data-suf="%">+8,2%</div><small>receita líquida em 2025</small></div>
+   <div data-s style="--i:1"><div class="num" data-conta="6.5" data-dec="1" data-pre="+" data-suf="%">+6,5%</div><small>volume vendido em 2025</small></div>
+  </div>
+  <div class="apr">
+   <h2 data-s style="--i:0;font-size:44px">A inovação cresceu. O desafio é fazê-la girar em cada loja.</h2>
+   <div class="bx" data-s style="--i:1"><b>Problema aparente</b><p>Conquistar distribuição para lava-roupas e limpadores perfumados.</p></div>
+   <svg class="ln" width="40" height="34" viewBox="0 0 40 34" style="margin:-6px 0 -6px 30px"><path pathLength="1" d="M20 2 L20 28 M10 20 L20 30 L30 20" stroke="#E31E24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   <div class="bx real" data-s style="--i:2"><b>Problema real</b><p>Fazer o shopper reconhecer, comparar e escolher a inovação na gôndola, e a marca saber onde isso acontece.</p></div>
+  </div>
+  <div class="mos" data-s style="--i:2">
+   <img class="w zoomable" src="assets/08-foto-outra-9-1792508121484.jpg" alt="Linha de limpadores perfumados Limpol com frascos e fragrâncias" loading="lazy">
+   <img class="zoomable" src="assets/09-foto-produto-16-1792508133314.webp" alt="Embalagens Mon Bijou lava-roupas Multiação" loading="lazy">
+   <img class="zoomable" src="assets/10-foto-outra-2-1792508112703.png" alt="Frasco Limpol Perfumes Lavander 500 ml" loading="lazy">
+  </div>
+ </div></div>
+ <div class="fonte">Fonte: Bombril Relações com Investidores, Press Release 4T25, exercício de 2025. Imagens dos sites oficiais Bombril e SuperHiper, consulta em 20/10/2026.</div>
+ <aside class="roteiro" hidden>O relatório de 2025 mostra receita líquida com alta de oito vírgula dois por cento e volume com alta de seis vírgula cinco, e associa parte da evolução a inovações em lava-roupas e limpador perfumado. O problema aparente é distribuição. O problema real é o que acontece depois que o produto entra: o shopper entende, compara e escolhe? E a marca sabe em quais lojas isso funciona? Essa é a pergunta do projeto.</aside>
+</section>
+
+<!-- 5 MERCADO -->
+<section class="slide s-mer" data-cap="Leitura">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Mercado</div></div>
+ <div class="pad"><div class="mer">
+  <div>
+   <h2 data-s style="--i:0;font-size:46px;margin-bottom:34px">A categoria cresce devagar. Quem ganha espaço é quem explica o valor.</h2>
+   <div class="bars" data-s style="--i:1">
+    <div class="bar"><div class="num" data-conta="0.2" data-dec="1" data-pre="-" data-suf="%" style="font-size:54px;color:var(--mut)">-0,2%</div><div class="b" style="height:26px;background:#b9aebe"></div></div>
+    <div class="bar"><div class="num" data-conta="3.9" data-dec="1" data-pre="+" data-suf="%" style="color:var(--lil)">+3,9%</div><div class="b" style="height:230px"></div></div>
+   </div>
+   <div style="display:flex;gap:46px;padding:10px 30px;font:700 13px 'Space Mono';text-transform:uppercase;letter-spacing:.1em;color:var(--mut)"><span style="flex:1;text-align:center">Produção 2025</span><span style="flex:1;text-align:center">Projeção 2026</span></div>
+  </div>
+  <div>
+   <div class="qt" data-s style="--i:2">Eficiência e experiência sensorial guiam a evolução dos produtos de limpeza.</div>
+   <p class="mut" data-s style="--i:3" style="margin-top:14px">Leitura da Worldpanel para 2026: limpeza que funciona e que também entrega sensação. É o território do perfume.</p>
+   <div class="warn" data-s style="--i:4"><b>Cuidado ao usar os números.</b> Produção física do setor não é venda ao consumidor, e a projeção de 2026 não é resultado realizado.</div>
+  </div>
+ </div></div>
+ <div class="fonte">Fontes: ABIPLA com dados FGV IBRE, 29/09/2026 (produção física do setor de produtos de limpeza); Worldpanel by Numerator, 10 tendências do consumo em 2026, 04/02/2026.</div>
+ <aside class="roteiro" hidden>Segundo a ABIPLA, a produção física do setor de limpeza ficou praticamente estável em 2025, menos zero vírgula dois por cento, e a projeção para 2026 é de mais três vírgula nove. É crescimento moderado, então cada ponto de giro por loja conta. A Worldpanel aponta que eficiência e experiência sensorial estão guiando a evolução do consumo. Importante: são dados setoriais, não são venda da Bombril nem prova de participação de mercado.</aside>
+</section>
+
+<!-- 6 CONCORRÊNCIA -->
+<section class="slide" data-cap="Leitura">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Concorrência</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;max-width:1200px">O território do perfume já é disputado. Perfume sozinho não diferencia.</h2>
+  <div class="cmp">
+   <div class="cl" data-s style="--i:1"><span class="ic" data-ic="drop"></span><b>Ypê</b><p>Renovou os limpadores perfumados em setembro de 2025, incluindo a fragrância Chá Branco.</p><span class="tag">Renovação de linha</span></div>
+   <div class="cl" data-s style="--i:2"><span class="ic" data-ic="layers"></span><b>Veja</b><p>Separa Perfumes de Aroma Sense, esta com proposta mais premium e óleos essenciais, segundo a fabricante.</p><span class="tag">Duas camadas de linha</span></div>
+   <div class="cl us" data-s style="--i:3"><span class="ic" data-ic="target"></span><b>Limpol Perfumes</b><p>Renovação anunciada em março de 2025, com cinco fragrâncias e embalagem inspirada em diamante.</p><span class="tag">Espaço a ocupar: escolha guiada</span></div>
+  </div>
+  <div class="gap" data-s style="--i:4"><svg class="ln arrow" width="70" height="30" viewBox="0 0 70 30"><path pathLength="1" d="M2 15 H62 M50 5 L62 15 L50 25" stroke="#E31E24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A execução precisa tornar Limpol reconhecível, explicar o uso e dar razão para escolher.</span></div>
+ </div>
+ <div class="fonte">Fontes: Ypê, comunicação oficial, set/2025; Veja, site oficial, consulta em 20/10/2026; SuperHiper/ABRAS, 17/03/2025. Alegações são das fabricantes; não há comparação de eficácia.</div>
+ <aside class="roteiro" hidden>Os concorrentes também estão no perfume. A Ypê renovou seus limpadores perfumados em setembro de 2025. A Veja separa Perfumes de Aroma Sense, com uma versão mais premium. A Limpol Perfumes foi renovada em março de 2025 com cinco fragrâncias e embalagem de diamante. Perfume, sozinho, não é argumento. O espaço livre é tornar a escolha da fragrância fácil na gôndola. Isso é o que a execução pode resolver.</aside>
+</section>
+
+<!-- 7 SHOPPER -->
+<section class="slide s-shop" data-cap="Leitura">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Shopper</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;max-width:1100px">O shopper decide em quatro perguntas. A gôndola precisa respondê-las.</h2>
+  <div class="jor">
+   <svg class="ln jlinha" viewBox="0 0 1000 4" preserveAspectRatio="none"><line pathLength="1" x1="0" y1="2" x2="1000" y2="2" stroke="#E31E24" stroke-width="4"/></svg>
+   <div class="st" data-s style="--i:1"><div class="dot">1</div><h3>O que é e para que serve?</h3><p>Categoria, uso e benefício em poucas palavras.</p><span class="resp">Ponta Prisma</span></div>
+   <div class="st" data-s style="--i:2"><div class="dot">2</div><h3>Qual fragrância?</h3><p>Navegação visual entre as variantes escolhidas.</p><span class="resp">Régua de Escolha</span></div>
+   <div class="st" data-s style="--i:3"><div class="dot">3</div><h3>Qual formato levar?</h3><p>Hierarquia entre tamanhos, com o preço legível.</p><span class="resp">Régua + Caixa Prisma</span></div>
+   <div class="st" data-s style="--i:4"><div class="dot">4</div><h3>Quero conhecer o aroma?</h3><p>Experiência olfativa opcional, só se aprovada pela Bombril.</p><span class="resp">Variante opcional</span></div>
+  </div>
+ </div>
+ <div class="fonte">Leitura da 75 LAB a partir do material público da Bombril, a validar no diagnóstico em loja. Sem dado primário de shopper neste momento.</div>
+ <aside class="roteiro" hidden>Esta é a nossa leitura da jornada de escolha, e vamos validar em loja no diagnóstico. O shopper faz quatro perguntas em segundos: o que é, qual fragrância, qual tamanho, e se vale experimentar o aroma. Cada peça do projeto responde a uma delas. O aroma é uma variante opcional, e só entra se a Bombril aprovar o sistema e a reposição.</aside>
+</section>
+
+<!-- DIVISOR 2 -->
+<section class="slide k-divisor" data-cap="Estratégia">
+ <div class="bgk"><i style="width:620px;height:620px;left:-160px;bottom:-200px"></i></div>
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap">Capítulo 2</div></div>
+ <div class="cn" data-s>02</div>
+ <div class="tx"><h2 data-s style="--i:1">Estratégia: um módulo de execução ligado a uma prioridade.</h2><p data-s style="--i:2">Trade e marketing se somam no mesmo metro quadrado da loja.</p></div>
+ <div class="trail"><span>01 Leitura</span><span class="me">02 Estratégia</span><span>03 Solução</span><span>04 Execução e medição</span></div>
+ <aside class="roteiro" hidden>Segundo capítulo: estratégia. Aqui mostramos como trade e marketing trabalham juntos para que a inovação não dependa só de mídia. O princípio é uma prioridade de categoria, uma rede, e um módulo de execução que a loja consegue montar e repor.</aside>
+</section>
+
+<!-- 8 TRADE -->
+<section class="slide s-trade" data-cap="Estratégia">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Estratégia de trade</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;max-width:1200px">Trade: começar onde há dado, expor com clareza, repor com disciplina.</h2>
+  <div class="pil">
+   <div class="p" data-s style="--i:1"><div class="n">01</div><span class="ic" data-ic="store"></span><h3>Canal e rede</h3><p>Uma rede ou região com histórico por loja e SKU. Supermercado e atacarejo conforme onde a distribuição já existe.</p></div>
+   <div class="p" data-s style="--i:2"><div class="n">02</div><span class="ic" data-ic="layers"></span><h3>Exposição</h3><p>Ponta autorizada, régua de escolha na gôndola e caixa para loja compacta. Embalagens sempre visíveis.</p></div>
+   <div class="p" data-s style="--i:3"><div class="n">03</div><span class="ic" data-ic="box"></span><h3>Sortimento e preço</h3><p>Só os SKUs cadastrados e abastecidos na rede escolhida. Preço legível e condição comercial da loja respeitada.</p></div>
+   <div class="p" data-s style="--i:4"><div class="n">04</div><span class="ic" data-ic="check"></span><h3>Execução e régua</h3><p>Instalação com evidência, treino curto e rotina de reposição junto às equipes regionais. Sucesso definido antes de começar.</p></div>
+  </div>
+ </div>
+ <div class="fonte">Fonte: Bombril, site oficial, Trade Regionais (atendimento a atacadistas, distribuidores e varejistas), consulta em 20/10/2026.</div>
+ <aside class="roteiro" hidden>A estratégia de trade tem quatro pilares. Canal: escolher uma rede ou região com dados utilizáveis. Exposição: ponta, régua e caixa, cada uma para um tamanho de loja. Sortimento e preço: trabalhar só com o que está cadastrado e abastecido. E execução: instalação com evidência, treinamento curto e reposição, apoiados nas equipes regionais que a Bombril já tem. O critério de sucesso é combinado antes da instalação.</aside>
+</section>
+
+<!-- 9 MARKETING -->
+<section class="slide s-mkt" data-cap="Estratégia">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril" style="background:#fff;padding:4px 10px;border-radius:6px"><span class="sep"></span><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap">Estratégia de marketing</div></div>
+ <div class="pad"><div class="mk">
+  <div><div class="eyebrow" style="color:#fff;opacity:.8" data-s>Território criativo para desenvolver com a Bombril</div><div class="big" data-s style="--i:1;margin-top:18px">Escolha o perfume da sua casa.</div></div>
+  <div>
+   <div class="it" data-s style="--i:2"><span class="ic" data-ic="eye"></span><div><h3>Mensagem</h3><p>Identifica o limpador e o benefício, e coloca a fragrância como critério de escolha.</p></div></div>
+   <div class="it" data-s style="--i:3"><span class="ic" data-ic="qr"></span><div><h3>Conteúdo no celular</h3><p>QR na peça leva ao guia de fragrância e de uso, com o evento medido.</p></div></div>
+   <div class="it" data-s style="--i:4"><span class="ic" data-ic="layers"></span><div><h3>Integração</h3><p>Reaproveita os aprendizados da Blitz Bombril e da promoção 1001 Prêmios, sem concorrer com as agências atuais.</p></div></div>
+  </div>
+ </div></div>
+ <div class="fonte" style="color:#ffd9da">Fontes: Propmark, 20/02/2026 (campanha de Carnaval com Sotaq e Movin e Blitz Bombril em PDVs); Bombril, promoção oficial 1001 Prêmios Pra Você, encerrada em 14/08/2026.</div>
+ <aside class="roteiro" hidden>Na parte de marketing, trazemos uma proposta de território, escolha o perfume da sua casa, para desenvolver junto com vocês. A mensagem mantém o benefício funcional visível. O QR leva ao conteúdo de fragrância e uso, e cada leitura vira dado. E o projeto se integra ao que já existe: a Blitz Bombril do Carnaval e a promoção de 2026. Queremos saber o que funcionou nelas para não reinventar.</aside>
+</section>
+
+<!-- DIVISOR 3 -->
+<section class="slide k-divisor" data-cap="Solução">
+ <div class="bgk"><i style="width:560px;height:560px;right:-100px;bottom:-160px"></i></div>
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap">Capítulo 3</div></div>
+ <div class="cn" data-s>03</div>
+ <div class="tx"><h2 data-s style="--i:1">Solução: escolher, entender e comprovar.</h2><p data-s style="--i:2">Três peças para três tamanhos de loja, todas com leitura de resultado.</p></div>
+ <div class="trail"><span>01 Leitura</span><span>02 Estratégia</span><span class="me">03 Solução</span><span>04 Execução e medição</span></div>
+ <aside class="roteiro" hidden>Terceiro capítulo: a solução. Vamos ver o conceito aplicado na gôndola e depois cada peça, com o que ela é, como funciona, por que ela existe e o que entrega para a marca, o varejo e o shopper.</aside>
+</section>
+
+<!-- 10 REVEAL -->
+<section class="slide s-rev" data-cap="Solução">
+ <div class="bgimg"><video class="kb" src="assets/11-ponta-prisma-video.mp4" poster="assets/12-ponta-prisma-hero-1600.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Giro da Ponta Prisma, peça principal do projeto" style="width:100%;height:100%;object-fit:cover"></video></div>
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap" style="color:#fff">Reveal da solução</div></div>
+ <div class="ov">
+  <div class="eyebrow" style="color:var(--lime)" data-s>O reveal</div>
+  <h2 data-s style="--i:1;font-size:62px">A inovação na altura do olho, com a escolha facilitada.</h2>
+  <div class="rev3" data-s style="--i:2"><span>Escolher</span><span>Entender</span><span>Comprovar</span></div>
+  <p data-s style="--i:3;font-size:19px;color:#d8cfdc">Ponta autorizada no fim da gôndola, frascos à frente, luz de borda e QR para provar a instalação.</p>
+ </div>
+ <aside class="roteiro" hidden>Este é o conceito aplicado. A ponta de gôndola reúne a linha Limpol Perfumes, com luz de borda lilás que lembra a faceta do diamante da embalagem. O shopper vê, compara e escolhe. A peça está encostada no fim da linha de gôndolas, onde existe em loja de verdade. E o QR e o sensor permitem que a Bombril saiba em qual loja ela entrou e quando precisa de reposição.</aside>
+</section>
+
+<!-- 11 PEÇA PONTA -->
+<section class="slide" data-peca="Ponta Prisma" data-cap="Solução">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Peça 1 · Ponta Prisma</div></div>
+ <div class="pad"><div class="pc pa">
+  <div>
+   <h2 data-s style="--i:0;font-size:48px;margin-bottom:10px">Ponta Prisma: a inovação ganha endereço certo e se identifica sozinha.</h2>
+   <div class="spec" data-s style="--i:1"><span>80 x 170 x 40 cm</span><span>Metal pintado</span><span class="l">Verniz localizado</span><span class="l">Sensor Códice</span></div>
+   <div class="blks" style="margin-top:22px">
+    <div class="blk" data-s style="--i:2"><span class="ic" data-ic="box"></span><div><b>O que é</b><p>Ponta de gôndola modular, com frente em facetas de diamante e testeira Bombril trocável por campanha.</p></div></div>
+    <div class="blk" data-s style="--i:3"><span class="ic" data-ic="sensor"></span><div><b>Como funciona</b><p>Encostada no fim da linha de limpeza. O sensor Códice na base conta presença e reposição. O QR da lateral registra a instalação: loja, data, hora e GPS.</p></div></div>
+    <div class="blk" data-s style="--i:4"><span class="ic" data-ic="target"></span><div><b>Racional</b><p>A inovação precisa ser vista antes de ser escolhida. A ponta concentra a linha num ponto de visita certa e dá à marca um único lugar para medir.</p></div></div>
+    <div class="blk" data-s style="--i:5"><span class="ic" data-ic="check"></span><div><b>Benefícios</b><ul><li><b style="display:inline;font-size:12px">Marca:</b> identidade e dado de reposição.</li><li><b style="display:inline;font-size:12px">Varejo:</b> módulo limpo e fácil de repor.</li><li><b style="display:inline;font-size:12px">Shopper:</b> a linha reunida num só lugar.</li></ul></div></div>
+   </div>
+   <div class="arbox" data-s style="--i:6">
+<svg class="qr" role="img" aria-label="QR Code da página de AR" version="1.1" viewBox="0 0 63 63" xmlns="http://www.w3.org/2000/svg"><path fill="#1A1420" d="M1,1H2V2H1zM2,1H3V2H2zM3,1H4V2H3zM4,1H5V2H4zM5,1H6V2H5zM6,1H7V2H6zM7,1H8V2H7zM9,1H10V2H9zM10,1H11V2H10zM12,1H13V2H12zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM16,1H17V2H16zM18,1H19V2H18zM19,1H20V2H19zM20,1H21V2H20zM22,1H23V2H22zM24,1H25V2H24zM25,1H26V2H25zM26,1H27V2H26zM27,1H28V2H27zM33,1H34V2H33zM35,1H36V2H35zM38,1H39V2H38zM39,1H40V2H39zM40,1H41V2H40zM41,1H42V2H41zM43,1H44V2H43zM44,1H45V2H44zM47,1H48V2H47zM48,1H49V2H48zM50,1H51V2H50zM52,1H53V2H52zM53,1H54V2H53zM55,1H56V2H55zM56,1H57V2H56zM57,1H58V2H57zM58,1H59V2H58zM59,1H60V2H59zM60,1H61V2H60zM61,1H62V2H61zM1,2H2V3H1zM7,2H8V3H7zM9,2H10V3H9zM11,2H12V3H11zM15,2H16V3H15zM17,2H18V3H17zM18,2H19V3H18zM20,2H21V3H20zM21,2H22V3H21zM24,2H25V3H24zM25,2H26V3H25zM29,2H30V3H29zM30,2H31V3H30zM32,2H33V3H32zM33,2H34V3H33zM35,2H36V3H35zM36,2H37V3H36zM38,2H39V3H38zM41,2H42V3H41zM43,2H44V3H43zM44,2H45V3H44zM45,2H46V3H45zM47,2H48V3H47zM49,2H50V3H49zM52,2H53V3H52zM53,2H54V3H53zM55,2H56V3H55zM61,2H62V3H61zM1,3H2V4H1zM3,3H4V4H3zM4,3H5V4H4zM5,3H6V4H5zM7,3H8V4H7zM9,3H10V4H9zM11,3H12V4H11zM13,3H14V4H13zM14,3H15V4H14zM17,3H18V4H17zM18,3H19V4H18zM21,3H22V4H21zM22,3H23V4H22zM23,3H24V4H23zM25,3H26V4H25zM27,3H28V4H27zM30,3H31V4H30zM31,3H32V4H31zM34,3H35V4H34zM36,3H37V4H36zM38,3H39V4H38zM40,3H41V4H40zM42,3H43V4H42zM43,3H44V4H43zM44,3H45V4H44zM45,3H46V4H45zM47,3H48V4H47zM50,3H51V4H50zM51,3H52V4H51zM52,3H53V4H52zM53,3H54V4H53zM55,3H56V4H55zM57,3H58V4H57zM58,3H59V4H58zM59,3H60V4H59zM61,3H62V4H61zM1,4H2V5H1zM3,4H4V5H3zM4,4H5V5H4zM5,4H6V5H5zM7,4H8V5H7zM10,4H11V5H10zM11,4H12V5H11zM13,4H14V5H13zM15,4H16V5H15zM17,4H18V5H17zM18,4H19V5H18zM19,4H20V5H19zM22,4H23V5H22zM24,4H25V5H24zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM33,4H34V5H33zM35,4H36V5H35zM37,4H38V5H37zM39,4H40V5H39zM40,4H41V5H40zM41,4H42V5H41zM43,4H44V5H43zM45,4H46V5H45zM48,4H49V5H48zM49,4H50V5H49zM51,4H52V5H51zM53,4H54V5H53zM55,4H56V5H55zM57,4H58V5H57zM58,4H59V5H58zM59,4H60V5H59zM61,4H62V5H61zM1,5H2V6H1zM3,5H4V6H3zM4,5H5V6H4zM5,5H6V6H5zM7,5H8V6H7zM9,5H10V6H9zM12,5H13V6H12zM15,5H16V6H15zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM20,5H21V6H20zM21,5H22V6H21zM23,5H24V6H23zM25,5H26V6H25zM29,5H30V6H29zM30,5H31V6H30zM31,5H32V6H31zM32,5H33V6H32zM33,5H34V6H33zM34,5H35V6H34zM36,5H37V6H36zM37,5H38V6H37zM39,5H40V6H39zM42,5H43V6H42zM43,5H44V6H43zM44,5H45V6H44zM45,5H46V6H45zM48,5H49V6H48zM49,5H50V6H49zM50,5H51V6H50zM51,5H52V6H51zM52,5H53V6H52zM55,5H56V6H55zM57,5H58V6H57zM58,5H59V6H58zM59,5H60V6H59zM61,5H62V6H61zM1,6H2V7H1zM7,6H8V7H7zM10,6H11V7H10zM12,6H13V7H12zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM17,6H18V7H17zM20,6H21V7H20zM29,6H30V7H29zM33,6H34V7H33zM34,6H35V7H34zM36,6H37V7H36zM38,6H39V7H38zM39,6H40V7H39zM40,6H41V7H40zM42,6H43V7H42zM45,6H46V7H45zM48,6H49V7H48zM50,6H51V7H50zM51,6H52V7H51zM55,6H56V7H55zM61,6H62V7H61zM1,7H2V8H1zM2,7H3V8H2zM3,7H4V8H3zM4,7H5V8H4zM5,7H6V8H5zM6,7H7V8H6zM7,7H8V8H7zM9,7H10V8H9zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM17,7H18V8H17zM19,7H20V8H19zM21,7H22V8H21zM23,7H24V8H23zM25,7H26V8H25zM27,7H28V8H27zM29,7H30V8H29zM31,7H32V8H31zM33,7H34V8H33zM35,7H36V8H35zM37,7H38V8H37zM39,7H40V8H39zM41,7H42V8H41zM43,7H44V8H43zM45,7H46V8H45zM47,7H48V8H47zM49,7H50V8H49zM51,7H52V8H51zM53,7H54V8H53zM55,7H56V8H55zM56,7H57V8H56zM57,7H58V8H57zM58,7H59V8H58zM59,7H60V8H59zM60,7H61V8H60zM61,7H62V8H61zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM15,8H16V9H15zM16,8H17V9H16zM19,8H20V9H19zM22,8H23V9H22zM23,8H24V9H23zM27,8H28V9H27zM29,8H30V9H29zM33,8H34V9H33zM39,8H40V9H39zM40,8H41V9H40zM41,8H42V9H41zM42,8H43V9H42zM43,8H44V9H43zM44,8H45V9H44zM46,8H47V9H46zM48,8H49V9H48zM50,8H51V9H50zM1,9H2V10H1zM4,9H5V10H4zM5,9H6V10H5zM6,9H7V10H6zM7,9H8V10H7zM8,9H9V10H8zM9,9H10V10H9zM10,9H11V10H10zM13,9H14V10H13zM14,9H15V10H14zM16,9H17V10H16zM19,9H20V10H19zM29,9H30V10H29zM30,9H31V10H30zM31,9H32V10H31zM32,9H33V10H32zM33,9H34V10H33zM36,9H37V10H36zM37,9H38V10H37zM39,9H40V10H39zM41,9H42V10H41zM42,9H43V10H42zM47,9H48V10H47zM49,9H50V10H49zM54,9H55V10H54zM57,9H58V10H57zM59,9H60V10H59zM60,9H61V10H60zM61,9H62V10H61zM1,10H2V11H1zM2,10H3V11H2zM3,10H4V11H3zM4,10H5V11H4zM5,10H6V11H5zM9,10H10V11H9zM12,10H13V11H12zM14,10H15V11H14zM17,10H18V11H17zM18,10H19V11H18zM19,10H20V11H19zM22,10H23V11H22zM23,10H24V11H23zM24,10H25V11H24zM28,10H29V11H28zM29,10H30V11H29zM31,10H32V11H31zM35,10H36V11H35zM38,10H39V11H38zM39,10H40V11H39zM40,10H41V11H40zM41,10H42V11H41zM42,10H43V11H42zM43,10H44V11H43zM46,10H47V11H46zM47,10H48V11H47zM49,10H50V11H49zM50,10H51V11H50zM51,10H52V11H51zM52,10H53V11H52zM53,10H54V11H53zM54,10H55V11H54zM55,10H56V11H55zM57,10H58V11H57zM59,10H60V11H59zM60,10H61V11H60zM1,11H2V12H1zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM11,11H12V12H11zM14,11H15V12H14zM15,11H16V12H15zM18,11H19V12H18zM19,11H20V12H19zM20,11H21V12H20zM21,11H22V12H21zM22,11H23V12H22zM25,11H26V12H25zM26,11H27V12H26zM27,11H28V12H27zM29,11H30V12H29zM30,11H31V12H30zM31,11H32V12H31zM32,11H33V12H32zM33,11H34V12H33zM34,11H35V12H34zM35,11H36V12H35zM36,11H37V12H36zM37,11H38V12H37zM40,11H41V12H40zM42,11H43V12H42zM44,11H45V12H44zM47,11H48V12H47zM49,11H50V12H49zM50,11H51V12H50zM52,11H53V12H52zM53,11H54V12H53zM54,11H55V12H54zM56,11H57V12H56zM58,11H59V12H58zM60,11H61V12H60zM61,11H62V12H61zM2,12H3V13H2zM3,12H4V13H3zM4,12H5V13H4zM5,12H6V13H5zM6,12H7V13H6zM9,12H10V13H9zM10,12H11V13H10zM15,12H16V13H15zM16,12H17V13H16zM18,12H19V13H18zM20,12H21V13H20zM22,12H23V13H22zM23,12H24V13H23zM25,12H26V13H25zM26,12H27V13H26zM29,12H30V13H29zM31,12H32V13H31zM32,12H33V13H32zM35,12H36V13H35zM43,12H44V13H43zM45,12H46V13H45zM46,12H47V13H46zM47,12H48V13H47zM48,12H49V13H48zM50,12H51V13H50zM51,12H52V13H51zM53,12H54V13H53zM55,12H56V13H55zM56,12H57V13H56zM57,12H58V13H57zM58,12H59V13H58zM59,12H60V13H59zM61,12H62V13H61zM1,13H2V14H1zM2,13H3V14H2zM4,13H5V14H4zM5,13H6V14H5zM6,13H7V14H6zM7,13H8V14H7zM10,13H11V14H10zM11,13H12V14H11zM12,13H13V14H12zM15,13H16V14H15zM16,13H17V14H16zM17,13H18V14H17zM18,13H19V14H18zM23,13H24V14H23zM24,13H25V14H24zM25,13H26V14H25zM26,13H27V14H26zM27,13H28V14H27zM28,13H29V14H28zM29,13H30V14H29zM35,13H36V14H35zM37,13H38V14H37zM41,13H42V14H41zM42,13H43V14H42zM45,13H46V14H45zM46,13H47V14H46zM47,13H48V14H47zM49,13H50V14H49zM51,13H52V14H51zM52,13H53V14H52zM54,13H55V14H54zM55,13H56V14H55zM56,13H57V14H56zM57,13H58V14H57zM58,13H59V14H58zM61,13H62V14H61zM4,14H5V15H4zM5,14H6V15H5zM9,14H10V15H9zM15,14H16V15H15zM16,14H17V15H16zM17,14H18V15H17zM20,14H21V15H20zM26,14H27V15H26zM28,14H29V15H28zM30,14H31V15H30zM31,14H32V15H31zM34,14H35V15H34zM36,14H37V15H36zM37,14H38V15H37zM39,14H40V15H39zM40,14H41V15H40zM41,14H42V15H41zM42,14H43V15H42zM43,14H44V15H43zM45,14H46V15H45zM48,14H49V15H48zM50,14H51V15H50zM51,14H52V15H51zM52,14H53V15H52zM54,14H55V15H54zM55,14H56V15H55zM1,15H2V16H1zM3,15H4V16H3zM4,15H5V16H4zM6,15H7V16H6zM7,15H8V16H7zM10,15H11V16H10zM11,15H12V16H11zM12,15H13V16H12zM13,15H14V16H13zM17,15H18V16H17zM18,15H19V16H18zM19,15H20V16H19zM23,15H24V16H23zM24,15H25V16H24zM25,15H26V16H25zM28,15H29V16H28zM30,15H31V16H30zM31,15H32V16H31zM32,15H33V16H32zM34,15H35V16H34zM38,15H39V16H38zM39,15H40V16H39zM44,15H45V16H44zM49,15H50V16H49zM51,15H52V16H51zM53,15H54V16H53zM56,15H57V16H56zM58,15H59V16H58zM60,15H61V16H60zM61,15H62V16H61zM4,16H5V17H4zM5,16H6V17H5zM6,16H7V17H6zM9,16H10V17H9zM10,16H11V17H10zM12,16H13V17H12zM14,16H15V17H14zM17,16H18V17H17zM22,16H23V17H22zM23,16H24V17H23zM24,16H25V17H24zM27,16H28V17H27zM28,16H29V17H28zM29,16H30V17H29zM30,16H31V17H30zM31,16H32V17H31zM32,16H33V17H32zM33,16H34V17H33zM35,16H36V17H35zM36,16H37V17H36zM39,16H40V17H39zM40,16H41V17H40zM42,16H43V17H42zM44,16H45V17H44zM46,16H47V17H46zM47,16H48V17H47zM48,16H49V17H48zM51,16H52V17H51zM54,16H55V17H54zM55,16H56V17H55zM56,16H57V17H56zM59,16H60V17H59zM60,16H61V17H60zM61,16H62V17H61zM2,17H3V18H2zM3,17H4V18H3zM4,17H5V18H4zM7,17H8V18H7zM12,17H13V18H12zM13,17H14V18H13zM17,17H18V18H17zM24,17H25V18H24zM26,17H27V18H26zM27,17H28V18H27zM29,17H30V18H29zM30,17H31V18H30zM33,17H34V18H33zM36,17H37V18H36zM37,17H38V18H37zM40,17H41V18H40zM43,17H44V18H43zM45,17H46V18H45zM46,17H47V18H46zM47,17H48V18H47zM48,17H49V18H48zM49,17H50V18H49zM50,17H51V18H50zM52,17H53V18H52zM53,17H54V18H53zM54,17H55V18H54zM57,17H58V18H57zM59,17H60V18H59zM60,17H61V18H60zM61,17H62V18H61zM5,18H6V19H5zM6,18H7V19H6zM9,18H10V19H9zM11,18H12V19H11zM13,18H14V19H13zM14,18H15V19H14zM15,18H16V19H15zM16,18H17V19H16zM18,18H19V19H18zM19,18H20V19H19zM21,18H22V19H21zM24,18H25V19H24zM25,18H26V19H25zM27,18H28V19H27zM28,18H29V19H28zM31,18H32V19H31zM32,18H33V19H32zM33,18H34V19H33zM35,18H36V19H35zM41,18H42V19H41zM42,18H43V19H42zM43,18H44V19H43zM47,18H48V19H47zM49,18H50V19H49zM53,18H54V19H53zM55,18H56V19H55zM57,18H58V19H57zM60,18H61V19H60zM6,19H7V20H6zM7,19H8V20H7zM8,19H9V20H8zM10,19H11V20H10zM11,19H12V20H11zM15,19H16V20H15zM18,19H19V20H18zM19,19H20V20H19zM21,19H22V20H21zM23,19H24V20H23zM24,19H25V20H24zM26,19H27V20H26zM27,19H28V20H27zM28,19H29V20H28zM31,19H32V20H31zM33,19H34V20H33zM36,19H37V20H36zM37,19H38V20H37zM41,19H42V20H41zM44,19H45V20H44zM45,19H46V20H45zM46,19H47V20H46zM48,19H49V20H48zM49,19H50V20H49zM52,19H53V20H52zM53,19H54V20H53zM54,19H55V20H54zM57,19H58V20H57zM58,19H59V20H58zM59,19H60V20H59zM61,19H62V20H61zM2,20H3V21H2zM3,20H4V21H3zM4,20H5V21H4zM6,20H7V21H6zM9,20H10V21H9zM10,20H11V21H10zM11,20H12V21H11zM12,20H13V21H12zM13,20H14V21H13zM14,20H15V21H14zM21,20H22V21H21zM25,20H26V21H25zM27,20H28V21H27zM30,20H31V21H30zM31,20H32V21H31zM33,20H34V21H33zM36,20H37V21H36zM40,20H41V21H40zM41,20H42V21H41zM42,20H43V21H42zM43,20H44V21H43zM50,20H51V21H50zM51,20H52V21H51zM52,20H53V21H52zM55,20H56V21H55zM56,20H57V21H56zM57,20H58V21H57zM58,20H59V21H58zM60,20H61V21H60zM61,20H62V21H61zM2,21H3V22H2zM4,21H5V22H4zM5,21H6V22H5zM6,21H7V22H6zM7,21H8V22H7zM9,21H10V22H9zM10,21H11V22H10zM12,21H13V22H12zM14,21H15V22H14zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM22,21H23V22H22zM23,21H24V22H23zM24,21H25V22H24zM26,21H27V22H26zM28,21H29V22H28zM32,21H33V22H32zM35,21H36V22H35zM37,21H38V22H37zM38,21H39V22H38zM39,21H40V22H39zM41,21H42V22H41zM44,21H45V22H44zM47,21H48V22H47zM48,21H49V22H48zM49,21H50V22H49zM50,21H51V22H50zM51,21H52V22H51zM52,21H53V22H52zM60,21H61V22H60zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM12,22H13V23H12zM14,22H15V23H14zM16,22H17V23H16zM17,22H18V23H17zM18,22H19V23H18zM21,22H22V23H21zM22,22H23V23H22zM24,22H25V23H24zM26,22H27V23H26zM27,22H28V23H27zM29,22H30V23H29zM30,22H31V23H30zM34,22H35V23H34zM35,22H36V23H35zM37,22H38V23H37zM38,22H39V23H38zM39,22H40V23H39zM40,22H41V23H40zM41,22H42V23H41zM42,22H43V23H42zM43,22H44V23H43zM44,22H45V23H44zM45,22H46V23H45zM47,22H48V23H47zM49,22H50V23H49zM50,22H51V23H50zM51,22H52V23H51zM52,22H53V23H52zM53,22H54V23H53zM55,22H56V23H55zM58,22H59V23H58zM6,23H7V24H6zM7,23H8V24H7zM8,23H9V24H8zM14,23H15V24H14zM15,23H16V24H15zM17,23H18V24H17zM18,23H19V24H18zM22,23H23V24H22zM23,23H24V24H23zM26,23H27V24H26zM27,23H28V24H27zM30,23H31V24H30zM33,23H34V24H33zM34,23H35V24H34zM35,23H36V24H35zM42,23H43V24H42zM44,23H45V24H44zM45,23H46V24H45zM47,23H48V24H47zM48,23H49V24H48zM49,23H50V24H49zM52,23H53V24H52zM53,23H54V24H53zM57,23H58V24H57zM58,23H59V24H58zM59,23H60V24H59zM61,23H62V24H61zM1,24H2V25H1zM3,24H4V25H3zM5,24H6V25H5zM6,24H7V25H6zM10,24H11V25H10zM11,24H12V25H11zM12,24H13V25H12zM14,24H15V25H14zM18,24H19V25H18zM19,24H20V25H19zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM25,24H26V25H25zM26,24H27V25H26zM27,24H28V25H27zM29,24H30V25H29zM32,24H33V25H32zM35,24H36V25H35zM44,24H45V25H44zM45,24H46V25H45zM47,24H48V25H47zM51,24H52V25H51zM52,24H53V25H52zM53,24H54V25H53zM54,24H55V25H54zM57,24H58V25H57zM58,24H59V25H58zM59,24H60V25H59zM2,25H3V26H2zM3,25H4V26H3zM5,25H6V26H5zM7,25H8V26H7zM8,25H9V26H8zM10,25H11V26H10zM12,25H13V26H12zM13,25H14V26H13zM15,25H16V26H15zM18,25H19V26H18zM20,25H21V26H20zM22,25H23V26H22zM23,25H24V26H23zM25,25H26V26H25zM27,25H28V26H27zM29,25H30V26H29zM30,25H31V26H30zM31,25H32V26H31zM34,25H35V26H34zM35,25H36V26H35zM36,25H37V26H36zM37,25H38V26H37zM40,25H41V26H40zM41,25H42V26H41zM43,25H44V26H43zM44,25H45V26H44zM45,25H46V26H45zM48,25H49V26H48zM49,25H50V26H49zM51,25H52V26H51zM54,25H55V26H54zM57,25H58V26H57zM58,25H59V26H58zM61,25H62V26H61zM3,26H4V27H3zM5,26H6V27H5zM9,26H10V27H9zM12,26H13V27H12zM14,26H15V27H14zM16,26H17V27H16zM20,26H21V27H20zM22,26H23V27H22zM25,26H26V27H25zM26,26H27V27H26zM30,26H31V27H30zM31,26H32V27H31zM32,26H33V27H32zM33,26H34V27H33zM36,26H37V27H36zM37,26H38V27H37zM39,26H40V27H39zM40,26H41V27H40zM43,26H44V27H43zM45,26H46V27H45zM48,26H49V27H48zM50,26H51V27H50zM51,26H52V27H51zM55,26H56V27H55zM57,26H58V27H57zM60,26H61V27H60zM1,27H2V28H1zM3,27H4V28H3zM6,27H7V28H6zM7,27H8V28H7zM8,27H9V28H8zM9,27H10V28H9zM14,27H15V28H14zM16,27H17V28H16zM18,27H19V28H18zM19,27H20V28H19zM20,27H21V28H20zM21,27H22V28H21zM22,27H23V28H22zM24,27H25V28H24zM25,27H26V28H25zM28,27H29V28H28zM33,27H34V28H33zM34,27H35V28H34zM35,27H36V28H35zM36,27H37V28H36zM38,27H39V28H38zM39,27H40V28H39zM41,27H42V28H41zM42,27H43V28H42zM44,27H45V28H44zM46,27H47V28H46zM49,27H50V28H49zM51,27H52V28H51zM52,27H53V28H52zM56,27H57V28H56zM58,27H59V28H58zM60,27H61V28H60zM61,27H62V28H61zM4,28H5V29H4zM8,28H9V29H8zM9,28H10V29H9zM11,28H12V29H11zM12,28H13V29H12zM13,28H14V29H13zM14,28H15V29H14zM15,28H16V29H15zM17,28H18V29H17zM18,28H19V29H18zM23,28H24V29H23zM25,28H26V29H25zM26,28H27V29H26zM29,28H30V29H29zM31,28H32V29H31zM34,28H35V29H34zM36,28H37V29H36zM38,28H39V29H38zM42,28H43V29H42zM43,28H44V29H43zM47,28H48V29H47zM48,28H49V29H48zM51,28H52V29H51zM53,28H54V29H53zM58,28H59V29H58zM59,28H60V29H59zM60,28H61V29H60zM61,28H62V29H61zM1,29H2V30H1zM5,29H6V30H5zM6,29H7V30H6zM7,29H8V30H7zM8,29H9V30H8zM9,29H10V30H9zM14,29H15V30H14zM15,29H16V30H15zM16,29H17V30H16zM17,29H18V30H17zM22,29H23V30H22zM26,29H27V30H26zM27,29H28V30H27zM29,29H30V30H29zM30,29H31V30H30zM31,29H32V30H31zM32,29H33V30H32zM33,29H34V30H33zM34,29H35V30H34zM35,29H36V30H35zM37,29H38V30H37zM39,29H40V30H39zM43,29H44V30H43zM45,29H46V30H45zM47,29H48V30H47zM48,29H49V30H48zM49,29H50V30H49zM52,29H53V30H52zM53,29H54V30H53zM54,29H55V30H54zM55,29H56V30H55zM56,29H57V30H56zM57,29H58V30H57zM58,29H59V30H58zM2,30H3V31H2zM4,30H5V31H4zM5,30H6V31H5zM9,30H10V31H9zM11,30H12V31H11zM13,30H14V31H13zM15,30H16V31H15zM16,30H17V31H16zM18,30H19V31H18zM19,30H20V31H19zM21,30H22V31H21zM24,30H25V31H24zM25,30H26V31H25zM27,30H28V31H27zM29,30H30V31H29zM33,30H34V31H33zM34,30H35V31H34zM35,30H36V31H35zM38,30H39V31H38zM42,30H43V31H42zM43,30H44V31H43zM44,30H45V31H44zM46,30H47V31H46zM47,30H48V31H47zM49,30H50V31H49zM50,30H51V31H50zM52,30H53V31H52zM53,30H54V31H53zM57,30H58V31H57zM58,30H59V31H58zM59,30H60V31H59zM60,30H61V31H60zM3,31H4V32H3zM5,31H6V32H5zM7,31H8V32H7zM9,31H10V32H9zM11,31H12V32H11zM13,31H14V32H13zM17,31H18V32H17zM19,31H20V32H19zM21,31H22V32H21zM22,31H23V32H22zM24,31H25V32H24zM27,31H28V32H27zM28,31H29V32H28zM29,31H30V32H29zM31,31H32V32H31zM33,31H34V32H33zM34,31H35V32H34zM38,31H39V32H38zM40,31H41V32H40zM41,31H42V32H41zM42,31H43V32H42zM44,31H45V32H44zM45,31H46V32H45zM49,31H50V32H49zM50,31H51V32H50zM53,31H54V32H53zM55,31H56V32H55zM57,31H58V32H57zM58,31H59V32H58zM59,31H60V32H59zM60,31H61V32H60zM61,31H62V32H61zM1,32H2V33H1zM2,32H3V33H2zM3,32H4V33H3zM4,32H5V33H4zM5,32H6V33H5zM9,32H10V33H9zM12,32H13V33H12zM13,32H14V33H13zM15,32H16V33H15zM16,32H17V33H16zM17,32H18V33H17zM18,32H19V33H18zM19,32H20V33H19zM20,32H21V33H20zM22,32H23V33H22zM23,32H24V33H23zM24,32H25V33H24zM27,32H28V33H27zM29,32H30V33H29zM33,32H34V33H33zM34,32H35V33H34zM39,32H40V33H39zM41,32H42V33H41zM44,32H45V33H44zM46,32H47V33H46zM48,32H49V33H48zM50,32H51V33H50zM51,32H52V33H51zM53,32H54V33H53zM57,32H58V33H57zM58,32H59V33H58zM60,32H61V33H60zM61,32H62V33H61zM2,33H3V34H2zM4,33H5V34H4zM5,33H6V34H5zM6,33H7V34H6zM7,33H8V34H7zM8,33H9V34H8zM9,33H10V34H9zM12,33H13V34H12zM17,33H18V34H17zM20,33H21V34H20zM21,33H22V34H21zM22,33H23V34H22zM24,33H25V34H24zM26,33H27V34H26zM29,33H30V34H29zM30,33H31V34H30zM31,33H32V34H31zM32,33H33V34H32zM33,33H34V34H33zM36,33H37V34H36zM37,33H38V34H37zM41,33H42V34H41zM42,33H43V34H42zM43,33H44V34H43zM46,33H47V34H46zM48,33H49V34H48zM49,33H50V34H49zM50,33H51V34H50zM53,33H54V34H53zM54,33H55V34H54zM55,33H56V34H55zM56,33H57V34H56zM57,33H58V34H57zM61,33H62V34H61zM5,34H6V35H5zM13,34H14V35H13zM14,34H15V35H14zM15,34H16V35H15zM17,34H18V35H17zM18,34H19V35H18zM19,34H20V35H19zM21,34H22V35H21zM22,34H23V35H22zM23,34H24V35H23zM24,34H25V35H24zM25,34H26V35H25zM26,34H27V35H26zM28,34H29V35H28zM29,34H30V35H29zM30,34H31V35H30zM32,34H33V35H32zM34,34H35V35H34zM35,34H36V35H35zM37,34H38V35H37zM38,34H39V35H38zM39,34H40V35H39zM40,34H41V35H40zM42,34H43V35H42zM43,34H44V35H43zM47,34H48V35H47zM48,34H49V35H48zM49,34H50V35H49zM51,34H52V35H51zM54,34H55V35H54zM55,34H56V35H55zM56,34H57V35H56zM57,34H58V35H57zM58,34H59V35H58zM59,34H60V35H59zM2,35H3V36H2zM3,35H4V36H3zM5,35H6V36H5zM6,35H7V36H6zM7,35H8V36H7zM9,35H10V36H9zM12,35H13V36H12zM15,35H16V36H15zM16,35H17V36H16zM17,35H18V36H17zM19,35H20V36H19zM21,35H22V36H21zM23,35H24V36H23zM25,35H26V36H25zM26,35H27V36H26zM28,35H29V36H28zM29,35H30V36H29zM30,35H31V36H30zM31,35H32V36H31zM34,35H35V36H34zM35,35H36V36H35zM36,35H37V36H36zM37,35H38V36H37zM38,35H39V36H38zM41,35H42V36H41zM45,35H46V36H45zM47,35H48V36H47zM48,35H49V36H48zM49,35H50V36H49zM50,35H51V36H50zM53,35H54V36H53zM55,35H56V36H55zM56,35H57V36H56zM58,35H59V36H58zM59,35H60V36H59zM61,35H62V36H61zM2,36H3V37H2zM3,36H4V37H3zM9,36H10V37H9zM11,36H12V37H11zM13,36H14V37H13zM15,36H16V37H15zM16,36H17V37H16zM19,36H20V37H19zM20,36H21V37H20zM21,36H22V37H21zM23,36H24V37H23zM24,36H25V37H24zM25,36H26V37H25zM26,36H27V37H26zM27,36H28V37H27zM28,36H29V37H28zM29,36H30V37H29zM30,36H31V37H30zM31,36H32V37H31zM32,36H33V37H32zM38,36H39V37H38zM40,36H41V37H40zM43,36H44V37H43zM44,36H45V37H44zM45,36H46V37H45zM46,36H47V37H46zM48,36H49V37H48zM50,36H51V37H50zM52,36H53V37H52zM53,36H54V37H53zM54,36H55V37H54zM59,36H60V37H59zM60,36H61V37H60zM61,36H62V37H61zM4,37H5V38H4zM5,37H6V38H5zM7,37H8V38H7zM8,37H9V38H8zM11,37H12V38H11zM13,37H14V38H13zM16,37H17V38H16zM18,37H19V38H18zM19,37H20V38H19zM23,37H24V38H23zM24,37H25V38H24zM27,37H28V38H27zM28,37H29V38H28zM29,37H30V38H29zM30,37H31V38H30zM31,37H32V38H31zM33,37H34V38H33zM35,37H36V38H35zM36,37H37V38H36zM37,37H38V38H37zM38,37H39V38H38zM39,37H40V38H39zM40,37H41V38H40zM41,37H42V38H41zM42,37H43V38H42zM43,37H44V38H43zM44,37H45V38H44zM45,37H46V38H45zM47,37H48V38H47zM49,37H50V38H49zM50,37H51V38H50zM51,37H52V38H51zM52,37H53V38H52zM54,37H55V38H54zM55,37H56V38H55zM3,38H4V39H3zM5,38H6V39H5zM8,38H9V39H8zM9,38H10V39H9zM10,38H11V39H10zM11,38H12V39H11zM13,38H14V39H13zM16,38H17V39H16zM17,38H18V39H17zM18,38H19V39H18zM22,38H23V39H22zM23,38H24V39H23zM24,38H25V39H24zM25,38H26V39H25zM26,38H27V39H26zM28,38H29V39H28zM38,38H39V39H38zM39,38H40V39H39zM40,38H41V39H40zM43,38H44V39H43zM45,38H46V39H45zM49,38H50V39H49zM50,38H51V39H50zM51,38H52V39H51zM52,38H53V39H52zM53,38H54V39H53zM54,38H55V39H54zM55,38H56V39H55zM57,38H58V39H57zM58,38H59V39H58zM1,39H2V40H1zM2,39H3V40H2zM3,39H4V40H3zM5,39H6V40H5zM6,39H7V40H6zM7,39H8V40H7zM8,39H9V40H8zM13,39H14V40H13zM14,39H15V40H14zM16,39H17V40H16zM19,39H20V40H19zM21,39H22V40H21zM24,39H25V40H24zM27,39H28V40H27zM28,39H29V40H28zM30,39H31V40H30zM31,39H32V40H31zM32,39H33V40H32zM33,39H34V40H33zM37,39H38V40H37zM39,39H40V40H39zM41,39H42V40H41zM42,39H43V40H42zM44,39H45V40H44zM48,39H49V40H48zM49,39H50V40H49zM51,39H52V40H51zM54,39H55V40H54zM55,39H56V40H55zM56,39H57V40H56zM58,39H59V40H58zM59,39H60V40H59zM60,39H61V40H60zM3,40H4V41H3zM4,40H5V41H4zM5,40H6V41H5zM6,40H7V41H6zM9,40H10V41H9zM13,40H14V41H13zM14,40H15V41H14zM15,40H16V41H15zM16,40H17V41H16zM18,40H19V41H18zM25,40H26V41H25zM28,40H29V41H28zM31,40H32V41H31zM32,40H33V41H32zM33,40H34V41H33zM34,40H35V41H34zM48,40H49V41H48zM52,40H53V41H52zM54,40H55V41H54zM57,40H58V41H57zM58,40H59V41H58zM59,40H60V41H59zM61,40H62V41H61zM2,41H3V42H2zM4,41H5V42H4zM7,41H8V42H7zM9,41H10V42H9zM12,41H13V42H12zM15,41H16V42H15zM16,41H17V42H16zM17,41H18V42H17zM18,41H19V42H18zM20,41H21V42H20zM21,41H22V42H21zM23,41H24V42H23zM24,41H25V42H24zM25,41H26V42H25zM26,41H27V42H26zM31,41H32V42H31zM32,41H33V42H32zM34,41H35V42H34zM37,41H38V42H37zM39,41H40V42H39zM43,41H44V42H43zM45,41H46V42H45zM48,41H49V42H48zM49,41H50V42H49zM50,41H51V42H50zM51,41H52V42H51zM52,41H53V42H52zM54,41H55V42H54zM55,41H56V42H55zM56,41H57V42H56zM59,41H60V42H59zM60,41H61V42H60zM61,41H62V42H61zM1,42H2V43H1zM3,42H4V43H3zM4,42H5V43H4zM6,42H7V43H6zM10,42H11V43H10zM11,42H12V43H11zM12,42H13V43H12zM15,42H16V43H15zM16,42H17V43H16zM17,42H18V43H17zM18,42H19V43H18zM20,42H21V43H20zM28,42H29V43H28zM30,42H31V43H30zM32,42H33V43H32zM34,42H35V43H34zM35,42H36V43H35zM37,42H38V43H37zM38,42H39V43H38zM41,42H42V43H41zM43,42H44V43H43zM47,42H48V43H47zM49,42H50V43H49zM50,42H51V43H50zM52,42H53V43H52zM54,42H55V43H54zM58,42H59V43H58zM59,42H60V43H59zM3,43H4V44H3zM4,43H5V44H4zM7,43H8V44H7zM8,43H9V44H8zM10,43H11V44H10zM15,43H16V44H15zM17,43H18V44H17zM19,43H20V44H19zM20,43H21V44H20zM21,43H22V44H21zM22,43H23V44H22zM23,43H24V44H23zM24,43H25V44H24zM27,43H28V44H27zM28,43H29V44H28zM31,43H32V44H31zM32,43H33V44H32zM41,43H42V44H41zM42,43H43V44H42zM45,43H46V44H45zM50,43H51V44H50zM53,43H54V44H53zM55,43H56V44H55zM60,43H61V44H60zM61,43H62V44H61zM4,44H5V45H4zM8,44H9V45H8zM12,44H13V45H12zM14,44H15V45H14zM15,44H16V45H15zM17,44H18V45H17zM18,44H19V45H18zM19,44H20V45H19zM20,44H21V45H20zM22,44H23V45H22zM24,44H25V45H24zM27,44H28V45H27zM28,44H29V45H28zM29,44H30V45H29zM31,44H32V45H31zM33,44H34V45H33zM34,44H35V45H34zM35,44H36V45H35zM39,44H40V45H39zM41,44H42V45H41zM44,44H45V45H44zM46,44H47V45H46zM47,44H48V45H47zM48,44H49V45H48zM50,44H51V45H50zM51,44H52V45H51zM52,44H53V45H52zM53,44H54V45H53zM56,44H57V45H56zM57,44H58V45H57zM60,44H61V45H60zM61,44H62V45H61zM5,45H6V46H5zM7,45H8V46H7zM8,45H9V46H8zM9,45H10V46H9zM10,45H11V46H10zM13,45H14V46H13zM15,45H16V46H15zM16,45H17V46H16zM18,45H19V46H18zM19,45H20V46H19zM23,45H24V46H23zM29,45H30V46H29zM30,45H31V46H30zM31,45H32V46H31zM32,45H33V46H32zM33,45H34V46H33zM34,45H35V46H34zM37,45H38V46H37zM38,45H39V46H38zM41,45H42V46H41zM42,45H43V46H42zM43,45H44V46H43zM47,45H48V46H47zM49,45H50V46H49zM52,45H53V46H52zM55,45H56V46H55zM57,45H58V46H57zM58,45H59V46H58zM60,45H61V46H60zM3,46H4V47H3zM5,46H6V47H5zM8,46H9V47H8zM11,46H12V47H11zM13,46H14V47H13zM18,46H19V47H18zM20,46H21V47H20zM22,46H23V47H22zM24,46H25V47H24zM25,46H26V47H25zM32,46H33V47H32zM34,46H35V47H34zM39,46H40V47H39zM40,46H41V47H40zM41,46H42V47H41zM43,46H44V47H43zM45,46H46V47H45zM46,46H47V47H46zM47,46H48V47H47zM48,46H49V47H48zM51,46H52V47H51zM52,46H53V47H52zM54,46H55V47H54zM57,46H58V47H57zM58,46H59V47H58zM59,46H60V47H59zM1,47H2V48H1zM3,47H4V48H3zM4,47H5V48H4zM5,47H6V48H5zM6,47H7V48H6zM7,47H8V48H7zM9,47H10V48H9zM10,47H11V48H10zM11,47H12V48H11zM12,47H13V48H12zM13,47H14V48H13zM15,47H16V48H15zM17,47H18V48H17zM18,47H19V48H18zM19,47H20V48H19zM23,47H24V48H23zM25,47H26V48H25zM26,47H27V48H26zM27,47H28V48H27zM30,47H31V48H30zM31,47H32V48H31zM34,47H35V48H34zM37,47H38V48H37zM38,47H39V48H38zM40,47H41V48H40zM41,47H42V48H41zM44,47H45V48H44zM45,47H46V48H45zM46,47H47V48H46zM47,47H48V48H47zM49,47H50V48H49zM53,47H54V48H53zM54,47H55V48H54zM55,47H56V48H55zM56,47H57V48H56zM57,47H58V48H57zM58,47H59V48H58zM59,47H60V48H59zM60,47H61V48H60zM61,47H62V48H61zM1,48H2V49H1zM4,48H5V49H4zM9,48H10V49H9zM10,48H11V49H10zM11,48H12V49H11zM14,48H15V49H14zM16,48H17V49H16zM17,48H18V49H17zM18,48H19V49H18zM20,48H21V49H20zM21,48H22V49H21zM22,48H23V49H22zM23,48H24V49H23zM25,48H26V49H25zM26,48H27V49H26zM28,48H29V49H28zM31,48H32V49H31zM32,48H33V49H32zM35,48H36V49H35zM36,48H37V49H36zM38,48H39V49H38zM44,48H45V49H44zM45,48H46V49H45zM46,48H47V49H46zM47,48H48V49H47zM50,48H51V49H50zM52,48H53V49H52zM53,48H54V49H53zM54,48H55V49H54zM56,48H57V49H56zM58,48H59V49H58zM59,48H60V49H59zM60,48H61V49H60zM1,49H2V50H1zM4,49H5V50H4zM5,49H6V50H5zM7,49H8V50H7zM13,49H14V50H13zM14,49H15V50H14zM15,49H16V50H15zM16,49H17V50H16zM17,49H18V50H17zM19,49H20V50H19zM23,49H24V50H23zM24,49H25V50H24zM27,49H28V50H27zM29,49H30V50H29zM30,49H31V50H30zM31,49H32V50H31zM37,49H38V50H37zM39,49H40V50H39zM41,49H42V50H41zM42,49H43V50H42zM44,49H45V50H44zM45,49H46V50H45zM46,49H47V50H46zM47,49H48V50H47zM48,49H49V50H48zM49,49H50V50H49zM51,49H52V50H51zM52,49H53V50H52zM56,49H57V50H56zM60,49H61V50H60zM61,49H62V50H61zM1,50H2V51H1zM2,50H3V51H2zM3,50H4V51H3zM5,50H6V51H5zM6,50H7V51H6zM8,50H9V51H8zM9,50H10V51H9zM11,50H12V51H11zM13,50H14V51H13zM16,50H17V51H16zM17,50H18V51H17zM18,50H19V51H18zM19,50H20V51H19zM20,50H21V51H20zM21,50H22V51H21zM24,50H25V51H24zM25,50H26V51H25zM26,50H27V51H26zM28,50H29V51H28zM29,50H30V51H29zM30,50H31V51H30zM31,50H32V51H31zM34,50H35V51H34zM37,50H38V51H37zM39,50H40V51H39zM40,50H41V51H40zM42,50H43V51H42zM43,50H44V51H43zM44,50H45V51H44zM45,50H46V51H45zM46,50H47V51H46zM48,50H49V51H48zM49,50H50V51H49zM51,50H52V51H51zM53,50H54V51H53zM54,50H55V51H54zM57,50H58V51H57zM58,50H59V51H58zM3,51H4V52H3zM4,51H5V52H4zM5,51H6V52H5zM6,51H7V52H6zM7,51H8V52H7zM9,51H10V52H9zM10,51H11V52H10zM12,51H13V52H12zM14,51H15V52H14zM15,51H16V52H15zM16,51H17V52H16zM17,51H18V52H17zM18,51H19V52H18zM19,51H20V52H19zM22,51H23V52H22zM23,51H24V52H23zM26,51H27V52H26zM28,51H29V52H28zM31,51H32V52H31zM34,51H35V52H34zM36,51H37V52H36zM37,51H38V52H37zM38,51H39V52H38zM39,51H40V52H39zM41,51H42V52H41zM44,51H45V52H44zM45,51H46V52H45zM46,51H47V52H46zM48,51H49V52H48zM49,51H50V52H49zM50,51H51V52H50zM51,51H52V52H51zM53,51H54V52H53zM55,51H56V52H55zM56,51H57V52H56zM57,51H58V52H57zM58,51H59V52H58zM60,51H61V52H60zM61,51H62V52H61zM1,52H2V53H1zM2,52H3V53H2zM3,52H4V53H3zM5,52H6V53H5zM9,52H10V53H9zM14,52H15V53H14zM17,52H18V53H17zM18,52H19V53H18zM19,52H20V53H19zM22,52H23V53H22zM23,52H24V53H23zM24,52H25V53H24zM25,52H26V53H25zM29,52H30V53H29zM31,52H32V53H31zM33,52H34V53H33zM34,52H35V53H34zM35,52H36V53H35zM36,52H37V53H36zM39,52H40V53H39zM43,52H44V53H43zM44,52H45V53H44zM46,52H47V53H46zM47,52H48V53H47zM52,52H53V53H52zM57,52H58V53H57zM59,52H60V53H59zM60,52H61V53H60zM61,52H62V53H61zM1,53H2V54H1zM2,53H3V54H2zM3,53H4V54H3zM4,53H5V54H4zM7,53H8V54H7zM8,53H9V54H8zM9,53H10V54H9zM10,53H11V54H10zM12,53H13V54H12zM14,53H15V54H14zM17,53H18V54H17zM20,53H21V54H20zM23,53H24V54H23zM24,53H25V54H24zM26,53H27V54H26zM27,53H28V54H27zM29,53H30V54H29zM30,53H31V54H30zM31,53H32V54H31zM32,53H33V54H32zM33,53H34V54H33zM37,53H38V54H37zM38,53H39V54H38zM42,53H43V54H42zM44,53H45V54H44zM45,53H46V54H45zM46,53H47V54H46zM49,53H50V54H49zM51,53H52V54H51zM52,53H53V54H52zM53,53H54V54H53zM54,53H55V54H54zM55,53H56V54H55zM56,53H57V54H56zM57,53H58V54H57zM58,53H59V54H58zM59,53H60V54H59zM60,53H61V54H60zM9,54H10V55H9zM10,54H11V55H10zM11,54H12V55H11zM15,54H16V55H15zM17,54H18V55H17zM18,54H19V55H18zM19,54H20V55H19zM20,54H21V55H20zM21,54H22V55H21zM23,54H24V55H23zM25,54H26V55H25zM28,54H29V55H28zM29,54H30V55H29zM33,54H34V55H33zM35,54H36V55H35zM37,54H38V55H37zM38,54H39V55H38zM40,54H41V55H40zM43,54H44V55H43zM44,54H45V55H44zM45,54H46V55H45zM47,54H48V55H47zM48,54H49V55H48zM52,54H53V55H52zM53,54H54V55H53zM57,54H58V55H57zM59,54H60V55H59zM60,54H61V55H60zM1,55H2V56H1zM2,55H3V56H2zM3,55H4V56H3zM4,55H5V56H4zM5,55H6V56H5zM6,55H7V56H6zM7,55H8V56H7zM9,55H10V56H9zM10,55H11V56H10zM12,55H13V56H12zM13,55H14V56H13zM14,55H15V56H14zM17,55H18V56H17zM18,55H19V56H18zM19,55H20V56H19zM20,55H21V56H20zM22,55H23V56H22zM23,55H24V56H23zM24,55H25V56H24zM26,55H27V56H26zM29,55H30V56H29zM31,55H32V56H31zM33,55H34V56H33zM34,55H35V56H34zM36,55H37V56H36zM37,55H38V56H37zM41,55H42V56H41zM42,55H43V56H42zM48,55H49V56H48zM49,55H50V56H49zM53,55H54V56H53zM55,55H56V56H55zM57,55H58V56H57zM59,55H60V56H59zM61,55H62V56H61zM1,56H2V57H1zM7,56H8V57H7zM9,56H10V57H9zM10,56H11V57H10zM11,56H12V57H11zM12,56H13V57H12zM15,56H16V57H15zM20,56H21V57H20zM21,56H22V57H21zM23,56H24V57H23zM24,56H25V57H24zM29,56H30V57H29zM33,56H34V57H33zM35,56H36V57H35zM39,56H40V57H39zM41,56H42V57H41zM43,56H44V57H43zM44,56H45V57H44zM48,56H49V57H48zM50,56H51V57H50zM51,56H52V57H51zM52,56H53V57H52zM53,56H54V57H53zM57,56H58V57H57zM58,56H59V57H58zM60,56H61V57H60zM61,56H62V57H61zM1,57H2V58H1zM3,57H4V58H3zM4,57H5V58H4zM5,57H6V58H5zM7,57H8V58H7zM9,57H10V58H9zM10,57H11V58H10zM12,57H13V58H12zM13,57H14V58H13zM15,57H16V58H15zM17,57H18V58H17zM18,57H19V58H18zM19,57H20V58H19zM22,57H23V58H22zM23,57H24V58H23zM28,57H29V58H28zM29,57H30V58H29zM30,57H31V58H30zM31,57H32V58H31zM32,57H33V58H32zM33,57H34V58H33zM34,57H35V58H34zM35,57H36V58H35zM36,57H37V58H36zM37,57H38V58H37zM38,57H39V58H38zM41,57H42V58H41zM49,57H50V58H49zM50,57H51V58H50zM51,57H52V58H51zM53,57H54V58H53zM54,57H55V58H54zM55,57H56V58H55zM56,57H57V58H56zM57,57H58V58H57zM58,57H59V58H58zM60,57H61V58H60zM1,58H2V59H1zM3,58H4V59H3zM4,58H5V59H4zM5,58H6V59H5zM7,58H8V59H7zM9,58H10V59H9zM11,58H12V59H11zM15,58H16V59H15zM17,58H18V59H17zM18,58H19V59H18zM21,58H22V59H21zM22,58H23V59H22zM23,58H24V59H23zM25,58H26V59H25zM28,58H29V59H28zM29,58H30V59H29zM31,58H32V59H31zM32,58H33V59H32zM33,58H34V59H33zM35,58H36V59H35zM36,58H37V59H36zM38,58H39V59H38zM39,58H40V59H39zM40,58H41V59H40zM41,58H42V59H41zM43,58H44V59H43zM44,58H45V59H44zM45,58H46V59H45zM46,58H47V59H46zM47,58H48V59H47zM48,58H49V59H48zM49,58H50V59H49zM51,58H52V59H51zM52,58H53V59H52zM53,58H54V59H53zM54,58H55V59H54zM55,58H56V59H55zM58,58H59V59H58zM59,58H60V59H59zM61,58H62V59H61zM1,59H2V60H1zM3,59H4V60H3zM4,59H5V60H4zM5,59H6V60H5zM7,59H8V60H7zM11,59H12V60H11zM13,59H14V60H13zM15,59H16V60H15zM16,59H17V60H16zM17,59H18V60H17zM19,59H20V60H19zM20,59H21V60H20zM24,59H25V60H24zM27,59H28V60H27zM28,59H29V60H28zM30,59H31V60H30zM33,59H34V60H33zM35,59H36V60H35zM37,59H38V60H37zM45,59H46V60H45zM46,59H47V60H46zM47,59H48V60H47zM50,59H51V60H50zM55,59H56V60H55zM56,59H57V60H56zM57,59H58V60H57zM58,59H59V60H58zM60,59H61V60H60zM61,59H62V60H61zM1,60H2V61H1zM7,60H8V61H7zM13,60H14V61H13zM14,60H15V61H14zM15,60H16V61H15zM16,60H17V61H16zM17,60H18V61H17zM19,60H20V61H19zM20,60H21V61H20zM22,60H23V61H22zM26,60H27V61H26zM32,60H33V61H32zM33,60H34V61H33zM34,60H35V61H34zM35,60H36V61H35zM36,60H37V61H36zM38,60H39V61H38zM45,60H46V61H45zM46,60H47V61H46zM47,60H48V61H47zM48,60H49V61H48zM50,60H51V61H50zM51,60H52V61H51zM55,60H56V61H55zM56,60H57V61H56zM58,60H59V61H58zM59,60H60V61H59zM60,60H61V61H60zM61,60H62V61H61zM1,61H2V62H1zM2,61H3V62H2zM3,61H4V62H3zM4,61H5V62H4zM5,61H6V62H5zM6,61H7V62H6zM7,61H8V62H7zM9,61H10V62H9zM12,61H13V62H12zM13,61H14V62H13zM14,61H15V62H14zM17,61H18V62H17zM18,61H19V62H18zM20,61H21V62H20zM22,61H23V62H22zM23,61H24V62H23zM25,61H26V62H25zM26,61H27V62H26zM27,61H28V62H27zM29,61H30V62H29zM32,61H33V62H32zM33,61H34V62H33zM34,61H35V62H34zM35,61H36V62H35zM37,61H38V62H37zM38,61H39V62H38zM39,61H40V62H39zM41,61H42V62H41zM42,61H43V62H42zM45,61H46V62H45zM48,61H49V62H48zM49,61H50V62H49zM50,61H51V62H50zM51,61H52V62H51zM52,61H53V62H52zM53,61H54V62H53zM54,61H55V62H54zM61,61H62V62H61z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg><span>Veja as três peças em 3D e realidade aumentada no seu celular.<br><a href="assets/13-index.html" target="_blank" rel="noopener" style="display:inline-block;min-height:44px;line-height:44px;padding:0 4px">Abrir a página de AR</a></span></div>
+  </div>
+  <div class="imgs" data-s style="--i:2"><img class="cena zoomable" data-img="cena" src="assets/12-ponta-prisma-hero-1600.jpg" alt="Ponta Prisma instalada no fim da gôndola de limpeza" loading="lazy"><div class="rec"><img class="zoomable" data-img="recorte" src="assets/14-ponta-prisma-poster.webp" alt="Recorte em fundo neutro da peça ponta-prisma"></div></div>
+ </div></div>
+ <div class="fonte">Medidas da peça: especificação do enxoval proposto. Frasco de referência: Limpol Perfumes Lavander 500 ml; as medidas finais seguem a embalagem vigente.</div>
+ <aside class="roteiro" hidden>Primeira peça, a Ponta Prisma, oitenta por cento e setenta de altura por quarenta de profundidade. Ela fica no fim da linha de gôndolas, onde a loja já aceita ponta. Tem sensor Códice na base, que conta presença e avisa reposição, e um QR na lateral que registra quem instalou, onde e quando. A frente é trocável: a estrutura fica e a comunicação muda por campanha. Para a marca, é identidade com dado. Para a loja, é módulo limpo. Para o shopper, a linha toda num lugar.</aside>
+</section>
+
+<!-- 12 PEÇA RÉGUA -->
+<section class="slide" data-peca="Régua de Escolha" data-cap="Solução">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Peça 2 · Régua de Escolha</div></div>
+ <div class="pad"><div class="pc pb">
+  <div class="imgs" data-s style="--i:1"><img class="cena zoomable" data-img="cena" src="assets/15-1792510339150-imagem.png" alt="Régua de Escolha com divisórias iluminadas na gôndola de limpeza" loading="lazy"><div class="rec"><img class="zoomable" data-img="recorte" src="assets/16-regua-escolha-poster.webp" alt="Recorte em fundo neutro da peça regua-escolha"></div></div>
+  <div>
+   <h2 data-s style="--i:0;font-size:48px;margin-bottom:10px">Régua de Escolha: a gôndola ensina qual perfume levar.</h2>
+   <div class="spec" data-s style="--i:1"><span>90 x 190 x 40 cm</span><span>Acrílico jateado</span><span class="l">Soft touch</span><span class="l">Luz de borda</span></div>
+   <div class="blks" style="margin-top:22px">
+    <div class="blk" data-s style="--i:2"><span class="ic" data-ic="box"></span><div><b>O que é</b><p>Módulo de gôndola com divisórias de acrílico jateado por fragrância e uma testeira com o benefício do produto.</p></div></div>
+    <div class="blk" data-s style="--i:3"><span class="ic" data-ic="layers"></span><div><b>Como funciona</b><p>Cada divisória tem a cor e o nome da fragrância e a hierarquia entre formatos. A luz de borda guia o olhar. O QR leva ao guia de fragrância e uso.</p></div></div>
+    <div class="blk" data-s style="--i:4"><span class="ic" data-ic="target"></span><div><b>Racional</b><p>Perfume sozinho não diferencia. A régua transforma escolha em três decisões simples: fragrância, formato e preço.</p></div></div>
+    <div class="blk" data-s style="--i:5"><span class="ic" data-ic="check"></span><div><b>Benefícios</b><ul><li><b style="display:inline;font-size:12px">Marca:</b> clareza entre variantes.</li><li><b style="display:inline;font-size:12px">Varejo:</b> gôndola organizada, menos ruptura.</li><li><b style="display:inline;font-size:12px">Shopper:</b> escolha rápida, sem esforço.</li></ul></div></div>
+   </div>
+  </div>
+ </div></div>
+ <div class="fonte">Medidas da peça: especificação do enxoval proposto. A régua só exibe as variantes cadastradas e abastecidas na rede do piloto.</div>
+ <aside class="roteiro" hidden>Segunda peça, a Régua de Escolha, para a gôndola. Divisórias de acrílico jateado separam as fragrâncias, com luz de borda e hierarquia entre os formatos. É o que organiza a linha e dá ao shopper um caminho de leitura. O racional é direto: se perfume sozinho não diferencia, a gôndola precisa guiar a escolha. Só entram os SKUs que a rede realmente abastece.</aside>
+</section>
+
+<!-- 13 PEÇA CAIXA -->
+<section class="slide" data-peca="Caixa Prisma" data-cap="Solução">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Peça 3 · Caixa Prisma</div></div>
+ <div class="pad"><div class="pc pcx">
+  <div style="grid-column:1/3" data-s><h2 style="font-size:46px;max-width:1300px">Caixa Prisma: a loja pequena também recebe a inovação exposta e comprovada.</h2>
+   <div class="spec" style="margin-top:12px"><span>40 x 26 x 30 cm</span><span>Papelão BC</span><span class="l">Corte especial</span><span class="l">QR único na aba</span></div></div>
+  <div class="blks" style="grid-template-columns:1fr">
+    <div class="blk" data-s style="--i:2"><span class="ic" data-ic="box"></span><div><b>O que é</b><p>Caixa de embarque que abre no picote e vira bloco de marca na prateleira, sem montagem.</p></div></div>
+    <div class="blk" data-s style="--i:3"><span class="ic" data-ic="qr"></span><div><b>Como funciona</b><p>O repositor abre no picote e escaneia o QR da aba: a marca recebe loja, hora e foto. A face interna conta o benefício.</p></div></div>
+    <div class="blk" data-s style="--i:4"><span class="ic" data-ic="target"></span><div><b>Racional</b><p>Loja compacta e atacarejo nem sempre têm ponta livre. A inovação chega exposta e a entrada na loja fica provada.</p></div></div>
+    <div class="blk" data-s style="--i:5"><span class="ic" data-ic="check"></span><div><b>Benefícios</b><ul><li><b style="display:inline;font-size:12px">Marca:</b> prova de entrada loja a loja.</li><li><b style="display:inline;font-size:12px">Varejo:</b> reposição rápida, nada para montar.</li><li><b style="display:inline;font-size:12px">Shopper:</b> bloco da marca fácil de achar.</li></ul></div></div>
+  </div>
+  <div class="imgs" data-s style="--i:2"><img class="cena zoomable" data-img="cena" src="assets/17-1792510443369-imagem.png" alt="Caixa Prisma aberta na prateleira de limpeza com frascos Limpol Perfumes" loading="lazy" style="height:420px"><div class="rec"><img class="zoomable" data-img="recorte" src="assets/18-caixa-prisma-poster.webp" alt="Recorte em fundo neutro da peça caixa-prisma"></div></div>
+ </div></div>
+ <div class="fonte">Medidas da peça: especificação do enxoval proposto. A face interna e o corte final dependem da aprovação do manual de embalagem da rede.</div>
+ <aside class="roteiro" hidden>Terceira peça, a Caixa Prisma, para loja compacta e atacarejo. É a caixa de embarque que abre no picote e vira um bloco de marca na prateleira. No QR da aba, o repositor escaneia ao abrir e a Bombril recebe loja, hora e foto. É o jeito mais simples de provar que a inovação entrou, sem display, sem montagem e sem auditoria presencial. O desenho final segue o manual de embalagem de cada rede.</aside>
+</section>
+
+<!-- 14 RASTREIO -->
+<section class="slide" data-cap="Solução">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Plano de rastreamento 75 LAB</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;font-size:46px;max-width:1300px">Cada peça deixa rastro: da instalação ao produto que acabou.</h2>
+  <div class="fl" data-s style="--i:1">
+   <div class="nd"><span class="ic" data-ic="box"></span>Peça</div><div class="ar">→</div>
+   <div class="nd"><span class="ic" data-ic="camera"></span>Captação</div><div class="ar">→</div>
+   <div class="nd"><span class="ic pulse" data-ic="sensor"></span>Transmissão</div><div class="ar">→</div>
+   <div class="nd"><span class="ic" data-ic="layers"></span>Plataforma</div><div class="ar">→</div>
+   <div class="nd"><span class="ic" data-ic="chart"></span>Dados</div><div class="ar">→</div>
+   <div class="nd"><span class="ic" data-ic="eye"></span>Insights</div><div class="ar">→</div>
+   <div class="nd"><span class="ic" data-ic="check"></span>Decisão</div>
+  </div>
+  <div class="tw">
+   <div class="cd os" data-s style="--i:2"><h3>One Shot</h3><dl><dt>O que é</dt><dd>O registro da instalação de cada peça, pelo QR Code da própria peça.</dd><dt>Como funciona</dt><dd>Quem instala escaneia o QR e fotografa a peça montada. O sistema grava loja, data, hora e GPS no painel de instalações.</dd><dt>Benefício</dt><dd>A Bombril sabe, loja a loja, que a peça entrou, onde e quando, sem auditoria presencial, e cobra o que não foi instalado.</dd></dl></div>
+   <div class="cd ot" data-s style="--i:3"><h3>On Timing</h3><dl><dt>O que é</dt><dd>O acompanhamento da peça durante a campanha, com sensor Códice na Ponta Prisma.</dd><dt>Como funciona</dt><dd>O sensor envia sinal à plataforma. O painel mostra onde a peça está, há quanto tempo, se saiu do lugar e se o produto acabou, e avisa.</dd><dt>Benefício</dt><dd>A peça não some nem fica vazia sem ninguém saber. A marca reforça onde vende e corta onde não funciona.</dd></dl></div>
+  </div>
+ </div>
+ <div class="fonte">Fonte: plano de rastreamento da 75 LAB. O On Timing com sensor se aplica às peças com módulo Códice; Régua e Caixa usam o One Shot.</div>
+ <aside class="roteiro" hidden>Todas as peças têm rastreio. O One Shot é o registro da instalação: quem instala escaneia o QR e fotografa a peça, e o painel grava loja, data, hora e GPS. O benefício é saber, sem auditoria presencial, onde a inovação entrou. O On Timing é o acompanhamento durante a campanha: o sensor Códice da ponta avisa quando o produto acabou ou a peça saiu do lugar. A régua e a caixa usam o One Shot. O fluxo termina em decisão: ampliar, ajustar ou encerrar.</aside>
+</section>
+
+<!-- DIVISOR 4 -->
+<section class="slide k-divisor" data-cap="Execução e medição">
+ <div class="bgk"><i style="width:520px;height:520px;left:40%;top:-220px"></i></div>
+ <div class="hd"><div class="lg"><img src="assets/03-logo-1-1792508241192.png" alt="Logo 75 LAB"></div><div class="cap">Capítulo 4</div></div>
+ <div class="cn" data-s>04</div>
+ <div class="tx"><h2 data-s style="--i:1">Execução e medição: provar antes de ampliar.</h2><p data-s style="--i:2">Um piloto de doze semanas, com critério de decisão combinado antes da instalação.</p></div>
+ <div class="trail"><span>01 Leitura</span><span>02 Estratégia</span><span>03 Solução</span><span class="me">04 Execução e medição</span></div>
+ <aside class="roteiro" hidden>Último capítulo: como colocar isso em loja e provar o resultado. A proposta é começar pequeno, com critério claro, e só ampliar se o dado justificar.</aside>
+</section>
+
+<!-- 15 PILOTO -->
+<section class="slide" data-cap="Execução e medição">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Piloto</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;max-width:1300px">Trinta lojas em três grupos mostram o que gera resultado adicional.</h2>
+  <div class="gr3">
+   <div class="g" data-s style="--i:1"><div class="num" data-conta="10">10</div><h3>Grupo A · execução habitual</h3><p>O que acontece no período sem o novo módulo.</p><div class="lojas"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i></div></div>
+   <div class="g hi" data-s style="--i:2"><div class="num" data-conta="10">10</div><h3>Grupo B · módulo de comunicação e exposição</h3><p>A nova execução melhora a venda e a contribuição?</p><div class="lojas"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i></div></div>
+   <div class="g" data-s style="--i:3"><div class="num" data-conta="10">10</div><h3>Grupo C · mesmo módulo com experiência olfativa aprovada</h3><p>O aroma acrescenta resultado suficiente para pagar a operação?</p><div class="lojas"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i></div></div>
+  </div>
+  <div class="nt" data-s style="--i:4">Lojas agrupadas por rede, formato, região e histórico, com sorteio dentro de cada bloco. Se o volume por loja for baixo ou o aroma não estiver pronto, começamos com dois grupos.</div>
+ </div>
+ <div class="fonte">Desenho inicial para discussão. Trinta lojas é uma referência de escopo, não uma amostra estatística já calculada; ajustar após observar o giro e a variação entre lojas.</div>
+ <aside class="roteiro" hidden>O desenho inicial do piloto tem trinta lojas, em três grupos de dez. O A segue a execução de hoje e é o controle. O B recebe o módulo de comunicação e exposição. O C recebe o mesmo módulo com a experiência olfativa, se a Bombril aprovar. Assim separamos o efeito do módulo do efeito do aroma. O número é referência de escopo, e a gente ajusta depois de ver o giro e a variação entre lojas. Se o aroma não estiver pronto, rodamos com dois grupos.</aside>
+</section>
+
+<!-- 16 CRONOGRAMA -->
+<section class="slide s-cro" data-cap="Execução e medição">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Cronograma</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0"><span class="num" data-conta="12" style="font-size:inherit;color:var(--red)">12</span> semanas do diagnóstico à decisão.</h2>
+  <div class="tl" data-s style="--i:1">
+   <div class="eixo"></div><div class="fill"></div>
+   <div class="ph" style="left:0;width:240px"><div class="wk">Semanas 1 e 2</div><div class="bar2" style="background:var(--ink)">Diagnóstico</div><div class="mk2"></div><div class="d"><b>Marco: escopo aprovado</b>Escolha dos SKUs, dados e autorizações da rede.</div></div>
+   <div class="ph" style="left:262px;width:240px"><div class="wk">Semanas 3 e 4</div><div class="bar2" style="background:var(--lil)">Desenho e instalação</div><div class="mk2"></div><div class="d"><b>Marco: produção e instalação</b>Protótipo validado, logística e evidência fotográfica.</div></div>
+   <div class="ph" style="left:524px;width:520px"><div class="wk">Semanas 5 a 10</div><div class="bar2" style="background:var(--red)">Seis semanas ativas</div><div class="mk2"></div><div class="d"><b>Marco: medição contínua</b>Sell-out, reposição e execução por loja, com os três grupos comparados.</div></div>
+   <div class="ph" style="left:1066px;width:240px"><div class="wk">Semanas 11 e 12</div><div class="bar2" style="background:var(--ink)">Leitura e decisão</div><div class="mk2"></div><div class="d"><b>Marco: decisão</b>Ampliar, ajustar ou encerrar, pelo critério combinado.</div></div>
+  </div>
+  <p class="mut" data-s style="--i:2;font-size:20px;margin-top:10px">Antes: 4 a 8 semanas de histórico já existente servem de referência, sem acrescentar espera.</p>
+ </div>
+ <div class="fonte">Prazo de referência para discussão. Produção e aprovação técnica podem exigir ajuste do prazo total.</div>
+ <aside class="roteiro" hidden>O cronograma tem doze semanas. Nas duas primeiras, diagnóstico: escolher SKUs, liberar dados e autorizações. Nas semanas três e quatro, desenho final, produção e instalação, sempre com evidência fotográfica. De cinco a dez, seis semanas ativas com medição. Nas duas últimas, leitura e decisão. O histórico de quatro a oito semanas anteriores já existe e serve de comparação sem atrasar o cronograma. Produção e aprovação técnica podem mexer no prazo.</aside>
+</section>
+
+<!-- 17 KPIs + PRÓXIMOS PASSOS -->
+<section class="slide" data-cap="Execução e medição">
+ <div class="hd"><div class="lg"><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"><span class="sep"></span><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"></div><div class="cap">Indicadores e próximos passos</div></div>
+ <div class="pad">
+  <h2 data-s style="--i:0;font-size:44px;max-width:1300px">Giro, mix, execução e economia no mesmo relatório.</h2>
+  <div class="kp">
+   <div class="k" data-s style="--i:1"><span class="ic" data-ic="chart"></span><h3>Venda adicional</h3><p>Sell-out dos grupos contra histórico e controle, em unidades e litros.</p><em>Base: histórico 4 a 8 sem. · Meta: a combinar com a Bombril</em></div>
+   <div class="k" data-s style="--i:2"><span class="ic" data-ic="layers"></span><h3>Portfólio e mix</h3><p>SKUs ativados e produtos próximos, para ver transferência e crescimento líquido.</p><em>Base: histórico por SKU · Meta: a combinar</em></div>
+   <div class="k" data-s style="--i:3"><span class="ic" data-ic="check"></span><h3>Qualidade da execução</h3><p>Material instalado, preço legível, reposição e dias de funcionamento.</p><em>Base: auditoria do diagnóstico · Meta: a combinar</em></div>
+   <div class="k" data-s style="--i:4"><span class="ic" data-ic="target"></span><h3>Economia</h3><p>Contribuição adicional menos custos do projeto, com premissas validadas pela área financeira.</p><em>Base: dados de margem da Bombril · Meta: a combinar</em></div>
+  </div>
+  <div class="nx">
+   <div data-s style="--i:5"><div class="eyebrow">Para sair da reunião de 27/10</div><ol style="margin-top:8px"><li>Uma inovação e uma rede prioritárias.</li><li>Um interlocutor de trade ou comercial na Bombril.</li><li>Dados mínimos e escopo do diagnóstico.</li></ol></div>
+   <div data-s style="--i:6"><div class="pq">Qual inovação e qual rede vocês escolheriam para construir esse teste conosco?</div></div>
+  </div>
+ </div>
+ <div class="fonte">Resultado esperado, não resultado real: sem dados internos de venda, não prometemos ganho percentual. Seis semanas não comprovam recompra duradoura. Metas e responsáveis combinados com a Bombril até o fechamento do diagnóstico.</div>
+ <aside class="roteiro" hidden>Medimos quatro coisas. Venda adicional, comparando os grupos com o histórico. Mix, para ver se a venda é nova ou só transferida entre produtos. Qualidade da execução, para saber se a peça estava lá e abastecida. E economia, descontando produção, frete, instalação e operação. As metas ficam a combinar: é a Bombril quem define o ganho mínimo que justifica escalar. Então a pergunta que fica: qual inovação e qual rede vocês escolheriam para construir esse teste conosco?</aside>
+</section>
+
+<!-- 18 ENCERRAMENTO -->
+<section class="slide s-fim" data-cap="Encerramento">
+ <div class="hd"><div class="lg"><img src="assets/04-logo-2-1792508242124.png" alt="Logo 75 LAB"><span class="sep"></span><img src="assets/02-logo-1-1792508072174.webp" alt="Logo Bombril"></div><div class="cap">Obrigado</div></div>
+ <div class="pad"><div class="fim">
+  <div><h2 data-s>Inovação que chega à loja é inovação que gira.</h2>
+   <a class="wa" data-s style="--i:2" href="https://wa.me/5511986765634?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%2075%20LAB%20para%20a%20Bombril%20e%20quero%20conversar." target="_blank" rel="noopener">Fale conosco no WhatsApp →</a></div>
+  <div class="dados" data-s style="--i:1">
+   <b>75 LAB ESTRATÉGIA, DESIGN E PRODUÇÃO LTDA</b><br>CNPJ 55.470.982/0001-77<br>CENU · Centro Empresarial das Nações Unidas, Torre Norte<br>Av. das Nações Unidas, 12.901, Brooklin, São Paulo, SP, CEP 04578-910<br>(11) 8864-8434 · WhatsApp (11) 98676-5634<br>contato@75lab.com.br · 75lab.com.br · Instagram @setecincolab<br><br>
+   <b>Caique Becker</b> · cofundador e Head de Trade<br>caique.becker@75lab.com.br
+  </div>
+ </div></div>
+ <aside class="roteiro" hidden>Para fechar: a inovação já está no relatório da Bombril. O que a gente propõe é levá-la até a mão do shopper e provar o resultado, começando pequeno, com critério combinado antes. Deixamos nossos dados aqui e o botão de WhatsApp. Obrigado pelo tempo. Qual inovação e qual rede vocês escolheriam para começar?</aside>
+</section>
+
+</div>
+<div id="nav"><button id="pv" aria-label="Tela anterior">‹</button><div class="ct" id="ct">01 / 01</div><button id="nx" aria-label="Próxima tela">›</button></div>
+<div id="rot"></div>
+<div id="lb" role="dialog" aria-label="Imagem ampliada"><button aria-label="Fechar">×</button><img alt=""></div>
+<script>
+(function(){
+var ICONS={
+store:'<path pathLength="1" d="M4 20h40M8 20v22h32V20M6 20l4-12h28l4 12M18 42V30h12v12"/>',
+box:'<path pathLength="1" d="M24 4l18 9v22l-18 9-18-9V13z"/><path pathLength="1" d="M6 13l18 9 18-9M24 22v22"/>',
+qr:'<path pathLength="1" d="M6 6h14v14H6zM28 6h14v14H28zM6 28h14v14H6z"/><path pathLength="1" d="M28 28h4v4h-4zM38 28h4v4M28 38h4M36 36h6v6h-6z"/>',
+layers:'<path pathLength="1" d="M24 6l20 10-20 10L4 16z"/><path pathLength="1" d="M4 26l20 10 20-10M4 34l20 10 20-10"/>',
+drop:'<path pathLength="1" d="M24 5C16 16 11 22 11 30a13 13 0 0 0 26 0c0-8-5-14-13-25z"/><path pathLength="1" d="M18 32a6 6 0 0 0 6 6"/>',
+target:'<circle pathLength="1" cx="24" cy="24" r="18"/><circle pathLength="1" cx="24" cy="24" r="10"/><circle pathLength="1" cx="24" cy="24" r="2"/>',
+check:'<circle pathLength="1" cx="24" cy="24" r="19"/><path pathLength="1" d="M14 25l7 7 13-14"/>',
+eye:'<path pathLength="1" d="M3 24s8-14 21-14 21 14 21 14-8 14-21 14S3 24 3 24z"/><circle pathLength="1" cx="24" cy="24" r="6"/>',
+sensor:'<circle pathLength="1" cx="24" cy="30" r="4"/><path pathLength="1" d="M14 22a14 14 0 0 1 20 0M8 16a22 22 0 0 1 32 0"/>',
+camera:'<path pathLength="1" d="M5 14h10l3-5h12l3 5h10v28H5z"/><circle pathLength="1" cx="24" cy="27" r="8"/>',
+chart:'<path pathLength="1" d="M5 5v38h38"/><path pathLength="1" d="M12 34l9-10 8 6 13-18"/>'
+};
+document.querySelectorAll('[data-ic]').forEach(function(e){e.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true">'+(ICONS[e.dataset.ic]||'')+'</svg>';});
+var S=[].slice.call(document.querySelectorAll('.slide')),cur=0,st=document.getElementById('stage'),ct=document.getElementById('ct'),pg=document.getElementById('prog'),mob=false;
+function isMob(){return Math.min(window.innerWidth,screen.width)<900}
+function fit(){mob=isMob();if(mob){st.style.transform='';st.style.left='';st.style.top='';return}var k=Math.min(innerWidth/1600,innerHeight/900);st.style.transform='translate(-50%,-50%) scale('+k+')';st.style.left='50%';st.style.top='50%';st.style.transformOrigin='center center'}
+function count(el){var to=parseFloat(el.dataset.conta),d=parseInt(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'',t0=null;function f(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1400,1),e=1-Math.pow(1-p,3),v=to*e;el.textContent=pre+v.toFixed(d).replace('.',',')+suf;if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function go(n,dir){if(mob)return;n=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,i){s.classList.remove('on','prev');if(i<n)s.classList.add('prev')});S[n].classList.add('on');cur=n;ct.textContent=String(n+1).padStart(2,'0')+' / '+String(S.length).padStart(2,'0');pg.style.width=((n+1)/S.length*100)+'%';if(!reduce)S[n].querySelectorAll('[data-conta]').forEach(count);rot();}
+function rot(){var a=S[cur].querySelector('.roteiro');document.getElementById('rot').textContent=a?a.textContent:''}
+document.getElementById('pv').onclick=function(){go(cur-1)};document.getElementById('nx').onclick=function(){go(cur+1)};
+addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(cur+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1)}else if(e.key==='Escape'){lb.classList.remove('on')}else if(e.key==='r'||e.key==='R'){document.body.classList.toggle('pres')}});
+var tx=0,wl=0;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});addEventListener('touchend',function(e){if(mob)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))},{passive:true});
+addEventListener('wheel',function(e){if(mob||Date.now()-wl<800||Math.abs(e.deltaY)<30)return;wl=Date.now();go(cur+(e.deltaY>0?1:-1))},{passive:true});
+addEventListener('resize',fit);addEventListener('orientationchange',fit);
+var lb=document.getElementById('lb');document.querySelectorAll('img.zoomable,img[data-zoom]').forEach(function(i){i.classList.add('zoomable');i.addEventListener('click',function(){lb.querySelector('img').src=i.src;lb.querySelector('img').alt=i.alt;lb.classList.add('on')})});lb.addEventListener('click',function(){lb.classList.remove('on')});
+var c=document.getElementById('cur');addEventListener('mousemove',function(e){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px'});
+document.querySelectorAll('.zoomable').forEach(function(i){i.addEventListener('mouseenter',function(){c.classList.add('big');c.firstChild.textContent='EXPANDIR'});i.addEventListener('mouseleave',function(){c.classList.remove('big')})});
+document.querySelectorAll('a,button').forEach(function(i){i.addEventListener('mouseenter',function(){c.classList.add('big');c.firstChild.textContent='ABRIR'});i.addEventListener('mouseleave',function(){c.classList.remove('big')})});
+fit();go(0);
+if(mob){S.forEach(function(s){s.classList.add('on')})}
+addEventListener('resize',function(){if(isMob())S.forEach(function(s){s.classList.add('on')});else go(cur)});
+})();
+</script>
+<div id="painel-roteiro" data-modo-apresentador hidden style="position:fixed;left:16px;right:16px;bottom:16px;max-height:38vh;overflow:auto;z-index:99999;background:rgba(17,17,17,.94);color:#f4f4f0;font:16px/1.5 'Space Grotesk',Arial,sans-serif;padding:16px 20px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.35)"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px"><b id="painel-roteiro-t" style="font:700 13px 'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#C0EE4E">Roteiro</b><button type="button" onclick="document.getElementById('painel-roteiro').hidden=true" aria-label="Fechar roteiro" style="min-width:44px;min-height:44px;background:none;border:1px solid #555;color:#fff;border-radius:8px;cursor:pointer">×</button></div><div id="painel-roteiro-x"></div></div>
+<button type="button" id="botao-roteiro" aria-label="Abrir o roteiro de fala" style="position:fixed;right:16px;top:16px;z-index:99998;min-width:44px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid rgba(0,0,0,.15);background:rgba(255,255,255,.85);font:600 13px 'Space Grotesk',Arial,sans-serif;cursor:pointer;opacity:.55">Roteiro</button>
+<script>(function(){var P=document.getElementById('painel-roteiro'),X=document.getElementById('painel-roteiro-x'),T=document.getElementById('painel-roteiro-t');function atual(){var s=[].slice.call(document.querySelectorAll('.slide, section.tela, [data-slide]'));var v=s.filter(function(e){var c=getComputedStyle(e),r=e.getBoundingClientRect();return c.display!=='none'&&c.visibility!=='hidden'&&parseFloat(c.opacity||'1')>.3&&r.bottom>0&&r.top<innerHeight})[0];return {s:v,i:s.indexOf(v)}}function abrir(){var a=atual();if(!a.s)return;var r=a.s.querySelector('.roteiro');X.textContent=r?r.textContent.replace(/\s+/g,' ').trim():'Sem roteiro nesta tela.';T.textContent='Roteiro · tela '+(a.i+1);P.hidden=false}document.getElementById('botao-roteiro').onclick=function(){P.hidden?abrir():P.hidden=true};addEventListener('keydown',function(e){if((e.key==='r'||e.key==='R')&&!e.metaKey&&!e.ctrlKey){P.hidden?abrir():P.hidden=true}else if(!P.hidden&&/Arrow|Page| /.test(e.key)){setTimeout(abrir,60)}});})();</script>
+<style data-base-deck="1.0.0">
+/* Base de deck da agência 75 LAB: modo celular (html.bc-cel). No computador nada muda: todas as regras ficam presas a
+   html.bc-cel, ligado pelo deck-base.cliente.js só abaixo de 900 px de largura (ou quando o próprio deck entrou no modo
+   celular dele). No celular cada tela vira uma seção empilhada, fundo claro, tipografia por papel e navegação na margem. */
+html.bc-cel{--bc-papel:#F2F1E9;--bc-papel2:#FAF9F4;--bc-tinta:#111110;--bc-tinta2:#3a3a36;--bc-suave:#66665f;--bc-linha:rgba(17,17,16,.12);--bc-cartao:#FFFFFF;--bc-acento:#01A290;--bc-mx:22px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.bc-cel,html.bc-cel body{width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;overflow-x:hidden!important;overflow-y:auto!important;position:static!important;background:var(--bc-papel)!important;cursor:auto!important;touch-action:pan-y pinch-zoom!important;overscroll-behavior:auto!important;zoom:1!important}
+@supports (overflow:clip){html.bc-cel,html.bc-cel body{overflow-x:clip!important}}
+html.bc-cel body{margin:0!important;padding:0!important;user-select:auto!important;-webkit-user-select:auto!important}
+html.bc-cel *{cursor:auto!important}
+html.bc-cel *,html.bc-cel *::before,html.bc-cel *::after{touch-action:auto!important}
+/* palco do deck (stage e quem estiver entre o body e as telas) */
+html.bc-cel [data-bc-palco]{position:static!important;transform:none!important;scale:none!important;translate:none!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;inset:auto!important;overflow:visible!important;display:block!important;background:transparent!important;zoom:1!important;opacity:1!important;visibility:visible!important;filter:none!important;clip-path:none!important}
+/* cromo do deck (setas, pontos, contador, cursor, cabeçalho fixo, botão de roteiro): some no celular */
+html.bc-cel [data-bc-cromo],html.bc-cel [data-bc-deco],html.bc-cel [data-bc-oculto]{display:none!important}
+html.bc-cel [data-bc-tela] [data-bc-oculto][data-bc-oculto][data-bc-oculto],html.bc-cel [data-bc-tela] [data-bc-deco][data-bc-deco][data-bc-deco]{display:none!important}
+html.bc-cel .bc-rodape{display:flex!important;justify-content:center;padding:28px 22px 44px;background:var(--bc-papel)}
+html.bc-cel .bc-rodape #botao-roteiro{position:static!important;opacity:.8!important;min-height:44px}
+html.bc-cel #painel-roteiro{left:12px!important;right:12px!important;bottom:12px!important;max-height:50svh!important}
+/* cada tela vira uma seção */
+html.bc-cel [data-bc-tela]{position:relative!important;inset:auto!important;display:block!important;float:none!important;width:auto!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:60px max(var(--bc-mx),calc((100vw - 660px)/2)) 52px!important;opacity:1!important;visibility:visible!important;transform:none!important;scale:none!important;translate:none!important;filter:none!important;clip-path:none!important;overflow:hidden!important;background:var(--bc-papel)!important;background-image:none!important;color:var(--bc-tinta)!important;pointer-events:auto!important;transition:none!important;animation:none!important;content-visibility:visible!important;scroll-snap-align:start;scroll-margin-top:0;border-top:1px solid var(--bc-linha)!important;box-shadow:none!important;z-index:auto!important;text-align:left!important}
+html.bc-cel [data-bc-tela][data-bc-par]{background:var(--bc-papel2)!important}
+html.bc-cel [data-bc-tela]:first-of-type,html.bc-cel [data-bc-tela="1"]{border-top:0!important}
+html.bc-cel [data-bc-tela]::before,html.bc-cel [data-bc-tela]::after{display:none!important}
+/* tudo dentro da tela entra no fluxo: sem posição absoluta, sem transformação, nada mais largo que a tela */
+html.bc-cel [data-bc-tela] *:not(svg):not(svg *):not([data-bc-manter]):not([data-bc-manter] *){position:static!important;inset:auto!important;float:none!important;transform:none!important;scale:none!important;translate:none!important;rotate:none!important;min-width:0!important;max-width:100%!important;transition:none!important;clip-path:none!important;writing-mode:horizontal-tb!important;column-count:auto!important;columns:auto!important;z-index:auto!important;mix-blend-mode:normal!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.bc-cel [data-bc-tela] *::before,html.bc-cel [data-bc-tela] *::after{max-width:100%!important}
+html.bc-cel [data-bc-tela] [data-bc-c]{width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 1 auto!important;align-self:stretch!important;justify-self:stretch!important;margin-left:0!important;margin-right:0!important;text-overflow:clip!important}
+html.bc-cel [data-bc-tela] [data-bc-c][data-bc-c="inline"]{width:fit-content!important;max-width:100%!important;align-self:flex-start!important;justify-self:start!important}
+html.bc-cel [data-bc-tela] svg{max-width:100%!important;transform:none!important;rotate:none!important;position:static!important;inset:auto!important}
+html.bc-cel [data-bc-tela] svg *{stroke-dashoffset:0!important;animation:none!important;transition:none!important}
+html.bc-cel [data-bc-tela] svg[data-bc-svg="grafico"]{width:100%!important;height:auto!important;display:block!important}
+html.bc-cel [data-bc-tela] svg[data-bc-svg="icone"]{max-width:44px!important;max-height:44px!important}
+html.bc-cel [data-bc-tela] [data-bc-ancora]{position:relative!important}
+html.bc-cel [data-bc-tela] [data-bc-ancora]::before,html.bc-cel [data-bc-tela] [data-bc-ancora]::after{max-height:100%!important;max-width:100%!important}
+/* grades e linhas */
+html.bc-cel [data-bc-tela] [data-bc-grade]{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-template-areas:none!important;grid-auto-flow:row!important;grid-auto-rows:auto!important;gap:14px!important;align-items:stretch!important;justify-items:stretch!important;align-content:start!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="2"]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="logos"]{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;align-items:center!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="galeria"]{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+html.bc-cel [data-bc-tela] [data-bc-grade="galeria"] img{width:100%!important;height:auto!important;aspect-ratio:4/3!important;object-fit:cover!important;margin:0!important;max-height:none!important}
+html.bc-cel [data-bc-tela] [data-bc-grade]>*{grid-column:auto!important;grid-row:auto!important;grid-area:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="coluna"]{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:flex-start!important;gap:14px!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="fica"]{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px 14px!important}
+html.bc-cel [data-bc-tela] [data-bc-linha="fica"]>*{flex:0 1 auto!important;width:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-tabela]{display:block!important}
+/* cartões */
+html.bc-cel [data-bc-tela] [data-bc-cartao]{border-radius:inherit;padding:18px 18px!important;box-shadow:none!important}
+html.bc-cel [data-bc-tela] [data-bc-cartao="claro"]{background:var(--bc-cartao)!important;border:1px solid var(--bc-linha)!important;color:var(--bc-tinta)!important}
+html.bc-cel [data-bc-tela] [data-bc-camada]{background:transparent!important;background-image:none!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
+/* imagens */
+html.bc-cel [data-bc-tela] img,html.bc-cel [data-bc-tela] video,html.bc-cel [data-bc-tela] picture,html.bc-cel [data-bc-tela] canvas{max-width:100%!important;height:auto!important;opacity:1!important;filter:none!important}
+html.bc-cel [data-bc-tela] [data-bc-img="foto"]{display:block!important;width:100%!important;height:auto!important;max-height:72svh!important;object-fit:cover!important;object-position:center!important;margin:6px 0 18px!important;border-radius:0!important;aspect-ratio:auto!important}
+html.bc-cel [data-bc-tela] [data-bc-img="foto"][data-bc-alta]{width:auto!important;max-width:100%!important;max-height:60svh!important;margin-left:auto!important;margin-right:auto!important;object-fit:contain!important}
+html.bc-cel [data-bc-tela] [data-bc-img="capa"]{display:block!important;width:calc(100% + 2 * max(var(--bc-mx),calc((100vw - 660px)/2)))!important;max-width:none!important;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 26px!important;height:auto!important;aspect-ratio:4/3!important;object-fit:cover!important;object-position:center!important;border-radius:0!important}
+html.bc-cel [data-bc-tela] [data-bc-img="logo"]{display:inline-block!important;width:auto!important;height:auto!important;max-width:150px!important;max-height:42px!important;object-fit:contain!important;margin:0!important;vertical-align:middle}
+html.bc-cel [data-bc-tela] [data-bc-grade="logos"] [data-bc-img="logo"]{max-width:100%!important;max-height:40px!important;margin:0 auto!important;display:block!important}
+html.bc-cel [data-bc-tela] [data-bc-img="icone"]{display:inline-block!important;width:auto!important;height:auto!important;max-width:44px!important;max-height:44px!important;object-fit:contain!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-fundo]{display:block!important;width:calc(100% + 2 * max(var(--bc-mx),calc((100vw - 660px)/2)))!important;max-width:none!important;height:auto!important;aspect-ratio:4/3;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 26px!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;opacity:1!important;filter:none!important;border-radius:0!important}
+html.bc-cel [data-bc-tela] [data-bc-fundo="meio"]{width:100%!important;margin:6px 0 18px!important;aspect-ratio:16/10}
+html.bc-cel [data-bc-tela] iframe{width:100%!important;height:70svh!important;border:0}
+html.bc-cel [data-bc-tela] [data-bc-mapa]>img{width:100%!important;height:auto!important;max-height:none!important;margin:0!important}
+html.bc-cel [data-bc-tela] model-viewer{width:100%!important;height:56svh!important}
+/* texto por papel */
+html.bc-cel [data-bc-tela] [data-bc-papel]{white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important;hyphens:manual;text-overflow:clip!important;max-width:100%!important;-webkit-line-clamp:unset!important;line-clamp:none!important;text-indent:0!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="capa"]{font-size:clamp(38px,11.2vw,54px)!important;line-height:1.04!important;letter-spacing:-.01em!important;margin:0 0 16px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="titulo"]{font-size:clamp(29px,8.4vw,40px)!important;line-height:1.06!important;letter-spacing:-.005em!important;margin:0 0 16px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="titulo3"]{font-size:28px!important;line-height:1.1!important;letter-spacing:0!important;margin:0 0 8px!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="subtitulo"]{font-size:clamp(19px,5.4vw,23px)!important;line-height:1.28!important;letter-spacing:0!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="corpo"]{font-size:clamp(16px,4.4vw,18px)!important;line-height:1.5!important;letter-spacing:0!important;margin:0 0 12px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="apoio"]{font-size:16px!important;line-height:1.45!important;letter-spacing:0!important;margin:0 0 8px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="rotulo"]{font-size:13px!important;line-height:1.4!important;letter-spacing:.1em!important;margin:0 0 10px!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="numero"]{white-space:nowrap!important;line-height:1!important;letter-spacing:-.01em!important;margin:4px 0 6px!important;overflow:visible!important}
+html.bc-cel [data-bc-tela] [data-bc-papel="numero"][data-bc-quebra]{white-space:normal!important;text-wrap:balance}
+html.bc-cel [data-bc-tela] [data-bc-papel="fonte"]{font-size:12px!important;line-height:1.4!important;letter-spacing:0!important;margin:18px 0 0!important;color:var(--bc-suave)!important;opacity:1!important;text-transform:none!important;font-weight:400!important}
+html.bc-cel [data-bc-tela] [data-bc-papel] *{font-size:inherit;line-height:inherit!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important}
+html.bc-cel [data-bc-tela] [data-bc-papel] [data-bc-papel]{font-size:inherit!important}
+html.bc-cel [data-bc-tela] [data-bc-acao]{min-height:44px!important;display:inline-flex!important;align-items:center!important;justify-content:center;padding:10px 16px!important;margin:6px 0!important;width:auto!important}
+html.bc-cel [data-bc-tela] li[data-bc-papel]{margin-bottom:8px!important}
+html.bc-cel [data-bc-tela] ul,html.bc-cel [data-bc-tela] ol{padding-left:20px!important;margin:0 0 12px!important}
+html.bc-cel [data-bc-tela] [data-bc-c="lista-limpa"]{padding-left:0!important}
+/* créditos de foto que eram legenda: vão para o pé da tela, pequenos */
+html.bc-cel [data-bc-tela] .bc-fonte{display:block!important;font:400 12px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif!important;color:var(--bc-suave)!important;margin:20px 0 0!important;letter-spacing:0!important;text-transform:none!important}
+/* capa */
+html.bc-cel [data-bc-tela="1"]{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;padding-bottom:56px!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa]{min-height:100svh!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa]{justify-content:flex-start!important}
+html.bc-cel [data-bc-tela="1"]>*{flex:0 0 auto!important}
+html.bc-cel [data-bc-tela="1"] .bc-marcas{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;margin:-60px calc(-1 * max(var(--bc-mx),calc((100vw - 660px)/2))) 22px!important;padding:16px max(var(--bc-mx),calc((100vw - 660px)/2))!important;width:auto!important;max-width:none!important}
+html.bc-cel [data-bc-tela="1"] .bc-marcas img,html.bc-cel [data-bc-tela="1"] .bc-marcas svg{height:28px!important;width:auto!important;max-width:44%!important;object-fit:contain!important;display:block!important}
+html.bc-cel [data-bc-tela="1"][data-bc-temcapa] .bc-marcas{margin-bottom:0!important}
+html.bc-cel [data-bc-tela="1"]:not([data-bc-temcapa]) .bc-marcas+*{margin-top:28px!important}
+/* navegação na margem direita: nunca encosta no texto */
+#bc-nav{display:none}
+html.bc-cel #bc-nav{display:flex;position:fixed;right:7px;top:50%;transform:translateY(-50%);flex-direction:column;align-items:center;gap:6px;z-index:2147483000;pointer-events:none;opacity:0;transition:opacity .35s ease}
+html.bc-cel #bc-nav.bc-rolando{opacity:1}
+html.bc-cel #bc-nav i{display:block;width:5px;height:5px;border-radius:3px;background:rgba(17,17,16,.22);transition:height .25s ease,background .25s ease}
+html.bc-cel #bc-nav i.bc-agora{height:16px;background:var(--bc-acento)}
+html.bc-cel #bc-nav.bc-trilho{width:3px;height:34vh;border-radius:2px;background:rgba(17,17,16,.14);gap:0;justify-content:flex-start}
+html.bc-cel #bc-nav.bc-trilho b{display:block;width:3px;border-radius:2px;background:var(--bc-acento);height:0}
+@media (prefers-reduced-motion:reduce){html.bc-cel #bc-nav i{transition:none}}
+/* componente que o deck pede para manter como está no celular (data-bc-manter): só não pode passar da largura */
+html.bc-cel [data-bc-tela] [data-bc-manter]{max-width:100%!important;overflow-x:auto}
+</style>
+<script data-base-deck="1.0.0">
+/* Base de deck da agência 75 LAB (lado do navegador). Injetada pelo motor em todo deck e one-pager (deck-base.ts).
+   No computador não faz nada. No celular (largura abaixo de 900 px, ou quando o próprio deck entrou no modo celular dele)
+   transforma cada tela numa seção empilhada e desenhada para o telefone: fundo claro, tipografia por papel, números que
+   cabem, imagens na largura certa, legenda vira crédito no pé, navegação discreta na margem direita. ?bc=0 desliga. */
+(function () {
+  'use strict';
+  var D = document, H = D.documentElement, W = window;
+  if (W.__bcBase) return; W.__bcBase = 1;
+  var q = {}; try { q = Object.fromEntries(new URLSearchParams(location.search)); } catch (e) {}
+  if (q.bc === '0') return;
+  if (D.querySelector('meta[name="perfil-conferencia"][content="loja-simulada"]')) return;
+  var FORCAR = q.bc === '1';
+  var ATIVAS = ['on', 'active', 'ativa', 'ativo', 'act', 'atual', 'current', 'is-active', 'show', 'visivel', 'in', 'cur', 'atv'];
+  var CREDITO = /^(foto|fotos|imagem|imagens|ilustra[cç][aã]o|ilustrativ|cr[eé]dito|reprodu[cç][aã]o|divulga[cç][aã]o|simula[cç][aã]o|render|mockup|montagem|composi[cç][aã]o|©|\(c\))|foto real|imagem ilustrativa|ilustra[cç][aã]o institucional|meramente ilustrativ|composi[cç][aã]o ilustrativa|\bilustrativ[ao]s?\b|\(simula[cç][aã]o\)/i;
+  var LOGO = /logo|wordmark|brandmark/i;
+  var FONTE = /^\s*(fonte|fontes|source|sources|dados|refer[eê]ncias?)\s*[:·.]/i;
+  function arr(x) { return Array.prototype.slice.call(x || []); }
+  function cs(el, ps) { return W.getComputedStyle(el, ps || null); }
+  function direto(el) { var t = ''; for (var i = 0; i < el.childNodes.length; i++) { var c = el.childNodes[i]; if (c.nodeType === 3) t += c.textContent; } return t.replace(/\s+/g, ' ').trim(); }
+  function texto(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
+  function rgb(c) { var m = String(c || '').match(/rgba?\(([^)]+)\)/); if (!m) return null; var v = m[1].split(/[ ,/]+/).filter(Boolean).map(parseFloat); return { r: v[0], g: v[1], b: v[2], a: v.length > 3 ? v[3] : 1 }; }
+  function lum(c) { function f(x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); } return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); }
+  function razao(a, b) { var l1 = lum(a), l2 = lum(b); return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05); }
+  function imp(el, p, v) { el.style.setProperty(p, v, 'important'); }
+  var PAPEL = { r: 242, g: 241, b: 233, a: 1 }, PAPEL2 = { r: 250, g: 249, b: 244, a: 1 }, BRANCO = { r: 255, g: 255, b: 255, a: 1 };
+
+  function deckEmModoCelular() { return /(^|\s)(mob|mobile|celular|is-mobile)(\s|$)/.test(H.className + ' ' + (D.body ? D.body.className : '')); }
+  // largura do aparelho: conteúdo largo demais aumenta o innerWidth no celular, então vale o menor entre janela e tela
+  function largura() { return Math.min(W.innerWidth, (W.screen && W.screen.width) || W.innerWidth); }
+  function querCelular() { if (FORCAR) return true; if (q.bc === 'desk') return false; return largura() < 900 || deckEmModoCelular(); }
+
+  // ---------- telas ----------
+  function acharTelas() {
+    var c = arr(D.querySelectorAll('.slide, section.tela, [data-slide], section.s, .s[data-ch], .s[data-t]'));
+    c = c.filter(function (el) { return !c.some(function (o) { return o !== el && o.contains(el); }); });
+    if (c.length >= 2) return c;
+    // palco de uma tela só (one-pager 1600x900)
+    var st = D.querySelector('#stage, .stage, #palco, .palco, [data-palco], #deck, .deck');
+    if (st) {
+      var filhos = arr(st.children).filter(function (x) { return !/^(script|style|template)$/i.test(x.tagName); });
+      if (filhos.length === 1 && filhos[0].querySelector('h1,h2,h3,p')) return [filhos[0]];
+      return [st];
+    }
+    // página com largura fixa de palco no body (1600, 1440, 1280...)
+    var b = D.body; if (!b) return [];
+    var fixo = arr(b.children).filter(function (x) { if (/^(script|style|template|noscript)$/i.test(x.tagName)) return false; var w = parseFloat(cs(x).width); return w >= 1100 && x.querySelector('h1,h2,h3,p'); });
+    if (fixo.length) return fixo;
+    return [];
+  }
+
+  function classeAtiva(telas) {
+    var vis = telas.filter(function (t) { var s = cs(t); return s.visibility !== 'hidden' && s.display !== 'none' && parseFloat(s.opacity) > 0.5; });
+    for (var i = 0; i < vis.length; i++) {
+      var cand = arr(vis[i].classList).filter(function (k) { return telas.filter(function (o) { return o.classList.contains(k); }).length < telas.length; });
+      for (var j = 0; j < ATIVAS.length; j++) if (cand.indexOf(ATIVAS[j]) >= 0) return ATIVAS[j];
+      if (cand.length === 1 && cand[0].length <= 8) return cand[0];
+    }
+    return 'on';
+  }
+
+  // ---------- fase 1: lê o deck como ele foi desenhado ----------
+  function opacidadeEfetiva(el, ate) { var o = 1; for (var e = el; e && e !== ate && e !== D.body; e = e.parentElement) o *= parseFloat(cs(e).opacity || '1'); return o; }
+  function midiaDentro(el) { return /^(IMG|VIDEO|PICTURE|IFRAME|MODEL-VIEWER)$/.test(el.tagName) || !!el.querySelector('img,video,picture,iframe,model-viewer'); }
+
+  function analisar(telas, ativa) {
+    var fundos = [];
+    telas.forEach(function (t, i) {
+      var rt = t.getBoundingClientRect(), areaT = Math.max(1, rt.width * rt.height);
+      var st = cs(t);
+      t.__bcFundoOriginal = st.backgroundColor;
+      if (/url\(/.test(st.backgroundImage)) fundos.push({ tela: t, el: t, bg: st.backgroundImage, pos: st.backgroundPosition });
+      arr(t.querySelectorAll('*')).forEach(function (el) {
+        var tag = el.tagName;
+        if (el.closest('svg') && tag.toLowerCase() !== 'svg') return;
+        if (el.closest('[data-bc-manter]')) return;
+        if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|BR|WBR)$/.test(tag)) return;
+        if (el.closest('.roteiro,[data-roteiro],aside[hidden]')) return;
+        var s = cs(el);
+        if (s.display === 'none') return;
+        var abs = s.position === 'absolute' || s.position === 'fixed';
+        var tx = texto(el);
+        var midia = midiaDentro(el);
+        var bgUrl = /url\(/.test(s.backgroundImage);
+        var r = el.getBoundingClientRect(), area = r.width * r.height;
+        if (tag === 'CANVAS' && (abs || area / areaT > 0.4)) { el.setAttribute('data-bc-deco', ''); return; }
+        var stl = el.getAttribute('style') || '';
+        var pb = cs(el, '::before'), pa = cs(el, '::after');
+        if ((pb.content !== 'none' && /absolute|fixed/.test(pb.position)) || (pa.content !== 'none' && /absolute|fixed/.test(pa.position))) el.setAttribute('data-bc-ancora', '');
+        if (abs && el.parentElement && /(left|right)\s*:\s*[\d.]+%/.test(stl) && /(top|bottom)\s*:\s*[\d.]+%/.test(stl) && arr(el.parentElement.children).some(function (x) { return x.tagName === 'IMG' || x.tagName === 'PICTURE'; }) && r.width < 160) {
+          el.setAttribute('data-bc-ponto', ''); el.parentElement.setAttribute('data-bc-mapa', '');
+          el.__bcPos = { left: el.style.left, top: el.style.top, right: el.style.right, bottom: el.style.bottom };
+          return;
+        }
+        if (el.closest('[data-bc-ponto]')) return;
+        // barra de gráfico (preenchimento absoluto dentro de um trilho baixo): fica no trilho, na mesma proporção
+        var pr = el.parentElement ? el.parentElement.getBoundingClientRect() : null, cbg = rgb(s.backgroundColor);
+        if (abs && !tx && !midia && pr && pr.height > 0 && pr.height <= 56 && r.height >= pr.height * 0.4 && ((cbg && cbg.a > 0.3) || /gradient/.test(s.backgroundImage)) && el.parentElement !== t) {
+          el.setAttribute('data-bc-barra', ''); el.parentElement.setAttribute('data-bc-trilho', '');
+          el.__bcBarra = { left: ((r.left - pr.left) / pr.width * 100).toFixed(2) + '%', top: ((r.top - pr.top) / pr.height * 100).toFixed(2) + '%', width: (r.width / pr.width * 100).toFixed(2) + '%', height: (r.height / pr.height * 100).toFixed(2) + '%' };
+          return;
+        }
+        // galeria que troca de foto (uma visível, as outras com opacidade 0 no mesmo lugar): fica só a visível
+        if (abs && parseFloat(s.opacity) < 0.05 && el.parentElement && arr(el.parentElement.children).some(function (x) { if (x === el || x.tagName !== el.tagName) return false; var sx = cs(x); return (sx.position === 'absolute' || sx.position === 'relative') && parseFloat(sx.opacity) > 0.5; })) { el.setAttribute('data-bc-oculto', ''); return; }
+        if (abs && !tx && !midia) {
+          if (bgUrl && area / areaT > 0.1) { el.setAttribute('data-bc-fundo', area / areaT > 0.45 ? 'capa' : 'meio'); fundos.push({ tela: t, el: el }); }
+          else el.setAttribute('data-bc-deco', '');
+          return;
+        }
+        if (abs && tx) {
+          var op = opacidadeEfetiva(el, t), fs = parseFloat(s.fontSize);
+          if ((op > 0.01 && op < 0.3) || fs >= 180 || el.getAttribute('aria-hidden') === 'true') { el.setAttribute('data-bc-deco', ''); return; }
+        }
+        if (!abs && !tx && !midia && bgUrl && area / areaT > 0.25 && !el.children.length) { el.setAttribute('data-bc-fundo', 'meio'); fundos.push({ tela: t, el: el }); }
+        if (abs && midia && !tx && area / areaT > 0.4) el.setAttribute('data-bc-capa-midia', '');
+        if (el.getAttribute('aria-hidden') === 'true' && !tx && !midia && (tag !== 'svg' || (r.width > 120 && !el.querySelector('text')))) el.setAttribute('data-bc-deco', '');
+      });
+    });
+    return fundos;
+  }
+
+  // cabeçalho e navegação do deck que ficam fora das telas (fixos): saem; os logos do cabeçalho vão para a capa
+  function cromo(telas) {
+    var logos = [];
+    var tudo = arr(D.body.querySelectorAll('*'));
+    tudo.forEach(function (el) {
+      if (el.closest('[data-bc-tela]') || el.id === 'bc-nav' || el.closest('#bc-nav')) return;
+      if (telas.some(function (t) { return el.contains(t); })) return;
+      if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|LINK|META)$/.test(el.tagName)) return;
+      var s = cs(el);
+      var ancestralMarcado = el.parentElement && el.parentElement.closest('[data-bc-cromo]');
+      if (ancestralMarcado) return;
+      if (s.position === 'fixed' || s.position === 'sticky' || (s.position === 'absolute' && el.parentElement && el.parentElement.hasAttribute('data-bc-palco')) || (s.position === 'absolute' && el.parentElement === D.body)) {
+        arr(el.querySelectorAll('img, svg')).forEach(function (im) {
+          if (im.parentElement.closest('svg') || im.closest('button')) return;
+          var rr = im.getBoundingClientRect(); var sv = cs(im);
+          var visivel = rr.width > 24 && rr.height > 10 && sv.display !== 'none' && sv.visibility !== 'hidden' && parseFloat(sv.opacity) > 0.2;
+          var arq = im.tagName === 'IMG' ? decodeURIComponent((im.getAttribute('src') || '').split('?')[0]).toLowerCase() : '';
+          if (visivel || (arq && LOGO.test(arq))) logos.push({ el: im, visivel: visivel, arq: arq });
+        });
+        el.setAttribute('data-bc-cromo', '');
+      }
+    });
+    var saida = logos.filter(function (x) { return !ehCasa(x.el); }).map(function (x) { return x.el; });
+    return saida;
+  }
+
+  // Logos da capa no celular (Caique/coordenação, 13/10/2026: logo da PANCO, da faixa de clientes da casa, apareceu no topo
+  // da proposta da Catupiry). Regra: só o CABEÇALHO do deck (barra fixa ou cabeçalho repetido no topo das telas, antes do
+  // título), só a marca do trabalho e a 75 LAB, nunca marcas-casa nem logo de faixa de clientes. Sem certeza: sem faixa.
+  var MARCA_JOB = (function () { var sc = D.currentScript || D.querySelector('script[data-base-deck]'); return sc ? (sc.getAttribute('data-marca') || '') : ''; })();
+  function semAcento(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  var TOKENS_MARCA = semAcento(MARCA_JOB).replace(/\b(grupo|marca|da|de|do|das|dos|e|the|ltda|sa|s\/a|industria|alimentos|brasil)\b/g, ' ').split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 3; });
+  function caminhoDe(x) { return x && x.tagName === 'IMG' ? semAcento(decodeURIComponent((x.getAttribute('src') || '').split('?')[0])) : ''; }
+  // nome do arquivo + alt (sem a pasta: a pasta do trabalho tem o nome do cliente e casaria com qualquer foto)
+  function nomeLogo(x) { return x && x.tagName === 'IMG' ? semAcento(caminhoDe(x).split('/').pop() + ' ' + (x.getAttribute('alt') || '') + ' ' + (x.getAttribute('class') || '')) : semAcento(x && x.getAttribute ? (x.getAttribute('aria-label') || '') : ''); }
+  function eh75lab(x) { return /75\s?lab|setenta e cinco/.test(nomeLogo(x)) || /marca-75lab/.test(caminhoDe(x)); }
+  function ehCasa(x) { return /marcas-casa|clientes-casa|marcas_atendidas|\/cases\//.test(caminhoDe(x)); }
+  function ehLogo(x) { return LOGO.test(nomeLogo(x)) || eh75lab(x); }
+  function ehDaMarca(x) { var n = nomeLogo(x); return TOKENS_MARCA.length ? TOKENS_MARCA.some(function (t) { return n.indexOf(t) >= 0; }) : false; }
+  function cabecalhosDasTelas(telas) {
+    var porClasse = {}, cands = [];
+    telas.forEach(function (t, i) {
+      var titulo = t.querySelector('h1, h2');
+      arr(t.querySelectorAll('*')).forEach(function (el) {
+        // só logos (aceita um separador como "×" entre eles)
+        if (el.closest('svg') || texto(el).replace(/[×x+|·•\/\s-]/gi, '').length) return;
+        // cabeçalho é filho da tela (ou do primeiro invólucro) e vem antes do título
+        if (!(el.parentElement === t || (el.parentElement && el.parentElement.parentElement === t))) return;
+        var ims = arr(el.querySelectorAll('img')).concat(el.tagName === 'IMG' ? [el] : []);
+        var parDeMarcas = ims.length >= 2 && ims.some(eh75lab);
+        if (titulo && !parDeMarcas && !(el.compareDocumentPosition(titulo) & Node.DOCUMENT_POSITION_FOLLOWING)) return;
+        if (!ims.length || ims.length > 3) return;
+        if (ims.some(ehCasa)) return;
+        if (!ims.every(ehLogo)) return;
+        // faixa de marcas: irmãos com logos de outras empresas = não é cabeçalho
+        var irmaosComLogo = el.parentElement ? arr(el.parentElement.children).filter(function (x) { return x !== el && !texto(x).replace(/[×x+|·•\/\s-]/gi, '').length && x.querySelector && x.querySelector('img'); }).length : 0;
+        if (irmaosComLogo >= 2) return;
+        var chave = el.tagName + '.' + String(el.className || '').trim().split(/\s+/).sort().join('.');
+        porClasse[chave] = (porClasse[chave] || 0) + 1;
+        cands.push({ el: el, tela: i, chave: chave, ims: ims });
+      });
+    });
+    var pool = [];
+    cands.forEach(function (c) {
+      // par de logos (marca + 75 LAB) antes do título é cabeçalho em qualquer tela, mesmo com classe diferente
+      if (porClasse[c.chave] < 2 && c.tela !== 0 && !(c.ims.length >= 2 && c.ims.some(eh75lab))) return;
+      c.ims.forEach(function (x) { pool.push(x); });
+      c.el.setAttribute('data-bc-oculto', '');
+    });
+    return pool;
+  }
+  // escolhe no máximo 2 logos: a marca do trabalho e a 75 LAB, na versão para fundo claro quando existir
+  function logosDaCapa(pool) {
+    var CLARO = /branc|white|negativ|lime|light|inverse|claro/;
+    var vistos = {}, unicos = [];
+    pool.forEach(function (x) { if (ehCasa(x) || !ehLogo(x)) return; var k = nomeLogo(x).split(' ')[0] || x.outerHTML.slice(0, 120); if (!vistos[k]) { vistos[k] = 1; unicos.push(x); } });
+    function melhor(lista) { var escuro = lista.filter(function (x) { return !CLARO.test(nomeLogo(x)); }); return (escuro.length ? escuro : lista)[0] || null; }
+    var lab = melhor(unicos.filter(eh75lab));
+    var cliLista = unicos.filter(function (x) { return !eh75lab(x); });
+    if (TOKENS_MARCA.length) cliLista = cliLista.filter(ehDaMarca);
+    else if (cliLista.length > 1) cliLista = [];
+    var cli = melhor(cliLista);
+    var saida = [cli, lab].filter(Boolean);
+    saida.__claro = saida.length && saida.every(function (x) { return !CLARO.test(nomeLogo(x)); });
+    return saida;
+  }
+
+  // ---------- fase 2: desenha para o celular ----------
+  function papelDoTexto(el, base, ehCapa) {
+    var s = cs(el), tag = el.tagName, tx = texto(el), fs = parseFloat(s.fontSize), r = fs / base;
+    var palavras = tx.split(' ').length;
+    var cls = String(el.className && el.className.baseVal !== undefined ? el.className.baseVal : el.className || '');
+    if (/^\d{1,2}\s*\/\s*\d{1,2}$/.test(tx)) return 'contador';
+    if (tx.length <= 70 && /(setas do teclado|use as setas|deslize para|arraste para|toque para avan|clique para avan|swipe|tecla [a-z]\b|aperte f\b|tela cheia com)/i.test(tx)) return 'contador';
+    if (FONTE.test(tx) || /(^|[\s_-])(fonte|fontes|source|rodape-fonte)([\s_-]|$)/i.test(cls)) return 'fonte';
+    var digitos = /\d/.test(tx) && (tx.replace(/\D/g, '').length >= 2 || /[%+$×x]/.test(tx) || r >= 3.2), curto = tx.length <= 16;
+    if ((r >= 1.9 || /(^|[\s_-])(num|numero|kpi|stat|big|cnt|count|valor)([\s_-]|$)/i.test(cls)) && digitos && curto && !/^H[1-3]$/.test(tag)) return 'numero';
+    var pesado = parseInt(s.fontWeight, 10) >= 600 || /shoulders|anton|oswald|bebas|condensed|display|impact|archivo black|league gothic/i.test(s.fontFamily);
+    if (!/^H[1-3]$/.test(tag) && tx.length <= 11 && pesado && digitos && /^[\s+\-~≈R$€%x×.,:\/\d]+(\s?(mi|bi|mil|k|%|x|anos?|pp|p\.p\.))?\+?$/i.test(tx) && /\d/.test(tx) && !/^\d{1,2}\s*\/\s*\d{1,2}$/.test(tx)) return 'numero';
+    if (tag === 'H1') return ehCapa ? 'capa' : 'titulo';
+    if (tag === 'H2') return ehCapa && r >= 2.4 ? 'capa' : 'titulo';
+    if (tag === 'H3' || /titulo|title|headline/i.test(cls)) return r >= 2.4 ? 'titulo' : 'titulo3';
+    if (r >= 2.4) return ehCapa ? 'capa' : 'titulo';
+    if (tag === 'H4' || tag === 'H5' || r >= 1.32) return 'subtitulo';
+    var mono = /mono|courier|code/i.test(s.fontFamily);
+
+    if (mono && palavras > 12 && r <= 1.0 && tag !== 'P' || mono && palavras > 18 && r < 0.95) return 'fonte';
+    if (/(^|[\s_-])(src|nota|notas|obs|disclaimer|rodape)([\s_-]|$)/i.test(cls) && r < 0.95 && palavras > 3) return 'fonte';
+    if ((s.textTransform === 'uppercase' || mono) && palavras <= 12 && tx.length <= 90) return 'rotulo';
+    if (r < 0.86 && palavras <= 8) return 'apoio';
+    return 'corpo';
+  }
+
+  function corEfetivaDeFundo(el, tela) {
+    for (var e = el; e && e !== tela; e = e.parentElement) {
+      if (e.hasAttribute('data-bc-camada')) continue;
+      var s = cs(e);
+      if (/url\(/.test(s.backgroundImage) && !e.hasAttribute('data-bc-fundo')) return null;
+      var c = rgb(s.backgroundColor);
+      if (c && c.a > 0.55) return c;
+    }
+    return tela.hasAttribute('data-bc-par') ? PAPEL2 : PAPEL;
+  }
+
+  function escurecer(c, fundo, alvo) {
+    var r = c.r, g = c.g, b = c.b;
+    for (var i = 0; i < 24 && razao({ r: r, g: g, b: b }, fundo) < alvo; i++) { r *= 0.86; g *= 0.86; b *= 0.86; }
+    return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')';
+  }
+
+  function classificarImagem(im) {
+    if (im.hasAttribute('data-bc-img') && !im.hasAttribute('data-bc-provisoria')) return;
+    im.removeAttribute('data-bc-provisoria');
+    var nw = im.naturalWidth, nh = im.naturalHeight;
+    if (!nw || !nh) { im.setAttribute('data-bc-img', LOGO.test((im.getAttribute('alt') || '') + ' ' + (im.getAttribute('src') || '').split('?')[0]) ? 'logo' : 'foto'); im.setAttribute('data-bc-provisoria', ''); return; }
+    var arq = decodeURIComponent((im.getAttribute('src') || '').split('?')[0]).split('/').pop().toLowerCase();
+    var dica = ((im.getAttribute('alt') || '') + ' ' + arq + ' ' + (im.className || '') + ' ' + (im.parentElement ? im.parentElement.className : '')).toLowerCase();
+    var asp = nw / nh;
+    var tipo;
+    var ehLogo = /logo|wordmark|brandmark/.test(arq + ' ' + (im.className || '')) || /^(logo|logotipo|marca)\b/.test((im.getAttribute('alt') || '').toLowerCase()) || /\blogo(tipo)?\b/.test((im.getAttribute('alt') || '').toLowerCase());
+    if (ehLogo || (asp >= 2.4 && nh <= 360 && !/foto|kv|hero|banner|capa|gondola|loja|render/.test(dica))) tipo = 'logo';
+    else if (Math.max(nw, nh) <= 180 || /icone|icon|ico[-_]/.test(dica)) tipo = 'icone';
+    else tipo = im.hasAttribute('data-bc-capa-midia') || (im.closest('[data-bc-capa-midia]') && im.closest('[data-bc-tela="1"]')) ? 'capa' : 'foto';
+    im.setAttribute('data-bc-img', tipo);
+    if (tipo === 'foto' && asp < 0.8) im.setAttribute('data-bc-alta', '');
+  }
+
+  function ajustarNumero(el) {
+    el.removeAttribute('data-bc-quebra');
+    var pai = el.parentElement; var disp = Math.max(120, (pai ? pai.clientWidth - parseFloat(cs(pai).paddingLeft) - parseFloat(cs(pai).paddingRight) : W.innerWidth - 44));
+    disp = Math.min(disp, W.innerWidth - 44);
+    var max = Math.min(68, Math.round(W.innerWidth * 0.165)), min = 30;
+    imp(el, 'font-size', max + 'px');
+    imp(el, 'display', 'block');
+    var w = el.scrollWidth;
+    if (w > disp) {
+      var novo = Math.max(min, Math.floor(max * disp / w) - 1);
+      imp(el, 'font-size', novo + 'px');
+      if (el.scrollWidth > disp + 1) el.setAttribute('data-bc-quebra', '');
+    }
+  }
+
+  function legendas(tela) {
+    var achadas = [];
+    arr(tela.querySelectorAll('figcaption, [class*=legenda], [class*=caption], [class*=credito], [class*=credit]')).forEach(function (c) { if (texto(c)) achadas.push(c); });
+    // texto curto de crédito colado a uma imagem (embaixo ou por cima dela)
+    arr(tela.querySelectorAll('img, [data-bc-fundo], picture')).forEach(function (im) {
+      var cont = im.parentElement; if (!cont) return;
+      var cands = arr(cont.children).concat(cont.parentElement ? arr(cont.parentElement.children) : []);
+      cands.forEach(function (c) {
+        if (c === im || c.contains(im) || achadas.indexOf(c) >= 0 || c.hasAttribute('data-bc-proprio')) return;
+        var t = texto(c);
+        if (!t || t.length > 140 || c.querySelector('img, h1, h2, h3, h4') || /^H[1-4]$/.test(c.tagName)) return;
+        var logoPerto = im.tagName === 'IMG' && LOGO.test((im.getAttribute('alt') || '') + (im.getAttribute('src') || '').split('?')[0]);
+        // texto curto logo depois da foto (irmão seguinte) e menor que o corpo também é legenda
+        var colado = (c === im.nextElementSibling || c === (im.parentElement && im.parentElement.nextElementSibling)) && parseFloat(cs(c).fontSize) <= 15 && t.length >= 6 && t.length <= 90 && /[a-zà-ú]{3}/i.test(t) && !FONTE.test(t);
+        var depois = c === im.nextElementSibling || c === (im.parentElement && im.parentElement.nextElementSibling);
+        var creditoColado = depois && t.length <= 140 && /ilustra|simula|\bfoto|imagem|render|montagem|mockup/i.test(t);
+        if ((CREDITO.test(t) || colado || creditoColado) && !logoPerto) achadas.push(c);
+      });
+    });
+    // legenda e crédito de imagem SOMEM (Caique, 13/10/2026): só a fonte de DADO fica, pequena, no pé da tela
+    achadas.forEach(function (c) { c.setAttribute('data-bc-oculto', ''); });
+  }
+
+  // tira de linhas de fonte e de rótulos os trechos que são crédito de imagem ("Fotos: ...", "imagem ilustrativa")
+  var TRECHO_CREDITO = /^(fotos?|imagens?|ilustra[cç][aã]o|ilustra[cç][oõ]es|ilustrativ\w*|cr[eé]ditos?|reprodu[cç][aã]o|divulga[cç][aã]o|render|mockup|montagem|composi[cç][aã]o ilustrativa|simula[cç][aã]o)\b|imagem ilustrativa|imagens ilustrativas|foto real|fotos reais|ilustra[cç][aã]o institucional|meramente ilustrativ|imagem de fundo|\(simula[cç][aã]o\)/i;
+  function semCreditoDeImagem(tela) {
+    arr(tela.querySelectorAll('[data-bc-papel="fonte"], [data-bc-papel="rotulo"], [data-bc-papel="apoio"], [data-bc-papel="corpo"]')).forEach(function (el) {
+      var papel = el.getAttribute('data-bc-papel');
+      arr(el.childNodes).forEach(function (n) {
+        if (n.nodeType !== 3 || !n.textContent.trim()) return;
+        var partes = n.textContent.split(/(\s*[·|]\s*|(?<=[.;])\s+)/);
+        var saida = [], mudou = false;
+        for (var k = 0; k < partes.length; k += 2) {
+          var seg = partes[k], sep = partes[k + 1] || '';
+          var forte = /^(imagens? ilustrativas?|foto real|fotos reais|ilustra[cç][aã]o institucional|simula[cç][aã]o|imagem de fundo ilustrativa)\.?$/i.test(seg.trim());
+          if (seg.trim() && TRECHO_CREDITO.test(seg.trim()) && (papel === 'fonte' || (papel === 'corpo' ? forte : /imagem ilustrativa|foto real|ilustra[cç][aã]o|simula[cç][aã]o|^fotos?\s*:|^imagens?\s*:|cr[eé]dito/i.test(seg.trim())))) { mudou = true; continue; }
+          saida.push(seg + sep);
+        }
+        if (mudou) n.textContent = saida.join('').replace(/[\s·|,;]+$/, '').replace(/^[\s·|,;]+/, '');
+      });
+      var tx = texto(el).replace(/^(fontes?|sources?)\s*[:·.]\s*$/i, '');
+      if (!tx || !/[a-z0-9]{2}/i.test(tx)) el.setAttribute('data-bc-oculto', '');
+    });
+  }
+
+  function tabelas(tela) {
+    arr(tela.querySelectorAll('table')).forEach(function (tb) {
+      var linhas = arr(tb.rows); if (!linhas.length) return;
+      var cab = arr((tb.tHead && tb.tHead.rows[0] ? tb.tHead.rows[0] : linhas[0]).cells).map(texto);
+      if (cab.length <= 2) return;
+      var temCab = !!(tb.tHead && tb.tHead.rows[0]) || arr(linhas[0].cells).every(function (c) { return c.tagName === 'TH'; });
+      var box = D.createElement('div'); box.setAttribute('data-bc-proprio', ''); box.setAttribute('data-bc-grade', '');
+      linhas.slice(temCab ? 1 : 0).forEach(function (tr) {
+        if (tr.parentElement && tr.parentElement.tagName === 'THEAD') return;
+        var card = D.createElement('div'); card.setAttribute('data-bc-cartao', 'claro'); card.setAttribute('data-bc-c', '');
+        arr(tr.cells).forEach(function (td, i) {
+          var l = D.createElement('div'); l.setAttribute('data-bc-c', '');
+          var rot = cab[i] && temCab ? cab[i] : '';
+          var tt = (td.innerText || td.textContent || '').replace(/\s+/g, ' ').trim();
+          if (i === 0) { l.setAttribute('data-bc-papel', 'subtitulo'); l.textContent = tt; }
+          else { l.setAttribute('data-bc-papel', 'apoio'); l.textContent = (rot ? rot + ': ' : '') + tt; }
+          card.appendChild(l);
+        });
+        box.appendChild(card);
+      });
+      tb.setAttribute('data-bc-oculto', '');
+      tb.parentElement.insertBefore(box, tb.nextSibling);
+    });
+  }
+
+  function aplicar(telas, ativa, fundos, logos) {
+    H.classList.add('bc-cel');
+    var corpoTamanhos = [];
+    telas.forEach(function (t, i) {
+      if (i % 2 === 1) t.setAttribute('data-bc-par', '');
+      if (ativa) t.classList.add(ativa);
+      arr(t.querySelectorAll('p, li')).forEach(function (p) { var tx = texto(p); if (tx.length > 40) corpoTamanhos.push(parseFloat(cs(p).fontSize)); });
+    });
+    // tamanho de corpo do deck (mediana): referência para saber o que é título, número, apoio
+    corpoTamanhos.sort(function (a, b) { return a - b; });
+    var base = corpoTamanhos.length ? corpoTamanhos[Math.floor(corpoTamanhos.length / 2)] : 18;
+    if (!(base > 6)) base = 18;
+
+    telas.forEach(function (t, i) {
+      var ehCapa = i === 0;
+      // foto que era fundo da tela vira bloco no topo
+      fundos.filter(function (f) { return f.tela === t && f.el === t; }).forEach(function (f) {
+        var d = D.createElement('div'); d.setAttribute('data-bc-fundo', 'capa'); d.setAttribute('data-bc-proprio', '');
+        d.style.backgroundImage = f.bg; t.insertBefore(d, t.firstChild);
+      });
+      var els = arr(t.querySelectorAll('*'));
+      // contêineres, grades e linhas
+      els.forEach(function (el) {
+        if (el.closest('svg') && el.tagName.toLowerCase() !== 'svg') return;
+        if (el.hasAttribute('data-bc-deco') || el.closest('[data-bc-deco]') || el.closest('[data-bc-ponto]') || el.closest('[data-bc-manter]')) return;
+        var s = cs(el), tag = el.tagName;
+        if (tag === 'svg' || tag === 'SVG') {
+          var rs = el.getBoundingClientRect(); var vb = el.getAttribute('viewBox');
+          var grande = rs.width > 150 || el.querySelector('text') || (vb && parseFloat(vb.split(/[ ,]+/)[2]) > 200);
+          if (!vb && el.getAttribute('width') && el.getAttribute('height') && grande) el.setAttribute('viewBox', '0 0 ' + parseFloat(el.getAttribute('width')) + ' ' + parseFloat(el.getAttribute('height')));
+          el.setAttribute('data-bc-svg', grande ? 'grafico' : 'icone');
+          return;
+        }
+        if (/^(IMG|VIDEO|CANVAS|IFRAME|PICTURE|SOURCE|MODEL-VIEWER|INPUT|SELECT|TEXTAREA|BR|HR)$/.test(tag)) return;
+        var tx = texto(el);
+        var cfx = rgb(s.backgroundColor), selo = tx.length <= 24 && !midiaDentro(el) && el.children.length <= 2 && ((cfx && cfx.a > 0.3) || (parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' && parseFloat(s.borderLeftWidth) > 0)) && !/^H[1-4]$/.test(tag);
+        if (tx || midiaDentro(el) || el.querySelector('svg')) el.setAttribute('data-bc-c', selo || (s.display.indexOf('inline') === 0 && !el.children.length) ? 'inline' : '');
+        if (/^(UL|OL)$/.test(tag) && s.listStyleType === 'none') el.setAttribute('data-bc-c', 'lista-limpa');
+        if (s.display === 'grid' || s.display === 'inline-grid') {
+          var filhos = arr(el.children).filter(function (c) { return cs(c).display !== 'none' && !c.hasAttribute('data-bc-deco'); });
+          var soLogos = filhos.length >= 3 && filhos.every(function (c) { return !texto(c) && c.querySelector('img, svg') || c.tagName === 'IMG'; });
+          if (soLogos && !filhos.some(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return im && LOGO.test(nomeLogo(im)); })) { el.setAttribute('data-bc-grade', 'galeria'); return; }
+          var curtos = filhos.length >= 2 && filhos.length <= 4 && filhos.every(function (c) { var tt = texto(c); return tt.length <= 18 && !c.querySelector('img'); }) && filhos.some(function (c) { return /\d/.test(texto(c)); });
+          var poucosLogos = filhos.length >= 2 && filhos.length <= 3 && filhos.every(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return !texto(c) && im && LOGO.test((im.getAttribute('alt') || '') + ' ' + (im.getAttribute('src') || '').split('?')[0]); });
+          var chips = filhos.length >= 3 && filhos.every(function (c) { var tt = texto(c); return tt.length > 0 && tt.length <= 24 && !/\d/.test(tt) && !c.querySelector('img, p, h1, h2, h3, h4, li'); });
+          if (poucosLogos || chips) el.setAttribute('data-bc-linha', 'fica');
+          else el.setAttribute('data-bc-grade', soLogos ? 'logos' : curtos && filhos.length % 2 === 0 ? '2' : '');
+        } else if ((s.display === 'flex' || s.display === 'inline-flex') && /row/.test(s.flexDirection)) {
+          var fl = arr(el.children).filter(function (c) { return cs(c).display !== 'none' && !c.hasAttribute('data-bc-deco'); });
+          var soLog = fl.length >= 3 && fl.every(function (c) { return !texto(c) && (c.tagName === 'IMG' || c.querySelector('img, svg')); });
+          var galeria = soLog && !fl.some(function (c) { var im = c.tagName === 'IMG' ? c : c.querySelector('img'); return im && LOGO.test(nomeLogo(im)); });
+          if (galeria) { el.setAttribute('data-bc-grade', 'galeria'); return; }
+          var somaTexto = fl.reduce(function (a, c) { return a + texto(c).length; }, 0);
+          var iconeComTexto = fl.some(function (c) { return texto(c) && c.querySelector('svg, img'); });
+          var pequenos = !iconeComTexto && fl.length <= 4 && somaTexto <= 48 && fl.every(function (c) { var tt = texto(c); var img = c.tagName === 'IMG' ? c : (!tt ? c.querySelector('img') : null); return tt.length <= 28 && !c.querySelector('p, h1, h2, h3, h4, li') && !(img && !LOGO.test((img.getAttribute('alt') || '') + (img.getAttribute('src') || '').split('?')[0]) && (img.naturalWidth > 260 || !img.naturalWidth)); });
+          el.setAttribute('data-bc-linha', soLog ? 'fica' : pequenos ? 'fica' : 'coluna');
+          if (soLog) el.setAttribute('data-bc-grade', 'logos');
+        } else if (/^table/.test(s.display) && tag !== 'TABLE') { el.setAttribute('data-bc-linha', 'coluna'); }
+      });
+      tabelas(t);
+      // papéis do texto
+      var marcados = [];
+      els.forEach(function (el) {
+        if (el.closest('svg') || el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]') || el.closest('[data-bc-ponto]') || el.closest('[data-bc-manter]') || el.closest('.roteiro,[data-roteiro],aside[hidden]')) return;
+        if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|OPTION|SELECT|TEXTAREA)$/.test(el.tagName)) return;
+        if (!direto(el)) return;
+        var s = cs(el);
+        if (s.display === 'none') return;
+        var dentro = marcados.some(function (m) { return m.contains(el); });
+        if (dentro && s.display.indexOf('inline') === 0) return;
+        // título montado com palavras em <span> (animação por palavra): quem recebe o papel é o bloco inteiro
+        var sobe = el;
+        while (sobe.parentElement && sobe.parentElement !== t && cs(sobe.parentElement).display.indexOf('inline') === 0 && !direto(sobe.parentElement)) sobe = sobe.parentElement;
+        var pai = sobe.parentElement;
+        var titulo = pai && /^H[1-4]$/.test(pai.tagName) && !direto(pai);
+        if (pai && pai !== t && !pai.hasAttribute('data-bc-papel') && texto(pai).length <= 220 && (titulo || (cs(sobe).display.indexOf('inline') === 0 && cs(pai).display.indexOf('inline') !== 0 && arr(pai.children).every(function (c) { return cs(c).display.indexOf('inline') === 0 || c.tagName === 'BR'; })))) {
+          el = pai; s = cs(el);
+        }
+        // linhas de um título (cada linha num bloco): o papel vai para o título inteiro
+        while (el.parentElement && el.parentElement !== t && /^H[1-4]$/.test(el.parentElement.tagName) && !direto(el.parentElement) && !el.parentElement.hasAttribute('data-bc-papel')) { el = el.parentElement; s = cs(el); }
+        if (marcados.indexOf(el) >= 0 || el.hasAttribute('data-bc-papel')) return;
+        var papel = papelDoTexto(el, base, ehCapa);
+        if (papel === 'contador') { el.setAttribute('data-bc-oculto', ''); return; }
+        el.setAttribute('data-bc-papel', papel);
+        if (papel === 'rotulo' && s.textTransform !== 'uppercase') imp(el, 'font-size', '14px');
+        marcados.push(el);
+      });
+      // ações (links e botões soltos) com área de toque de 44 px
+      arr(t.querySelectorAll('a[href], button, [role=button]')).forEach(function (a) {
+        if (a.closest('[data-bc-deco]') || a.closest('[data-bc-oculto]') || a.closest('[data-bc-ponto]')) return;
+        var p = a.parentElement && a.parentElement.closest('[data-bc-papel="corpo"], [data-bc-papel="apoio"], [data-bc-papel="fonte"]');
+        if (!p && texto(a).length <= 60) a.setAttribute('data-bc-acao', '');
+      });
+      // cartões e camadas de fundo
+      var rt = t.getBoundingClientRect(), areaT = Math.max(1, rt.width * rt.height);
+      els.forEach(function (el) {
+        if (!el.hasAttribute('data-bc-c') || el.hasAttribute('data-bc-papel') && !el.children.length) return;
+        var s = cs(el); var c = rgb(s.backgroundColor); var r = el.getBoundingClientRect();
+        var temBorda = parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' || parseFloat(s.borderLeftWidth) > 0 && s.borderLeftStyle !== 'none';
+        var corBorda = rgb(s.borderTopColor) || rgb(s.borderLeftColor);
+        if (c && c.a > 0.55 && (r.width * r.height) / areaT > 0.62 && el.parentElement && (el.parentElement === t || el.parentElement.closest('[data-bc-tela]') === t && (r.width >= rt.width - 2))) { el.setAttribute('data-bc-camada', ''); return; }
+        if (c && c.a > 0.02 && c.a <= 0.55 || (temBorda && corBorda && lum(corBorda) > 0.6 && (!c || c.a <= 0.55))) {
+          if (texto(el).length > 6 && r.height > 40) el.setAttribute('data-bc-cartao', 'claro');
+        } else if (c && c.a > 0.55 && texto(el).length > 6 && r.height > 40) el.setAttribute('data-bc-cartao', '');
+      });
+      // espaços grandes do desenho de 1600 px viram o ritmo do celular
+      els.forEach(function (el) {
+        if (!el.hasAttribute('data-bc-c')) return;
+        if (el.hasAttribute('data-bc-papel') || el.hasAttribute('data-bc-img') || el.hasAttribute('data-bc-acao')) return;
+        var s = cs(el);
+        var mt = parseFloat(s.marginTop), mb = parseFloat(s.marginBottom);
+        if (mt > 22 || mt < 0) imp(el, 'margin-top', mt < 0 ? '0px' : '20px');
+        if (mb > 22 || mb < 0) imp(el, 'margin-bottom', mb < 0 ? '0px' : '20px');
+        if (!el.hasAttribute('data-bc-cartao')) {
+          var cf = rgb(s.backgroundColor), comFundo = cf && cf.a > 0.05 || /url\(|gradient/.test(s.backgroundImage);
+          ['left', 'right', 'top', 'bottom'].forEach(function (lado) {
+            var pv = parseFloat(s.getPropertyValue('padding-' + lado)), borda = parseFloat(s.getPropertyValue('border-' + lado + '-width')) > 0 && s.getPropertyValue('border-' + lado + '-style') !== 'none';
+            if (borda || comFundo) { if (pv > 22) imp(el, 'padding-' + lado, '16px'); }
+            else if (pv > (lado === 'left' || lado === 'right' ? 24 : 16)) imp(el, 'padding-' + lado, '0px');
+          });
+        }
+        var g = parseFloat(s.rowGap); if (g > 18) imp(el, 'row-gap', '14px');
+        var cg = parseFloat(s.columnGap); if (cg > 18) imp(el, 'column-gap', '14px');
+        if (s.whiteSpace === 'nowrap' && texto(el).length > 18) imp(el, 'white-space', 'normal');
+      });
+      arr(t.querySelectorAll('[data-bc-mapa]')).forEach(function (m) { imp(m, 'position', 'relative'); imp(m, 'width', '100%'); });
+      arr(t.querySelectorAll('[data-bc-trilho]')).forEach(function (m) { imp(m, 'position', 'relative'); });
+      arr(t.querySelectorAll('[data-bc-barra]')).forEach(function (b) { var o = b.__bcBarra || {}; imp(b, 'position', 'absolute'); imp(b, 'inset', 'auto'); ['left', 'top', 'width', 'height'].forEach(function (k) { if (o[k]) imp(b, k, o[k]); }); });
+      arr(t.querySelectorAll('[data-bc-ponto]')).forEach(function (pt) {
+        var o = pt.__bcPos || {}; imp(pt, 'position', 'absolute'); imp(pt, 'inset', 'auto');
+        ['left', 'top', 'right', 'bottom'].forEach(function (k) { if (o[k]) imp(pt, k, o[k]); });
+        imp(pt, 'min-width', '44px'); imp(pt, 'min-height', '44px'); imp(pt, 'transform', 'translate(-50%,-50%)'); imp(pt, 'z-index', '2');
+      });
+      arr(t.querySelectorAll('iframe')).forEach(function (f) {
+        if (!f.getAttribute('src')) { var u = f.getAttribute('data-src') || f.getAttribute('data-depois') || f.getAttribute('data-url') || f.getAttribute('data-antes'); if (u) f.setAttribute('src', u); }
+        f.setAttribute('loading', 'eager');
+      });
+      legendas(t);
+      semCreditoDeImagem(t);
+      // fonte de dado vai para o pé da tela
+      arr(t.querySelectorAll('[data-bc-papel="fonte"]')).forEach(function (f) {
+        var dono = f.parentElement && f.parentElement.closest('[data-bc-cartao]');
+        if (!dono && f.parentElement !== t) t.appendChild(f);
+      });
+    });
+    cores(telas);
+    // capa: logos do cabeçalho do deck
+    var capa = telas[0];
+    // a capa já mostra os logos no próprio conteúdo (antes do título): não repete numa faixa
+    var tituloCapa = capa && capa.querySelector('h1, h2');
+    var logosNaCapa = capa ? arr(capa.querySelectorAll('img')).filter(function (im) { return ehLogo(im) && !ehCasa(im) && !im.closest('[data-bc-oculto],[data-bc-deco],[data-bc-cromo]') && (!tituloCapa || (im.compareDocumentPosition(tituloCapa) & Node.DOCUMENT_POSITION_FOLLOWING)); }) : [];
+    if (logosNaCapa.length) logos = [];
+    // cabeçalho repetido: na capa ele aparece no lugar da faixa (só logos da marca e da 75 LAB)
+    if (!logosNaCapa.length && capa) arr(capa.querySelectorAll('[data-bc-oculto]')).forEach(function (h) { if (h.querySelector('img') && arr(h.querySelectorAll('img')).every(function (im) { return ehLogo(im) && !ehCasa(im) && (eh75lab(im) || ehDaMarca(im) || !TOKENS_MARCA.length); }) && !h.closest('[data-bc-deco]') && !arr(h.querySelectorAll('img')).some(function (im) { return /branc|white|negativ|lime|light|inverse|claro/.test(nomeLogo(im)); })) { h.removeAttribute('data-bc-oculto'); logos = []; } });
+    if (capa && logos.length && !capa.querySelector('.bc-marcas')) {
+      var barra = D.createElement('div'); barra.className = 'bc-marcas'; barra.setAttribute('data-bc-proprio', '');
+      var vistos = [];
+      logos.slice(0, 2).forEach(function (im) { var k = im.tagName === 'IMG' ? im.currentSrc || im.src : im.outerHTML.slice(0, 200); if (vistos.indexOf(k) >= 0) return; vistos.push(k); var c = im.cloneNode(true); arr(c.attributes).map(function (a) { return a.name; }).forEach(function (n) { if (/^(id|class|style|loading|data-bc-)/.test(n) || n.indexOf('data-bc-') === 0) c.removeAttribute(n); }); c.setAttribute('data-bc-proprio', ''); barra.appendChild(c); });
+      var fundoCapa = rgb(capa.__bcFundoOriginal);
+      var foto = capa.querySelector('[data-bc-fundo="capa"], [data-bc-img="capa"], [data-bc-capa-midia]');
+      var algumClaro = logos.some(function (x) { return /branc|white|negativ|lime|light|inverse|claro/.test(nomeLogo(x)); });
+      if (logos.__claro && !algumClaro) barra.style.background = 'transparent';
+      else if (algumClaro) barra.style.background = fundoCapa && fundoCapa.a > 0.5 && lum(fundoCapa) < 0.35 ? capa.__bcFundoOriginal : '#111110';
+      else if (fundoCapa && fundoCapa.a > 0.5 && lum(fundoCapa) < 0.35) barra.style.background = capa.__bcFundoOriginal;
+      else if (foto) barra.style.background = '#111110';
+      else barra.style.background = 'transparent';
+      capa.insertBefore(barra, capa.firstChild);
+      if (foto) imp(foto, 'margin-top', '0px');
+    }
+    if (capa && capa.querySelector('[data-bc-fundo="capa"], [data-bc-capa-midia]')) capa.setAttribute('data-bc-temcapa', '');
+  }
+
+  // cores: fundo claro e contraste garantido no texto que ficou sobre o papel (roda de novo no acabamento)
+  function cores(telas) {
+    telas.forEach(function (t) {
+      arr(t.querySelectorAll('[data-bc-papel], [data-bc-acao], .bc-fonte')).forEach(function (el) {
+        if (el.getAttribute('data-bc-papel') === 'fonte' || el.classList.contains('bc-fonte')) return;
+        var fundo = corEfetivaDeFundo(el, t); if (!fundo) return;
+        var c = rgb(cs(el).color); if (!c) return;
+        var grande = parseFloat(cs(el).fontSize) >= 24 || (parseFloat(cs(el).fontSize) >= 18.5 && parseInt(cs(el).fontWeight, 10) >= 700);
+        var alvo = grande ? 3.2 : 4.6;
+        if (razao(c, fundo) >= alvo) return;
+        var claroNoClaro = lum(fundo) > 0.5;
+        if (claroNoClaro && lum(c) > 0.55) {
+          // texto claro (era sobre fundo escuro): tinta, ou a cor escurecida quando é cor de destaque
+          var sat = Math.max(c.r, c.g, c.b) - Math.min(c.r, c.g, c.b);
+          imp(el, 'color', sat > 60 ? escurecer(c, fundo, alvo) : '#111110');
+        } else if (claroNoClaro) imp(el, 'color', escurecer(c, fundo, alvo));
+        else if (lum(c) < 0.3) imp(el, 'color', razao({ r: 242, g: 241, b: 233, a: 1 }, fundo) >= alvo ? '#F2F1E9' : '#FFFFFF'); // texto escuro sobre cartão escuro (estado de animação que não rodou)
+        arr(el.querySelectorAll('*')).forEach(function (f) { if (f.hasAttribute('data-bc-papel')) return; var cf = rgb(cs(f).color); if (cf && razao(cf, fundo) < alvo) imp(f, 'color', lum(cf) > 0.55 && Math.max(cf.r, cf.g, cf.b) - Math.min(cf.r, cf.g, cf.b) <= 60 ? '#111110' : escurecer(cf, fundo, alvo)); });
+      });
+      // bordas claras de cartões sobre o papel
+      arr(t.querySelectorAll('[data-bc-acao]')).forEach(function (a) { var s = cs(a); var b = rgb(s.borderTopColor); if (b && parseFloat(s.borderTopWidth) > 0 && lum(b) > 0.6) imp(a, 'border-color', 'rgba(17,17,16,.35)'); });
+      // ícones svg claros
+      arr(t.querySelectorAll('svg[data-bc-svg="icone"]')).forEach(function (v) { var fundo = corEfetivaDeFundo(v, t); var c = rgb(cs(v).color); if (fundo && c && razao(c, fundo) < 2.2) imp(v, 'color', escurecer(c, fundo, 3)); });
+    });
+  }
+
+  // ---------- depois que imagens e fontes chegam ----------
+  function acabamento(telas) {
+    arr(D.querySelectorAll('[data-bc-tela] img[loading="lazy"]')).forEach(function (im) { im.loading = 'eager'; });
+    arr(D.querySelectorAll('[data-bc-tela] img')).forEach(function (im) {
+      if (im.closest('[data-bc-deco]') || im.closest('.bc-marcas')) return;
+      if (im.complete) classificarImagem(im); else im.addEventListener('load', function () { classificarImagem(im); }, { once: true });
+    });
+    // contadores que ficaram no zero (o deck anima ao abrir a tela; no celular a tela não "abre")
+    arr(D.querySelectorAll('[data-bc-tela] [data-to], [data-bc-tela] [data-count], [data-bc-tela] [data-alvo], [data-bc-tela] [data-target]')).forEach(function (el) {
+      var alvo = el.getAttribute('data-to') || el.getAttribute('data-count') || el.getAttribute('data-alvo') || el.getAttribute('data-target');
+      var v = parseFloat(String(alvo).replace(',', '.')); if (!isFinite(v)) return;
+      var atual = (el.textContent || '').match(/[\d.,]+/);
+      var num = atual ? parseFloat(atual[0].replace(/\./g, '').replace(',', '.')) : NaN;
+      if (atual && num !== 0 && Math.abs(num - v) / Math.max(1, Math.abs(v)) < 0.02) return;
+      var dec = (String(alvo).split(/[.,]/)[1] || '').length; if (el.getAttribute('data-dec')) dec = +el.getAttribute('data-dec');
+      var fmt = v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+      if (atual) el.textContent = el.textContent.replace(atual[0], fmt); else el.textContent = (el.getAttribute('data-pre') || '') + fmt + (el.getAttribute('data-suf') || el.getAttribute('data-suffix') || '');
+    });
+    // texto que ficou invisível esperando a animação da tela
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-c], [data-bc-tela] [data-bc-papel], [data-bc-tela] img')).forEach(function (el) {
+      if (el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]')) return;
+      var s = cs(el);
+      if (parseFloat(s.opacity) < 0.05) imp(el, 'opacity', '1');
+      if (s.visibility === 'hidden') imp(el, 'visibility', 'visible');
+    });
+    // palavras e trechos em linha dentro de um bloco com papel seguem o tamanho do bloco
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel] *')).forEach(function (f) {
+      if (f.closest('svg') || f.hasAttribute('data-bc-papel')) return;
+      var dono = f.parentElement && f.parentElement.closest('[data-bc-papel]');
+      if (cs(f).display.indexOf('inline') !== 0 && !(dono && /^H[1-4]$/.test(dono.tagName))) return;
+      if (f.tagName === 'IMG' || f.tagName === 'svg') return;
+      imp(f, 'font-size', 'inherit'); imp(f, 'line-height', 'inherit');
+    });
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel] *')).forEach(function (f) {
+      if (f.closest('svg') || f.closest('[data-bc-papel="fonte"]') || !direto(f)) return;
+      if (parseFloat(cs(f).fontSize) < 14.5) imp(f, 'font-size', 'max(.5em, 15px)');
+    });
+    telas.forEach(function (t) {
+      var vistas = {};
+      arr(t.querySelectorAll('img')).forEach(function (im) {
+        if (im.closest('[data-bc-oculto],[data-bc-deco],.bc-marcas') || /logo|icone|icon/.test(im.getAttribute('data-bc-img') || '') || cs(im).display === 'none') return;
+        var k = (im.currentSrc || im.src || '').split('?')[0]; if (!k) return;
+        if (vistas[k]) im.setAttribute('data-bc-oculto', ''); else vistas[k] = 1;
+      });
+    });
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel="numero"]')).forEach(ajustarNumero);
+    cores(telas);
+    // título com palavra longa: diminui até caber
+    arr(D.querySelectorAll('[data-bc-tela] [data-bc-papel="capa"], [data-bc-tela] [data-bc-papel="titulo"], [data-bc-tela] [data-bc-papel="titulo3"], [data-bc-tela] [data-bc-papel="subtitulo"]')).forEach(function (el) {
+      var lim = el.clientWidth; var tam = parseFloat(cs(el).fontSize); var n = 0;
+      while (el.scrollWidth > lim + 1 && n < 10) { tam = tam * 0.93; imp(el, 'font-size', tam.toFixed(1) + 'px'); n++; }
+      if (el.scrollWidth > lim + 1) imp(el, 'overflow-wrap', 'anywhere');
+    });
+    // o que ainda vaza para o lado: quebra, vira coluna ou encolhe
+    arr(D.querySelectorAll('[data-bc-tela] *')).forEach(function (el) {
+      if (el.closest('svg') || el.closest('[data-bc-deco]') || el.closest('[data-bc-oculto]')) return;
+      var r = el.getBoundingClientRect(); if (!r.width) return;
+      if (r.right > W.innerWidth + 1 || r.left < -1) {
+        var s = cs(el);
+        if (/flex/.test(s.display)) { el.setAttribute('data-bc-linha', 'coluna'); }
+        else if (/grid/.test(s.display)) { el.setAttribute('data-bc-grade', ''); }
+        else if (el.tagName === 'IMG' || el.tagName === 'VIDEO') { imp(el, 'width', '100%'); imp(el, 'height', 'auto'); }
+        else if (direto(el)) { imp(el, 'overflow-wrap', 'anywhere'); imp(el, 'white-space', 'normal'); }
+        else imp(el, 'width', 'auto');
+      }
+    });
+  }
+
+  // ---------- navegação ----------
+  function navegacao(telas) {
+    if (telas.length < 2 || D.getElementById('bc-nav')) return;
+    var nav = D.createElement('div'); nav.id = 'bc-nav'; nav.setAttribute('aria-hidden', 'true'); nav.setAttribute('data-bc-proprio', '');
+    var trilho = telas.length > 18;
+    if (trilho) { nav.className = 'bc-trilho'; nav.appendChild(D.createElement('b')); }
+    else telas.forEach(function () { nav.appendChild(D.createElement('i')); });
+    D.body.appendChild(nav);
+    var atual = -1;
+    function marcar() {
+      var meio = W.innerHeight * 0.42, idx = 0;
+      for (var i = 0; i < telas.length; i++) { if (telas[i].getBoundingClientRect().top <= meio) idx = i; }
+      if (idx === atual) return; atual = idx;
+      if (trilho) nav.firstChild.style.height = Math.round(((idx + 1) / telas.length) * 100) + '%';
+      else arr(nav.children).forEach(function (d, i) { d.className = i === idx ? 'bc-agora' : ''; });
+    }
+    var parado = null;
+    W.addEventListener('scroll', function () { marcar(); nav.classList.add('bc-rolando'); clearTimeout(parado); parado = setTimeout(function () { nav.classList.remove('bc-rolando'); }, 1400); }, { passive: true });
+    marcar();
+  }
+
+  // botão "Roteiro" do modo apresentador: no celular sai do canto fixo (cobriria o texto) e vai para o fim da página
+  function roteiroNoFim(telas) {
+    var b = D.getElementById('botao-roteiro'); if (!b || !telas.length) return;
+    var ult = telas[telas.length - 1];
+    var box = D.createElement('div'); box.className = 'bc-rodape'; box.setAttribute('data-bc-proprio', '');
+    ult.parentElement.insertBefore(box, ult.nextSibling);
+    box.appendChild(b);
+    b.removeAttribute('data-bc-cromo');
+    ['position', 'top', 'right', 'left', 'bottom', 'opacity', 'z-index'].forEach(function (k) { b.style.removeProperty(k); });
+  }
+
+  // o deck não pode mais passar tela por gesto, roda ou tecla no celular: a página rola
+  function travarGestosDoDeck() {
+    ['touchstart', 'touchmove', 'touchend', 'wheel', 'keydown', 'pointerdown', 'pointermove', 'pointerup', 'mousemove'].forEach(function (ev) {
+      W.addEventListener(ev, function (e) {
+        if (!H.classList.contains('bc-cel')) return;
+        if (ev === 'keydown' && !/^(Arrow|Page|Home|End| |Spacebar)/.test(e.key || '')) return;
+        if (/^pointer/.test(ev) && e.target && e.target.closest && e.target.closest('a,button,input,select,textarea,[role=button],[onclick]')) return;
+        e.stopImmediatePropagation();
+      }, { capture: true, passive: true });
+    });
+  }
+
+  function manterTelasAtivas(telas, ativa) {
+    if (!ativa || !W.MutationObserver) return;
+    var mo = new MutationObserver(function () { telas.forEach(function (t) { if (!t.classList.contains(ativa)) t.classList.add(ativa); }); });
+    telas.forEach(function (t) { mo.observe(t, { attributes: true, attributeFilter: ['class'] }); });
+  }
+
+  // página responsiva (one-pager sem telas): não redesenha, só tira o que vaza para o lado
+  function consertarPagina() {
+    var largo = function () { return Math.max(H.scrollWidth, D.body.scrollWidth) > largura() + 1; };
+    if (!largo()) return;
+    // 1) mídia nunca mais larga que a tela
+    arr(D.body.querySelectorAll('img, video, iframe, canvas, svg, table, pre')).forEach(function (el) { var r = el.getBoundingClientRect(); if (r.right > largura() + 1 && !/fixed/.test(cs(el).position)) { imp(el, 'max-width', '100%'); if (el.tagName !== 'TABLE' && el.tagName !== 'PRE') imp(el, 'height', 'auto'); } });
+    // 2) sobra pequena (até 24 px, sombra ou borda): corta na página; maior que isso fica para a conferência apontar
+    if (largo() && Math.max(H.scrollWidth, D.body.scrollWidth) - largura() <= 24) { imp(H, 'overflow-x', 'hidden'); imp(D.body, 'overflow-x', 'hidden'); }
+  }
+
+  var feito = false;
+  function iniciar() {
+    if (feito || !D.body) return;
+    if (!querCelular()) return;
+    var telas = acharTelas();
+    if (!telas.length) { if (!H.hasAttribute('data-bc-pronto')) H.setAttribute('data-bc-pronto', '0'); consertarPagina(); return; }
+    feito = true;
+    try {
+      telas.forEach(function (t, i) {
+        t.setAttribute('data-bc-tela', String(i + 1));
+        for (var p = t.parentElement; p && p !== D.body && p !== H; p = p.parentElement) p.setAttribute('data-bc-palco', '');
+      });
+      var ativa = classeAtiva(telas);
+      // lê o desenho com todas as telas abertas e sem animação
+      var trava = D.createElement('style'); trava.textContent = '*,*::before,*::after{transition:none!important;animation-play-state:paused!important}';
+      D.head.appendChild(trava);
+      telas.forEach(function (t) { if (ativa) t.classList.add(ativa); });
+      void D.body.offsetHeight;
+      var fundos = analisar(telas, ativa);
+      var logos = logosDaCapa(cabecalhosDasTelas(telas).concat(cromo(telas)));
+      aplicar(telas, ativa, fundos, logos);
+      trava.remove();
+      travarGestosDoDeck();
+      manterTelasAtivas(telas, ativa);
+      navegacao(telas);
+      roteiroNoFim(telas);
+      acabamento(telas);
+      W.addEventListener('load', function () { acabamento(telas); });
+      if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { acabamento(telas); });
+      setTimeout(function () { acabamento(telas); }, 1600);
+      setTimeout(function () { acabamento(telas); W.scrollTo(0, 0); }, 3200);
+      H.setAttribute('data-bc-pronto', String(telas.length));
+    } catch (e) {
+      // qualquer falha: volta ao deck original, sem a base
+      H.classList.remove('bc-cel');
+      H.setAttribute('data-bc-erro', String(e && e.message || e).slice(0, 160));
+    }
+  }
+
+  // troca de tamanho que cruza o limite: recarrega (desfazer o desenho do celular não vale o risco)
+  var larguraInicial = largura(), estadoInicial = null;
+  W.addEventListener('resize', function () {
+    if (Math.abs(largura() - larguraInicial) < 40) return;
+    clearTimeout(W.__bcRz);
+    W.__bcRz = setTimeout(function () { var agora = largura() < 900; if (estadoInicial !== null && agora !== estadoInicial && !FORCAR) location.reload(); }, 350);
+  });
+  function comecar() { estadoInicial = largura() < 900; iniciar(); }
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', comecar); else comecar();
+  W.addEventListener('load', function () { setTimeout(iniciar, 60); });
+  setTimeout(iniciar, 900);
+})();
+</script>
+</body>
+</html>
